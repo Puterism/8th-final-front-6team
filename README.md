@@ -19,4 +19,4 @@
 - 공통 로직은 `custom hooks` 혹은 `utils`로 분리할 것
 
 ### 그 외 규칙들
-- 컴포넌트 내부에서의 이벤트핸들러는 `handle` prefix, 외부에서 props로 주입받은 이벤트핸들러는 `on` prefix를 붙인다.ex) onClick(props로 받은 경우), handleClick(컴포넌트내부)
+- 컴포넌트 내부에서의 이벤트핸들러는 `handle` prefix, 외부에서 props로 주입받은 이벤트핸들러는 `on` prefix를 붙인다.   ex) onClick(props로 받은 경우), handleClick(컴포넌트내부)
