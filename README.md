@@ -4,7 +4,7 @@
 
 ### 기술스택
 
-- React
+- React, React-Router
 
 ### PR
 
