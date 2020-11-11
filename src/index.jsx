@@ -3,6 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import MainPage from './pages/index';
+import CategoryPage from './pages/CategoryPage';
 import theme from './themes/index';
 
 ReactDOM.render(
@@ -11,6 +12,9 @@ ReactDOM.render(
       <Switch>
         <Route path="/" exact>
           <MainPage />
+        </Route>
+        <Route path="/category1" exact>
+          <CategoryPage />
         </Route>
       </Switch>
     </Router>
