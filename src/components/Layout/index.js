@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Flex, Grid, Box, GridItem,
+  Flex, Grid, GridItem,
 } from '@chakra-ui/core';
 import Sidebar from '../Sidebar';
 
