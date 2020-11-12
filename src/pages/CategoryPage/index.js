@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Grid } from '@chakra-ui/core';
-import Layout from '../components/Layout';
-import Card from '../components/Card';
+import Layout from '../../components/Layout';
+import Card from '../../components/Card';
 
 const CategoryPage = () => (
   <Layout backgroundColor="#f1f9ff">
