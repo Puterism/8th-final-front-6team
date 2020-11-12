@@ -14,13 +14,12 @@ const theme = extendTheme({
       'html, body, #root': { height: '100%' },
     },
   },
-  // breakpoints: {
-  //   sm: '30em',
-  //   md: '48em',
-  //   lg: '62em',
-  //   xl: '80em',
-  // },
   breakpoints: ['30em', '48em', '62em', '80em'],
+  space: {
+    17: '4.25rem',
+    18: '4.5rem',
+    19: '4.75rem',
+  },
 });
 
 export default theme;
