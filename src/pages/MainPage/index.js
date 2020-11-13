@@ -1,7 +1,7 @@
 import { Heading, Box } from '@chakra-ui/core';
 import React from 'react';
-import Layout from '../../components/Layout';
 import SearchBar from '../../components/SearchBar';
+import Layout from '../../components/Layout';
 
 const MainPage = () => (
   <Layout>
