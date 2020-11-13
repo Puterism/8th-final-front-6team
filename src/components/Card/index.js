@@ -21,10 +21,10 @@ const Card = (props) => {
             backgroundSize="cover"
             backgroundPosition="center center"
             gridColumnEnd="span 3"
-            color="#ffffff"
+            color="white"
           >
             <Box
-              backgroundColor="#2699fb"
+              backgroundColor="main"
               opacity="0.6"
               position="absolute"
               top="0"
@@ -96,16 +96,16 @@ const Card = (props) => {
                   </Text>
                 </Box>
               </Box>
-              <Button color="#ffffff" variant="link" position="absolute" top="0" right="0" marginRight="16" marginTop="17">
+              <Button color="white" variant="link" position="absolute" top="0" right="0" marginRight="16" marginTop="17">
                 SHARE
               </Button>
             </Box>
           </Box>
         ) : (
-          <Box overflow="hidden" gridColumnEnd="span 1" color="#2699fb">
+          <Box overflow="hidden" gridColumnEnd="span 1" color="main">
             <Box height="200px" background="url(https://dummyimage.com/340x200/2699fb/fff) center" />
             <Box
-              bgColor="#ffffff"
+              bgColor="white"
               padding="30px"
               position="relative"
             >
@@ -141,7 +141,7 @@ const Card = (props) => {
                       fontSize="sm"
                       fontWeight="bold"
                       letterSpacing="normal"
-                      color="#2699fb"
+                      color="main"
                     >
                       { likesCount }
                     </Text>
@@ -155,13 +155,13 @@ const Card = (props) => {
                       fontSize="sm"
                       fontWeight="bold"
                       letterSpacing="normal"
-                      color="#2699fb"
+                      color="main"
                     >
                       { commentsCount }
                     </Text>
                   </Box>
                 </Box>
-                <Button color="#2699fb" variant="link">
+                <Button color="main" variant="link">
                   SHARE
                 </Button>
               </Box>

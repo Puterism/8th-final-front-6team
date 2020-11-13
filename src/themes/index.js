@@ -4,6 +4,7 @@ const theme = extendTheme({
   colors: {
     main: '#2699fb',
     sub: '#9ad2ff',
+    bg: '#f1f9ff',
   },
   fonts: {
     body: '-apple-system,BlinkMacSystemFont, "Spoqa Han Sans", "Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol", sans-serif',
