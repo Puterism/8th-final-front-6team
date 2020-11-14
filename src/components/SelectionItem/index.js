@@ -42,20 +42,20 @@ const SelectionItem = (props) => {
       <Image src={image} alt={title} width="142px" height="142px" marginLeft="8" />
       <Stack direction="column" marginLeft="4" spacing={5}>
         <Text fontSize={24} fontWeight="bold" lineHeight="1.21">
-          {title}
+          { title }
         </Text>
         <Text maxWidth="508px" fontSize={18} fontWeight="normal" lineHeight="1.33">
-          {description}
+          { description }
         </Text>
       </Stack>
       <Stack direction="column" spacing={2} textAlign="right" flex="1">
         <Box>
           <Text as="span" fontSize={24} fontWeight="800" marginRight="2">
-            {weight}
+            { weight }
           </Text>
           <Text as="span" fontSize={16} fontWeight="500">
             (
-            {pricePerGram}
+            { pricePerGram }
             )
           </Text>
         </Box>
@@ -78,7 +78,7 @@ const SelectionItem = (props) => {
             </NumberInputStepper>
           </NumberInput>
           <Text as="span" fontSize={40} fontWeight="900" lineHeight="1" marginLeft="6">
-            {currencyFormat(price)}
+            { currencyFormat(price) }
           </Text>
         </Flex>
         <Box>
@@ -89,6 +89,15 @@ const SelectionItem = (props) => {
       </Stack>
     </Flex>
   );
+};
+
+SelectionItem.defaultProps = {
+  image: null,
+  title: '',
+  description: '',
+  weight: '0g',
+  pricePerGram: '100g당 0원',
+  price: 0,
 };
 
 export default SelectionItem;
