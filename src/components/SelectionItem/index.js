@@ -16,9 +16,9 @@ const SelectionItem = (props) => {
       width="full"
       minHeight="211px"
       border="solid 2px"
-      borderColor="#bce0fd"
+      borderColor="boxBorder"
       borderRadius="10px"
-      backgroundColor="#f7fbff"
+      backgroundColor="bg"
       paddingY="9"
       paddingLeft="9"
       paddingRight="11"
@@ -27,11 +27,11 @@ const SelectionItem = (props) => {
         <VisuallyHidden as="input" type="checkbox" defaultChecked />
         <ControlBox
           borderWidth="3px"
-          borderColor="#7fc4fd"
+          borderColor="checkboxBorder"
           width="47px"
           height="47px"
           rounded="4px"
-          _checked={{ color: 'main.500', borderColor: '#7fc4fd' }}
+          _checked={{ color: 'main.500', borderColor: 'checkboxBorder' }}
           cursor="pointer"
         >
           <Text as="span" fontWeight="bold" fontSize="24">
@@ -60,7 +60,7 @@ const SelectionItem = (props) => {
           </Text>
         </Box>
         <Flex justifyContent="flex-end" alignItems="flex-end">
-          <NumberInput defaultValue={1} min={1} height="33px" borderColor="#bce0fd">
+          <NumberInput defaultValue={1} min={1} height="33px" borderColor="boxBorder">
             <NumberInputField width="80px" height="33px" borderRadius="25px" border="solid 2px" fontSize={14} />
             <NumberInputStepper right={1}>
               <NumberIncrementStepper

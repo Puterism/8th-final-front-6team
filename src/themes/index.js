@@ -17,6 +17,8 @@ const theme = extendTheme({
     },
     sub: '#9ad2ff',
     bg: '#f1f9ff',
+    checkboxBorder: '#7fc4fd',
+    boxBorder: '#bce0fd',
   },
   fonts: {
     body: '-apple-system,BlinkMacSystemFont, "Spoqa Han Sans", "Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol", sans-serif',
