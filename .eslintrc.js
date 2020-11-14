@@ -24,6 +24,8 @@ module.exports = {
     'no-unused-expressions': 0,
     'no-console': 0,
     'react/jsx-filename-extension': 0,
-    'max-len': 0
+    'max-len': 0,
+    'no-shadow': 0,
+    'react/no-array-index-key': 0
   }
 };
