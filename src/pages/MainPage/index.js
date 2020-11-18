@@ -5,7 +5,7 @@ import Layout from '../../components/Layout';
 
 const MainPage = () => (
   <Layout>
-    <Heading color="main">Avocado</Heading>
+    <Heading color="main.500">Avocado</Heading>
     <Box mt="76px" w="full">
       <SearchBar mt="76px" />
     </Box>
