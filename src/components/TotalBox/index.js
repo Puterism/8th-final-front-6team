@@ -1,34 +1,41 @@
+import { Flex, Box, Avatar, Text, Button } from '@chakra-ui/core';
 import React from 'react';
-import styled from 'styled-components';
 
-const SelectedList = () => {
-  return <ListBox />
-}
+const SelectedList = () => <Box />;
 
-const DeliveryCost = ({ deliveryCost }) => {
-  return (
-    <Delivery>
-      배송료 {deliveryCost}원
-    </Delivery>
-  )
-}
+const DeliveryCost = ({ deliveryCost }) => (
+  <Box padding="8px 12px" borderRadius="25px" bg="#edf7ff" border="solid 1px #bce0fd" fontSize="11px">
+    배송료
+    {' '}
+    {deliveryCost}
+    원
+  </Box>
+);
 
-export default ({ mallName, totalPrice, list }) => (
-  <div style={{ display: 'flex', flexDirection: 'column', marginRight: '34px' }}>
-    <Box>
-      <Img />
-      <Name>{mallName}</Name>
-      <Price>
+export default ({
+  mallName, totalPrice, list, isSelected,
+}) => (
+  <Flex marginRight="34px" flexDirection="column" width="full">
+    <Box border={isSelected && 'solid 3px #2699fb'} cursor="pointer" maxWidth="384px" height="475.2px" bg="#f7fbff" color="#2699fb" display="flex" flexDirection="column" alignItems="center" borderRadius="8px" boxShadow="0 3px 8px 0 rgba(68, 67, 77, 0.29)">
+      {isSelected && <Text textAlign="center" position="absolute" marginTop="-43px" fontSize="20px" fontWeight="bold" color="#2699fb">가장 합리적인 조합을 찾았어요!</Text>}
+      <Avatar
+        size="xl"
+        marginTop="6"
+        background="white"
+        border="solid 1px #2699fb"
+      />
+      <Text fontSize="16px">{mallName}</Text>
+      <Text marginTop="3" fontSize="45px">
         {totalPrice}
         <span style={{ fontSize: '17px', marginLeft: '5px' }}>원</span>
-      </Price>
-      <Date>
+      </Text>
+      <Text marginTop="1" fontSize="11px">
         10월 24일, 오후 3:45 기준
-      </Date>
-      <div style={{ marginTop: '18px', display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+      </Text>
+      <Flex marginTop="3" alignItems="center">
         <DeliveryCost deliveryCost={2500} />
-        <span style={{ marginLeft: '9px', fontSize: '12px' }}>3만원 이상 무료배송</span>
-      </div>
+        <Text marginLeft="2" fontSize="12px">3만원 이상 무료배송</Text>
+      </Flex>
       <SelectedList />
       {/* {list.map((item) => (
         <SelectedList
@@ -39,60 +46,6 @@ export default ({ mallName, totalPrice, list }) => (
         />
       ))} */}
     </Box>
-    <Button>이 조합으로 선택</Button>
-  </div>
+    <Button color="white" background={isSelected ? '#2699fb' : '#b2dcff'} maxWidth="384px" height="61px" marginTop="4" fontSize="20px">이 조합으로 선택</Button>
+  </Flex>
 );
-
-const Box = styled.div`
-  background-color: #f7fbff;
-  width: 384px;
-  height: 475.2px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border-radius: 8px;
-  box-shadow: 0 3px 8px 0 rgba(68, 67, 77, 0.29);
-  color: #2699fb;
-`;
-const Button = styled.div`
-  width: 384px;
-  height: 61px;
-  background-color: #2699fb;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  margin-top: 16.8px;
-  font-size: 20px;
-  color: white;
-  border-radius: 8px;
-`;
-const Name = styled.div`
-  font-size: 16px;
-`;
-const Price = styled.div`
-  margin-top: 10px;
-  font-size: 45px;
-`;
-const Date = styled.div`
-  margin-top: 4px;
-  font-size: 11px;
-`;
-const Delivery = styled.div`
-  padding: 8px 12px;
-  border-radius: 25px;
-  border: solid 1px #bce0fd;
-  background-color: #edf7ff;
-  font-size: 11px;
-`;
-const ListBox = styled.div`
-  width: 378px;
-  height: 175px;
-`;
-const Img = styled.div`
-  width: 95px;
-  height: 95px;
-  border-radius: 50%;
-  margin-top: 27px;
-  border: solid 1px #2699fb;
-`;
