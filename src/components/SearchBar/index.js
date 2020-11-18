@@ -14,7 +14,7 @@ const SearchBar = () => {
 
   return (
     <Flex w="full">
-      <Input onChange={handleChange} value={keyword} placeholder="구입할 채소를 검색해주세요. 최저가 조합의 커머스를 알려드릴게요. ex) 양파 + 감자" borderColor="sub" color="main" boxShadow={inputStyle.boxShadow} fontSize="15px" _focus={inputStyle} _hover={inputStyle} _placeholder={{ color: '#2699fb' }} />
+      <Input bg="white" onChange={handleChange} value={keyword} placeholder="구입할 채소를 검색해주세요. 최저가 조합의 커머스를 알려드릴게요. ex) 양파 + 감자" borderColor="sub" color="main" boxShadow={inputStyle.boxShadow} fontSize="15px" _focus={inputStyle} _hover={inputStyle} _placeholder={{ color: '#2699fb' }} />
       <IconButton icon={<FiSearch color="white" />} background="main" ml="11px" disabled={!isActive} />
     </Flex>
   );

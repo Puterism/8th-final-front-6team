@@ -8,6 +8,7 @@ const Sidebar = () => (
     <Link to="/category2">Category2</Link>
     <Link to="/category3">Category3</Link>
     <Link to="/category4">Category4</Link>
+    <Link to="/category5">Category4</Link>
   </VStack>
 );
 
