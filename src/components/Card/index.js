@@ -24,7 +24,7 @@ const Card = (props) => {
             color="white"
           >
             <Box
-              backgroundColor="main"
+              backgroundColor="main.500"
               opacity="0.6"
               position="absolute"
               top="0"
@@ -102,7 +102,7 @@ const Card = (props) => {
             </Box>
           </Box>
         ) : (
-          <Box overflow="hidden" gridColumnEnd="span 1" color="main">
+          <Box overflow="hidden" gridColumnEnd="span 1" color="main.500">
             <Box height="200px" background="url(https://dummyimage.com/340x200/2699fb/fff) center" />
             <Box
               bgColor="white"
@@ -141,7 +141,7 @@ const Card = (props) => {
                       fontSize="sm"
                       fontWeight="bold"
                       letterSpacing="normal"
-                      color="main"
+                      color="main.500"
                     >
                       { likesCount }
                     </Text>
@@ -155,13 +155,13 @@ const Card = (props) => {
                       fontSize="sm"
                       fontWeight="bold"
                       letterSpacing="normal"
-                      color="main"
+                      color="main.500"
                     >
                       { commentsCount }
                     </Text>
                   </Box>
                 </Box>
-                <Button color="main" variant="link">
+                <Button color="main.500" variant="link">
                   SHARE
                 </Button>
               </Box>
