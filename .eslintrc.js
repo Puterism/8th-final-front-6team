@@ -27,6 +27,9 @@ module.exports = {
     'react/jsx-filename-extension': 0,
     'max-len': 0,
     'no-shadow': 0,
-    'react/no-array-index-key': 0
+    'react/no-array-index-key': 0,
+    'object-curly-newline': 0,
+    'jsx-a11y/no-static-element-interactions': 0,
+    'jsx-a11y/click-events-have-key-events': 0
   }
 };

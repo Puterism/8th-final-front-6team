@@ -9,13 +9,10 @@ import dayjs from 'dayjs';
 
 const BoxStyle = { boxShadow: '0 0 0 1.5px #9ad2ff', color: '#2699fb' };
 
-// const cancelToken = axios.CancelToken;
-// const source =
-
 function SearchBar() {
   const [searchValue, setSearchValue] = useState('');
   const [isNoSearch, setIsNoSearch] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitting] = useState(false);
   const [chips, setChips] = useState([]);
   const [keywords, setKeywords] = useState([]);
   const [activeItemIndex, setActiveItemIndex] = useState(0);
@@ -41,9 +38,9 @@ function SearchBar() {
   }, 200), []);
 
   const addChip = useCallback((searchText) => {
-    setChips((prev) => _.uniq(prev.concat(searchText)));
+		setChips((prev) => _.uniq(prev.concat(searchText)));
     reset();
-  }, []);
+  }, [reset]);
 
   const handleRemoveChip = useCallback((chip) => {
     setChips(_.remove(chips, (c) => c !== chip));
@@ -55,7 +52,7 @@ function SearchBar() {
 
     setSearchValue(input);
     fetchChips(input);
-  }, []);
+  }, [reset]);
 
   const handleKeyPress = useCallback((e) => {
     const shouldAddChip = e.key === ' ' || e.key === 'Enter';

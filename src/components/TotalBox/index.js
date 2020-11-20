@@ -28,10 +28,8 @@ const DeliveryCost = ({ deliveryCost }) => (
   </Box>
 );
 
-export default ({
-  mallName, totalPrice, list, isSelected,
-}) => {
-  const [isModalOpened, setIsModalOpened] = useState(false);
+const TotalBox = ({ mallName, totalPrice, list, isSelected }) => {
+  const [setIsModalOpened] = useState(false);
   const controlModal = () => setIsModalOpened(true);
 
   return (
@@ -56,14 +54,10 @@ export default ({
           <DeliveryCost deliveryCost={2500} />
           <Text marginLeft="2" fontSize="12px">3만원 이상 무료배송</Text>
         </Flex>
-        <div
-          onClick={controlModal}
-          style={{
-            cursor: 'pointer', backgroundColor: '#dceffe', marginTop: '24px', width: '100%', overflowX: 'scroll', borderBottomLeftRadius: '8px', borderBottomRightRadius: '8px',
-          }}
-        >
-          {list.map((item) => (
+        <div onClick={controlModal} style={{ cursor: 'pointer', backgroundColor: '#dceffe', marginTop: '24px', width: '100%', overflowX: 'scroll', borderBottomLeftRadius: '8px', borderBottomRightRadius: '8px' }}>
+          {list.map((item, index) => (
             <SelectedList
+              key={index}
               name={item.name}
               price={item.price}
               weight={item.weight}
@@ -76,3 +70,5 @@ export default ({
     </Flex>
   );
 };
+
+export default TotalBox;
