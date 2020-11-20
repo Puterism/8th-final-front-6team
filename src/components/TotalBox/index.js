@@ -1,23 +1,24 @@
 import { Flex, Box, Avatar, Text, Button } from '@chakra-ui/core';
 import React, { useState } from 'react';
+import theme from '../../themes';
 
 const SelectedList = ({
   name, price, weight, num,
 }) => (
-  <Box display="flex" flexDirection="row" fontSize="14px" margin="0 12px" padding="20px 15px" borderBottom="0.5px solid #b2dcff">
-    {name}
-    <Text marginLeft="auto">
-      <span style={{ fontWeight: 'bold' }}>
-        {price}
+    <Box display="flex" flexDirection="row" fontSize="14px" margin="0 12px" padding="20px 15px" borderBottom="0.5px solid #b2dcff">
+      {name}
+      <Text marginLeft="auto">
+        <span style={{ fontWeight: 'bold' }}>
+          {price}
         원
       </span>
-      {' / '}
-      {weight}
-      {'  '}
-      {num}
-    </Text>
-  </Box>
-);
+        {' / '}
+        {weight}
+        {'  '}
+        {num}
+      </Text>
+    </Box>
+  );
 
 const DeliveryCost = ({ deliveryCost }) => (
   <Box padding="5px 12px" borderRadius="25px" bg="#edf7ff" border="solid 1px #bce0fd" fontSize="11px">
@@ -72,7 +73,7 @@ export default ({
           ))}
         </div>
       </Box>
-      <Button color="white" background={isSelected ? '#2699fb' : '#b2dcff'} maxWidth="384px" height="61px" marginTop="4" fontSize="20px">이 조합으로 선택</Button>
+      <Button color="white" background={isSelected ? theme.colors.main[500] : '#b2dcff'} maxWidth="384px" height="61px" marginTop="4" fontSize="20px">이 조합으로 선택</Button>
     </Flex>
   );
 };

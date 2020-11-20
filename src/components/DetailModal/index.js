@@ -3,6 +3,7 @@ import {
   Flex, VStack, Text, Box,
 } from '@chakra-ui/core';
 import ImageBox from '../ImageBox';
+import theme from '../../themes';
 
 const list = [
   {
@@ -46,7 +47,7 @@ export default () => (
         ))}
       </Flex>
     </Flex>
-    <Box position="absolute" background="#2699fb" bottom="0" width="full" height="265px" opacity="0.8" />
+    <Box position="absolute" background={theme.colors.main[500]} bottom="0" width="full" height="265px" opacity="0.8" />
     <Box position="absolute" bottom="0" zIndex="4" width="xs" right="0" height="265px" backgroundImage="linear-gradient(to right, rgba(241, 249, 255, 0), #2699fb 89%)" />
   </>
 );

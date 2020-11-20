@@ -5,6 +5,7 @@ import Layout from '../../components/Layout';
 import SearchBar from '../../components/SearchBar';
 import Tag from '../../components/Tag';
 import TotalBox from '../../components/TotalBox';
+import theme from '../../themes';
 
 const list = [
   {
@@ -22,7 +23,7 @@ const list = [
 ];
 
 const ResultPage = () => (
-  <Layout>
+  <Layout bgColor={theme.colors.bgLight}>
     <Box mt="-90px" w="90%">
       <SearchBar />
       <Flex marginTop="17px">
