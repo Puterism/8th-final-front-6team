@@ -38,7 +38,7 @@ function SearchBar() {
   }, 200), []);
 
   const addChip = useCallback((searchText) => {
-		setChips((prev) => _.uniq(prev.concat(searchText)));
+    setChips((prev) => _.uniq(prev.concat(searchText)));
     reset();
   }, [reset]);
 
@@ -52,7 +52,7 @@ function SearchBar() {
 
     setSearchValue(input);
     fetchChips(input);
-  }, [reset]);
+  }, [reset, fetchChips]);
 
   const handleKeyPress = useCallback((e) => {
     const shouldAddChip = e.key === ' ' || e.key === 'Enter';
@@ -77,7 +77,7 @@ function SearchBar() {
       setActiveItemIndex((prev) => (Math.min(prev + 1, keywords.length - 1)));
       e.preventDefault();
     }
-  }, [keywords, activeItemIndex]);
+  }, [keywords, activeItemIndex, addChip]);
 
   SearchBar.handleClickOutside = reset;
 
