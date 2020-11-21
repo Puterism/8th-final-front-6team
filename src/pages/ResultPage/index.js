@@ -1,5 +1,5 @@
-import { Box, Flex } from '@chakra-ui/core';
 import React from 'react';
+import { Box, Flex } from '@chakra-ui/core';
 import DetailModal from '../../components/DetailModal';
 import Layout from '../../components/Layout';
 import SearchBar from '../../components/SearchBar';
@@ -9,16 +9,16 @@ import theme from '../../themes';
 
 const list = [
   {
-    name: '양파', price: '3,000', weight: '100g', num: '3개',
+    key: 1, name: '양파', price: '3,000', weight: '100g', num: '3개',
   },
   {
-    name: '브로콜리', price: '3,000', weight: '100g', num: '3개',
+    key: 2, name: '브로콜리', price: '3,000', weight: '100g', num: '3개',
   },
   {
-    name: '고구마', price: '3,000', weight: '100g', num: '3개',
+    key: 3, name: '고구마', price: '3,000', weight: '100g', num: '3개',
   },
   {
-    name: '양상추', price: '3,000', weight: '100g', num: '3개',
+    key: 4, name: '양상추', price: '3,000', weight: '100g', num: '3개',
   },
 ];
 
