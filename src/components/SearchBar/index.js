@@ -24,7 +24,7 @@ const SearchBar = ({ placeholder, width }) => {
         border="solid 2px"
         borderRadius="30px"
         color={theme.colors.mediumGray}
-        padding="25px 35px"
+        p="25px 35px"
         boxShadow={inputStyle.boxShadow}
         fontSize="18px"
         _focus={inputStyle}

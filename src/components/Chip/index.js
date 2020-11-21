@@ -5,14 +5,14 @@ import theme from '../../themes';
 export default ({ text }) => (
   <Box
     as="button"
-    marginRight="2"
+    mr="2"
     fontSize="14px"
     bg={theme.colors.lightGreen}
     color={theme.colors.green}
     borderColor={theme.colors.green}
     border="solid 1px"
     borderRadius="100px"
-    padding="5px 13px"
+    p="5px 13px"
     fontWeight="bold"
   >
     {text}

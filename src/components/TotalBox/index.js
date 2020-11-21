@@ -15,21 +15,21 @@ const SelectedList = ({
       borderRadius="10px"
       cursor="pointer"
       display="flex"
-      flexDirection="column"
+      flexDir="column"
       fontSize="18px"
-      margin="10px 0"
-      padding="8px 14px"
+      m="10px 0"
+      p="8px 14px"
       color={theme.colors.black}
     >
-      <Flex flexDirection="row">
+      <Flex flexDir="row">
         <SearchIcon />
-        <Flex flexDirection="column" marginLeft="6px" width="full">
+        <Flex flexDir="column" ml="6px" w="full">
           <Flex>
             <Text>{name}</Text>
           </Flex>
           <Flex alignItems="center">
             <Text fontSize="12px" color="#cccccc">무안 햇양파 국내산 신토...</Text>
-            <Text marginLeft="auto" textAlign="end" fontSize="15px" color="#aaaaaa">
+            <Text ml="auto" textAlign="end" fontSize="15px" color="#aaaaaa">
               {price}
               원
               {' / '}
@@ -48,51 +48,51 @@ export default ({
   mallName, totalPrice, list, isSelected,
 }) => (
   <>
-    <Flex flexDirection="column" width="full">
+    <Flex flexDir="column" w="full">
       <Box
         border="solid 2px"
         borderColor={isSelected ? theme.colors.green : theme.colors.subGray}
-        maxWidth="387px"
-        height="482px"
+        maxW="387px"
+        h="482px"
         color={theme.colors.black}
         display="flex"
-        flexDirection="column"
+        flexDir="column"
         alignItems="center"
         borderRadius="30px"
-        padding="16px"
+        p="16px"
         cursor="pointer"
       >
         <Box
-          width="100%"
-          height="134px"
+          w="100%"
+          h="134px"
           bg={isSelected ? theme.colors.lightGreen : theme.colors.subGray}
           display="flex"
-          flexDirection="column"
+          flexDir="column"
           borderRadius="19px"
-          padding="14px"
+          p="14px"
         >
           <Flex alignItems="center">
             <Avatar
               size="xs"
-              background="white"
+              bg="white"
             />
-            <Text marginLeft="4px" fontSize="16px">{mallName}</Text>
+            <Text ml="4px" fontSize="16px">{mallName}</Text>
           </Flex>
-          <Text textAlign="end" marginTop="8px" fontSize="32px" fontWeight="bold" color={isSelected ? theme.colors.green : '#cccccc'}>
+          <Text textAlign="end" mt="8px" fontSize="32px" fontWeight="bold" color={isSelected ? theme.colors.green : '#cccccc'}>
             {totalPrice}
-            <span style={{ fontSize: '17px', marginLeft: '5px' }}>원</span>
+            <span style={{ fontSize: '17px', ml: '5px' }}>원</span>
           </Text>
 
-          <Flex marginTop="auto" alignItems="center">
+          <Flex mt="auto" alignItems="center">
             <Text fontSize="14px" color={isSelected ? theme.colors.green : '#cccccc'}>배송료 2,500원</Text>
-            <Text fontSize="14px" marginLeft="10px" color={isSelected ? theme.colors.green : '#cccccc'}>3만원 이상 무료배송</Text>
+            <Text fontSize="14px" ml="10px" color={isSelected ? theme.colors.green : '#cccccc'}>3만원 이상 무료배송</Text>
           </Flex>
         </Box>
 
         <div
         // onClick={controlModal}
           style={{
-            marginTop: '10px', width: '100%', overflowX: 'scroll',
+            mt: '10px', w: '100%', overflowX: 'scroll',
           }}
         >
           {list.map((item) => (
