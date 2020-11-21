@@ -4,11 +4,11 @@ import {
 } from '@chakra-ui/core';
 import Sidebar from '../Sidebar';
 
-const Layout = (props, bg) => {
-  const { children, backgroundColor } = props;
+const Layout = (props) => {
+  const { children, bgColor } = props;
 
   return (
-    <Grid bg={bg && '#f0f7ff'} templateColumns="repeat(8, 1fr)" h="full" backgroundColor={backgroundColor}>
+    <Grid templateColumns="repeat(8, 1fr)" h="full" bg={bgColor}>
       <GridItem colSpan="1">
         <Sidebar />
       </GridItem>
