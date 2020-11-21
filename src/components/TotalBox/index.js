@@ -89,11 +89,10 @@ export default ({
           </Flex>
         </Box>
 
-        <div
-        // onClick={controlModal}
-          style={{
-            mt: '10px', w: '100%', overflowX: 'scroll',
-          }}
+        <Box
+          mt="10px"
+          w="full"
+          overflowX="scroll"
         >
           {list.map((item) => (
             <SelectedList
@@ -104,7 +103,7 @@ export default ({
               num={item.num}
             />
           ))}
-        </div>
+        </Box>
       </Box>
     </Flex>
   </>

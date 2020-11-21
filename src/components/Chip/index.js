@@ -2,9 +2,8 @@ import { Box } from '@chakra-ui/core';
 import React from 'react';
 import theme from '../../themes';
 
-export default ({ text }) => (
+export default ({ text, removeable }) => (
   <Box
-    as="button"
     mr="2"
     fontSize="14px"
     bg={theme.colors.lightGreen}
@@ -14,7 +13,9 @@ export default ({ text }) => (
     borderRadius="100px"
     p="5px 13px"
     fontWeight="bold"
+    cursor={!removeable && 'pointer'}
   >
     {text}
+    {removeable && <span style={{ cursor: 'pointer' }}>{'  X'}</span>}
   </Box>
 );
