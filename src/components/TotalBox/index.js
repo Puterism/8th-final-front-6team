@@ -3,7 +3,7 @@ import {
   Flex, Box, Avatar, Text,
 } from '@chakra-ui/core';
 import theme from '../../themes';
-import { SearchIcon } from '../../assets/svg';
+import { SearchIcon } from '../../assets';
 
 const SelectedList = ({
   name, price, weight, num,
