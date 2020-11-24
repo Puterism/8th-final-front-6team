@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
+  Box,
   Button,
   Flex, Text,
 } from '@chakra-ui/core';
@@ -30,36 +31,65 @@ const list = [
   },
 ];
 
-const ResultPage = () => (
-  <>
-    <Flex flexDir="column" p="64px 110px">
-      <Text fontSize="22px" color="#666666" fontWeight="bold" mb="20px">가장 합리적인 조합을 찾았어요!</Text>
-      <Flex alignItems="center">
-        <SearchBar placeholder="채소를 추가하여 조합을 다시 검색할 수 있어요." width="40%" />
-        <Flex ml="16px">
-          {list.map((item) => <Chip text={item.name} removeable />)}
+const mallList = [
+  {
+    key: 1, mallName: '이마트', totalPrice: '12,500', list,
+  },
+  {
+    key: 2, mallName: '쿠팡', totalPrice: '12,500', list,
+  },
+  {
+    key: 3, mallName: '마켓컬리', totalPrice: '12,500', list,
+  },
+];
+
+const ResultPage = () => {
+  const [isModalOpened, setIsModalOpened] = useState(false);
+  const [selectedMall, setSelectedMall] = useState(mallList[0].mallName);
+  const closeModal = () => setIsModalOpened(false);
+  const openModal = () => setIsModalOpened(true);
+
+  return (
+    <Flex flexDir="column">
+      <Flex flexDir="column" p="64px 110px">
+        <Text fontSize="22px" color="#666666" fontWeight="bold" mb="20px">가장 합리적인 조합을 찾았어요!</Text>
+        <Flex alignItems="center">
+          <div style={{ width: '40%' }}>
+            <SearchBar placeholder="채소를 추가하여 조합을 다시 검색할 수 있어요." />
+          </div>
+          <Flex ml="16px">
+            {list.map((item) => <Chip text={item.name} removeable />)}
+          </Flex>
         </Flex>
+        <Flex mt="20" justifyContent="space-between">
+          {mallList.map((item) => (
+            <div style={{ cursor: 'pointer' }} onClick={() => setSelectedMall(item.mallName)}>
+              <TotalBox
+                openModal={openModal}
+                mallName={item.mallName}
+                totalPrice={item.totalPrice}
+                list={item.list}
+                isSelected={selectedMall === item.mallName}
+              />
+            </div>
+          ))}
+        </Flex>
+        <Button
+          w="full"
+          bg={theme.colors.green}
+          py="35px"
+          fontSize="28px"
+          fontWeight="bold"
+          borderRadius="48px"
+          color="white"
+          mt="51px"
+        >
+          이 조합 선택하기
+        </Button>
       </Flex>
-      <Flex mt="20">
-        <TotalBox mallName="이마트" totalPrice="12,500" list={list} isSelected />
-        <TotalBox mallName="쿠팡" totalPrice="13,200" list={list} />
-        <TotalBox mallName="마켓컬리" totalPrice="15,700" list={list} />
-      </Flex>
-      <Button
-        w="full"
-        bg={theme.colors.green}
-        py="35px"
-        fontSize="28px"
-        fontWeight="bold"
-        borderRadius="48px"
-        color="white"
-        mt="51px"
-      >
-        이 조합 선택하기
-      </Button>
+      {isModalOpened && <DetailModal closeModal={closeModal} openModal={openModal} />}
     </Flex>
-    <DetailModal />
-  </>
-);
+  );
+};
 
 export default ResultPage;
