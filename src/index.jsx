@@ -6,6 +6,7 @@ import {
   MainPage, CategoryPage, ResultPage, SelectionPage,
 } from './pages';
 import theme from './themes/index';
+import './index.css';
 
 ReactDOM.render(
   <ChakraProvider theme={theme}>

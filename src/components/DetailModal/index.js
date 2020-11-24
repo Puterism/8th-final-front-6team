@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  Flex, Text, Box,
-} from '@chakra-ui/core';
+import { Flex, Text, Box } from '@chakra-ui/core';
 import ImageBox from '../ImageBox';
 import theme from '../../themes';
 import { CloseBtn } from '../../assets';
@@ -20,17 +18,17 @@ const list = [
   },
 ];
 
-export default ({ closeModal }) => (
+export default ({ closeModal, name }) => (
   <Flex w="full" h="full" bgColor="rgba(32, 32, 32, 0.3)" alignItems="flex-end" position="absolute" zIndex="3">
     <Box pl="70px" b="0" w="full" position="absolute" zIndex="3" h="418px">
       <Flex alignItems="center" mt="41px">
-        <Text fontSize="24px" color={theme.colors.black}>방울토마토</Text>
+        <Text fontSize="24px" color={theme.colors.black}>{name}</Text>
         <Text ml="15px" fontSize="18px" color="#aaaaaa">세부 상품을 선택하고 수량 변경이 가능해요</Text>
-        <CloseBtn onClick={closeModal} style={{ marginLeft: 'auto', marginRight: '69px', cursor: 'pointer' }} />
+        <CloseBtn onClick={() => closeModal()} style={{ marginLeft: 'auto', marginRight: '69px', cursor: 'pointer' }} />
       </Flex>
       <Flex mt="36px">
         <ImageBox isSelected name="국내산 양파" price="3,000" weight="400g" num={2} />
-        <Flex overflowY="scroll" w="full" ml="100px" pr="30px">
+        <Flex overflowY="scroll" w="full" ml="100px" pr="30px" className="no-scrollbar">
           {list.map((item) => (
             <ImageBox
               key={item.key}

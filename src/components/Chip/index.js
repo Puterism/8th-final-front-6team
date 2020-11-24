@@ -1,10 +1,11 @@
-import { Box, Flex } from '@chakra-ui/core';
+import { Flex } from '@chakra-ui/core';
 import React from 'react';
 import { RemoveBtn } from '../../assets';
 import theme from '../../themes';
 
 export default ({ text, removeable }) => (
   <Flex
+    overflowY="visible"
     mr="2"
     fontSize="14px"
     bg={theme.colors.lightGreen}
@@ -16,8 +17,10 @@ export default ({ text, removeable }) => (
     fontWeight="bold"
     alignItems="center"
     cursor={!removeable && 'pointer'}
+    wordBreak="keep-all"
   >
     {text}
-    {removeable && <span style={{ marginLeft: '7px', marginTop: '3px' }}><RemoveBtn /></span>}
+    {removeable
+    && <span style={{ marginLeft: '7px', marginTop: '3px', cursor: 'pointer' }}><RemoveBtn /></span>}
   </Flex>
 );

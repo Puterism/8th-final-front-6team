@@ -1,12 +1,11 @@
 import React from 'react';
-import {
-  Flex, Box, Avatar, Text,
-} from '@chakra-ui/core';
+import { Flex, Box, Avatar, Text } from '@chakra-ui/core';
 import theme from '../../themes';
 import { SearchIcon } from '../../assets';
 
 const SelectedList = ({
-  name, price, weight, num, openModal,
+  name, price, weight, num,
+  isSelected, setSelectedVegi,
 }) => {
   const hoverStyle = { bg: theme.colors.subGray };
   return (
@@ -20,7 +19,8 @@ const SelectedList = ({
       m="10px 0"
       p="8px 14px"
       color={theme.colors.black}
-      onClick={openModal}
+      onClick={() => setSelectedVegi(name)}
+      bg={isSelected && theme.colors.subGray}
     >
       <Flex flexDir="row">
         <SearchIcon />
@@ -46,7 +46,8 @@ const SelectedList = ({
 };
 
 export default ({
-  mallName, totalPrice, list, openModal, isSelected,
+  mallName, totalPrice, list, isSelected,
+  selectedVegi, setSelectedVegi,
 }) => (
   <Box
     border="solid 2px"
@@ -94,12 +95,13 @@ export default ({
     >
       {list.map((item) => (
         <SelectedList
-          openModal={openModal}
           key={item.key}
           name={item.name}
           price={item.price}
           weight={item.weight}
           num={item.num}
+          isSelected={selectedVegi === item.name}
+          setSelectedVegi={setSelectedVegi}
         />
       ))}
     </Box>

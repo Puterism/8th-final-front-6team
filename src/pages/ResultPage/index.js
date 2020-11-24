@@ -1,9 +1,5 @@
 import React, { useState } from 'react';
-import {
-  Box,
-  Button,
-  Flex, Text,
-} from '@chakra-ui/core';
+import { Button, Flex, Text } from '@chakra-ui/core';
 import SearchBar from '../../components/SearchBar';
 import Chip from '../../components/Chip';
 import TotalBox from '../../components/TotalBox';
@@ -29,6 +25,15 @@ const list = [
   {
     key: 6, name: '토마토', price: '3,000', weight: '100g', num: '3개',
   },
+  {
+    key: 7, name: '콜리플라워', price: '3,000', weight: '100g', num: '3개',
+  },
+  {
+    key: 8, name: '단호박', price: '3,000', weight: '100g', num: '3개',
+  },
+  {
+    key: 9, name: '새송이버섯', price: '3,000', weight: '100g', num: '3개',
+  },
 ];
 
 const mallList = [
@@ -46,18 +51,25 @@ const mallList = [
 const ResultPage = () => {
   const [isModalOpened, setIsModalOpened] = useState(false);
   const [selectedMall, setSelectedMall] = useState(mallList[0].mallName);
-  const closeModal = () => setIsModalOpened(false);
-  const openModal = () => setIsModalOpened(true);
+  const [selectedVegi, setSelectedVegi] = useState(null);
+  const closeModal = () => {
+    setSelectedVegi(null);
+    setIsModalOpened(false);
+  };
+  const openModal = (name) => {
+    setSelectedVegi(name);
+    setIsModalOpened(true);
+  };
 
   return (
     <Flex flexDir="column">
       <Flex flexDir="column" p="64px 110px">
         <Text fontSize="22px" color="#666666" fontWeight="bold" mb="20px">가장 합리적인 조합을 찾았어요!</Text>
-        <Flex alignItems="center">
+        <Flex alignItems="center" mr="-110px">
           <div style={{ width: '40%' }}>
             <SearchBar placeholder="채소를 추가하여 조합을 다시 검색할 수 있어요." />
           </div>
-          <Flex ml="16px">
+          <Flex ml="16px" w="60%" alignItems="center" overflowY="scroll" className="no-scrollbar">
             {list.map((item) => <Chip text={item.name} removeable />)}
           </Flex>
         </Flex>
@@ -65,11 +77,12 @@ const ResultPage = () => {
           {mallList.map((item) => (
             <div style={{ cursor: 'pointer' }} onClick={() => setSelectedMall(item.mallName)}>
               <TotalBox
-                openModal={openModal}
                 mallName={item.mallName}
                 totalPrice={item.totalPrice}
                 list={item.list}
                 isSelected={selectedMall === item.mallName}
+                selectedVegi={selectedVegi}
+                setSelectedVegi={openModal}
               />
             </div>
           ))}
@@ -87,7 +100,7 @@ const ResultPage = () => {
           이 조합 선택하기
         </Button>
       </Flex>
-      {isModalOpened && <DetailModal closeModal={closeModal} openModal={openModal} />}
+      {isModalOpened && <DetailModal closeModal={closeModal} name={selectedVegi} />}
     </Flex>
   );
 };
