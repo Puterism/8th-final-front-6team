@@ -13,7 +13,7 @@ const Layout = (props) => {
         <Sidebar />
       </GridItem>
       <GridItem colSpan="6">
-        <Flex direction="column" align="center" h="full" w="full">{children}</Flex>
+        <Flex direction="column" justify="center" align="center" h="full" w="full">{children}</Flex>
       </GridItem>
       <GridItem colSpan="1" />
     </Grid>

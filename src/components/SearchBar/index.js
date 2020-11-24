@@ -9,7 +9,7 @@ import dayjs from 'dayjs';
 
 const InputStyle = { boxShadow: '0 0 0 1.5px #9ad2ff', color: '#2699fb' };
 
-const SearchBar = ({ placeholder, width }) => {
+function SearchBar() {
   const [searchValue, setSearchValue] = useState('');
   const [isNoSearch, setIsNoSearch] = useState(false);
   const [isSubmitting] = useState(false);
@@ -175,10 +175,8 @@ const SearchBar = ({ placeholder, width }) => {
       </Flex> */}
     </>
   );
-};
+}
 
-const clickOutsideConfig = {
+export default onClickOutside(SearchBar, {
   handleClickOutside: () => SearchBar.handleClickOutside,
-};
-
-export default onClickOutside(SearchBar, clickOutsideConfig);
+});
