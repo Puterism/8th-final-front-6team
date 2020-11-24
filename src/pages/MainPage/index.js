@@ -1,4 +1,4 @@
-import { Heading, Box } from '@chakra-ui/core';
+import { Flex, Heading, Box } from '@chakra-ui/core';
 import React from 'react';
 import SearchBar from '../../components/SearchBar';
 import Layout from '../../components/Layout';
