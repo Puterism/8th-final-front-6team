@@ -4,7 +4,7 @@ import {
   Flex, Text,
 } from '@chakra-ui/core';
 import SearchBar from '../../components/SearchBar';
-import Chipß from '../../components/Chip';
+import Chip from '../../components/Chip';
 import TotalBox from '../../components/TotalBox';
 import theme from '../../themes';
 import DetailModal from '../../components/DetailModal';
@@ -37,7 +37,7 @@ const ResultPage = () => (
       <Flex alignItems="center">
         <SearchBar placeholder="채소를 추가하여 조합을 다시 검색할 수 있어요." width="40%" />
         <Flex ml="16px">
-          {list.map((item) => <Chipß text={item.name} />)}
+          {list.map((item) => <Chip text={item.name} removeable />)}
         </Flex>
       </Flex>
       <Flex mt="20">

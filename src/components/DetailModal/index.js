@@ -7,21 +7,15 @@ import theme from '../../themes';
 
 const list = [
   {
-    key: 1, name: '양파', price: '3,000', weight: '100g', num: '3개', isSelected: true,
+    key: 1, name: '미국산 양파', price: '3,000', weight: '100g', num: 3, isSelected: true,
   }, {
-    key: 2, name: '브로콜리', price: '3,000', weight: '100g', num: '3개',
+    key: 2, name: '중국산 양파', price: '3,000', weight: '100g', num: 3,
   }, {
-    key: 3, name: '고구마', price: '3,000', weight: '100g', num: '3개',
+    key: 3, name: '필란드산 양파', price: '3,000', weight: '100g', num: 3,
   }, {
-    key: 4, name: '양상추', price: '3,000', weight: '100g', num: '3개',
+    key: 4, name: '멕시코산 양파', price: '3,000', weight: '100g', num: 3,
   }, {
-    key: 5, name: '잠온다', price: '3,000', weight: '100g', num: '3개',
-  }, {
-    key: 6, name: '일하기시러', price: '3,000', weight: '100g', num: '3개',
-  }, {
-    key: 7, name: '노는게', price: '3,000', weight: '100g', num: '3개',
-  }, {
-    key: 8, name: '제일조아', price: '3,000', weight: '100g', num: '3개',
+    key: 5, name: '일본산 양파', price: '3,000', weight: '100g', num: 3,
   },
 ];
 
@@ -33,8 +27,8 @@ export default () => (
         <Text ml="15px" fontSize="18px" color="#aaaaaa">세부 상품을 선택하고 수량 변경이 가능해요</Text>
       </Flex>
       <Flex mt="36px">
-        <ImageBox isSelected name="국내산 양파" price="3,000" weight="400g" num="1봉" />
-        <Flex overflowY="scroll" w="full" ml="132px">
+        <ImageBox isSelected name="국내산 양파" price="3,000" weight="400g" num={2} />
+        <Flex overflowY="scroll" w="full" ml="100px">
           {list.map((item) => (
             <ImageBox
               key={item.key}
