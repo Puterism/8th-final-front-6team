@@ -3,7 +3,7 @@ module.exports = {
     browser: true,
     es6: true
   },
-  extends: ['plugin:react/recommended', 'airbnb'],
+  extends: ['plugin:react/recommended', 'airbnb', 'prettier'],
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly'
@@ -30,6 +30,9 @@ module.exports = {
     'react/no-array-index-key': 0,
     'object-curly-newline': 0,
     'jsx-a11y/no-static-element-interactions': 0,
-    'jsx-a11y/click-events-have-key-events': 0
+    'jsx-a11y/click-events-have-key-events': 0,
+    'react/jsx-props-no-spreading': 0,
+    'react/jsx-one-expression-per-line': 0,
+    'arrow-parens': 0
   }
 };
