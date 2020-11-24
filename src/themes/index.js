@@ -4,6 +4,8 @@ const theme = extendTheme({
   colors: {
     // main: '#2699fb',
     main: {
+      10: '#F6FBFF',
+      40: '#e8f5ff',
       50: '#DDF4FF',
       100: '#B8E2FE',
       200: '#94D0FD',
@@ -17,11 +19,11 @@ const theme = extendTheme({
     },
     sub: '#9ad2ff',
     bg: '#f1f9ff',
+    gray: '#5a5959',
     bgLight: '#f2f8ff',
     checkboxBorder: '#7fc4fd',
     boxBorder: '#bce0fd',
     boxBorderBlue: '#1995ff',
-
     green: '#36c66f',
     lightGreen: '#e8fbef',
     lightGray: '#dbdbdb',
@@ -29,7 +31,6 @@ const theme = extendTheme({
     darkGray: '#323232',
     orange: '#ff7b49',
     black: '#222222',
-
     subGray: '#faf8f8',
   },
   fonts: {
