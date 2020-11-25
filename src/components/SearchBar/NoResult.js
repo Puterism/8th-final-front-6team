@@ -1,43 +1,31 @@
 import React from 'react';
-import { VStack, HStack, Icon, Text, Flex, Button } from '@chakra-ui/core';
-import { FiSearch } from 'react-icons/fi';
-import dayjs from 'dayjs';
+import { VStack, HStack, Icon, Text, Flex, Box } from '@chakra-ui/core';
+import { SearchIcon } from '../../assets'
+import Chip from '../Chip';
+import theme from '../../themes';
 
 const NoResult = ({ searchValue }) => (
-  <VStack w="full">
-    <HStack w="full" spacing="2" color="main.500" background="bg" px="4" py="2">
-      <Icon as={FiSearch} w={4} h={4} />
-      <Text fontSize="sm">
+  <VStack w="full" mt="10px">
+    <Flex borderRadius="9px" mx="20px" w="full" bg={theme.colors.lightGreen} alignItems="center" px="16px" py="2">
+      <Icon as={SearchIcon} />
+      <Text ml="6px" color={theme.colors.green} fontSize="18px">
         <Text as="span" fontWeight="bold">
-          {searchValue}
+          '{searchValue}'
         </Text>
-        에 대한 검색결과가 없습니다.
+        에 대한 검색결과가 없습니다
       </Text>
-    </HStack>
-    <VStack spacing="2" w="full" p="4">
+    </Flex>
+    <Box w="full" px="16px" py="16.5px">
       <Flex w="full" align="center">
-        <Text color="main.500" fontSize="xs">
-          지금 가장 인기있는 채소를 검색해보세요
-        </Text>
-        <Text color="gray" fontSize="7px" ml="2">
-          {dayjs().format('MM월 DD일')} 기준 인기검색어
+        <Text color={theme.colors.darkGray} fontSize="18px">
+          지금 가장 인기있는 채소 검색어
         </Text>
       </Flex>
-      <HStack spacing="2" w="full">
-        <Button
-          color="sub"
-          fontSize="xs"
-          _focus={{ background: 'none' }}
-          borderWidth="3px"
-          bg="bg"
-          borderColor="sub"
-          width="56px"
-          height="34px"
-        >
-          고구마
-        </Button>
+      <HStack spacing="0.5" w="full" mt="13px">
+        <Chip text="고구마" />
+        <Chip text="브로콜리" />
       </HStack>
-    </VStack>
+    </Box>
   </VStack>
 );
 

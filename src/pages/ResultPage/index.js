@@ -5,6 +5,7 @@ import Chip from '../../components/Chip';
 import TotalBox from '../../components/TotalBox';
 import theme from '../../themes';
 import DetailModal from '../../components/DetailModal';
+import Header from '../../components/Header';
 
 const list = [
   {
@@ -63,10 +64,11 @@ const ResultPage = () => {
 
   return (
     <Flex flexDir="column">
-      <Flex flexDir="column" p="64px 110px">
+      <Header />
+      <Flex flexDir="column" p="47px 110px">
         <Text fontSize="22px" color="#666666" fontWeight="bold" mb="20px">가장 합리적인 조합을 찾았어요!</Text>
         <Flex alignItems="center" mr="-110px">
-          <div style={{ width: '40%' }}>
+          <div style={{ width: '40%', marginBottom: "50px" }}>
             <SearchBar placeholder="채소를 추가하여 조합을 다시 검색할 수 있어요." />
           </div>
           <Flex ml="16px" w="60%" alignItems="center" overflowY="scroll" className="no-scrollbar">
@@ -90,7 +92,7 @@ const ResultPage = () => {
         <Button
           w="full"
           bg={theme.colors.green}
-          py="35px"
+          py="40px"
           fontSize="28px"
           fontWeight="bold"
           borderRadius="48px"

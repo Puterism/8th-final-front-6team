@@ -3,8 +3,9 @@ import React from 'react';
 import { RemoveBtn } from '../../assets';
 import theme from '../../themes';
 
-export default ({ text, removeable }) => (
+export default ({ text, removeable, onClick }) => (
   <Flex
+    onClick={onClick}
     overflowY="visible"
     mr="2"
     fontSize="14px"
@@ -21,6 +22,6 @@ export default ({ text, removeable }) => (
   >
     {text}
     {removeable
-    && <span style={{ marginLeft: '7px', marginTop: '3px', cursor: 'pointer' }}><RemoveBtn /></span>}
+      && <span style={{ marginLeft: '7px', marginTop: '3px', cursor: 'pointer' }}><RemoveBtn /></span>}
   </Flex>
 );
