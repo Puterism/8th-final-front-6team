@@ -15,7 +15,16 @@ ReactDOM.render(
         <Route path="/" exact>
           <MainPage />
         </Route>
-        <Route path="/category1" exact>
+        <Route path="/categories" exact>
+          <CategoryPage />
+        </Route>
+        <Route path="/about" exact>
+          <CategoryPage />
+        </Route>
+        <Route path="/contact" exact>
+          <CategoryPage />
+        </Route>
+        <Route path="/faq" exact>
           <CategoryPage />
         </Route>
         <Route path="/result">
