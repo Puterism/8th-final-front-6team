@@ -2,21 +2,21 @@ import { Flex, Img, Heading, Box } from '@chakra-ui/core';
 import React from 'react';
 import SearchBar from '../../components/SearchBar';
 import Layout from '../../components/Layout';
+import Chip from '../../components/Chip';
 
 const MainPage = () => (
   <Layout>
-    <Box mt="180px">
+    <Flex flexDir="column" mt="180px" w="full" alignItems="center" >
       <Img src="/images/main.png" w="450px" h="220px" mx="auto" />
       <Heading color="darkGray" fontSize="40px" mt="2">
         for a smarter veggie lifestyle
       </Heading>
-      <Box mt="76px" w="full">
+      <Box mt="58px" w="full" px="12rem">
         <SearchBar
-          mt="76px"
           placeholder="구입할 채소를 검색해주세요. 최저가 조합의 커머스를 알려드릴게요. ex) 양파 + 감자"
         />
       </Box>
-    </Box>
+    </Flex>
   </Layout>
 );
 

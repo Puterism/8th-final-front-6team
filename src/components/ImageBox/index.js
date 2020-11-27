@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  Box, Circle, Flex, Image, Text,
-} from '@chakra-ui/core';
+import { Box, Circle, Flex, Image, Text } from '@chakra-ui/core';
 import theme from '../../themes';
 import { Minus, Plus, Check } from '../../assets';
 
@@ -22,7 +20,7 @@ export default ({
       borderColor={isSelected ? theme.colors.green : '#efefef'}
       mr="22px"
     >
-      <Image objectFit="cover" width="295px" height="142px" borderTopRadius="5px" src="https://t1.daumcdn.net/cfile/tistory/99C9D4445BBEC6BF08" />
+      <Image objectFit="cover" width="295px" height="142px" borderTopRadius="8px" src="https://t1.daumcdn.net/cfile/tistory/99C9D4445BBEC6BF08" />
       <Flex p="10px" flexDir="column">
         <Text fontSize="18px" color={theme.colors.black}>
           {name}

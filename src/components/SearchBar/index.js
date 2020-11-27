@@ -1,17 +1,15 @@
-import { Flex, Input, IconButton, Box, VStack, HStack } from '@chakra-ui/core';
+import { Flex, IconButton, Box } from '@chakra-ui/core';
 import React, { useState, useCallback } from 'react';
-import { FiSearch } from 'react-icons/fi';
 import onClickOutside from 'react-onclickoutside';
 import axios from 'axios';
 import _ from 'lodash';
 import NoResult from './NoResult';
 import AutoComplete from './AutoComplete';
-import Chip from '../Chip/index';
 import SearchInput from './SearchInput';
+import theme from '../../themes';
+import { SearchBtn } from '../../assets';
 
-const InputStyle = { boxShadow: '0 0 0 1.5px #9ad2ff', color: '#2699fb' };
-
-function SearchBar() {
+function SearchBar({ placeholder }) {
   const [searchValue, setSearchValue] = useState('');
   const [isNoSearch, setIsNoSearch] = useState(false);
   const [isSubmitting] = useState(false);
@@ -104,41 +102,43 @@ function SearchBar() {
   SearchBar.handleClickOutside = reset;
 
   return (
-    <>
-      <VStack w="full" spacing="4">
-        <Flex w="full">
-          <Box
-            w="full"
-            position="relative"
-            borderColor="main.500"
-            boxShadow={InputStyle.boxShadow}
-            _focus={InputStyle}
-            _hover={InputStyle}
-            borderRadius="md"
-            overflow="hidden"
-          >
-            <SearchInput onChange={handleChange} onKeyPress={handleKeyPress} searchValue={searchValue} />
-            {!isNoSearch && <AutoComplete keywords={keywords} activeItemIndex={activeItemIndex} addChip={addChip} />}
-            {isNoSearch && <NoResult searchValue={searchValue} />}
-          </Box>
-          <IconButton
-            icon={<FiSearch color="white" />}
+    <Box position="relative">
+      <Box
+        border="solid 2px"
+        borderColor={theme.colors.green}
+        bg="white"
+        position="absolute"
+        borderRadius="30px"
+        overflow="hidden"
+        px="20px"
+        zIndex="3"
+        w="full"
+      >
+        <Flex alignItems="center">
+          <SearchInput onChange={handleChange} onKeyPress={handleKeyPress} searchValue={searchValue} placeholder={placeholder} />
+          {searchValue === '' && <IconButton
+            icon={<SearchBtn />}
             isLoading={isSubmitting}
             color="white"
-            background="main.500"
-            ml="11px"
+            borderRadius="50%"
+            background={theme.colors.lightGray}
+            ml="auto"
+            mr="-10px"
             disabled={!isActive}
-          />
+          />}
         </Flex>
-        {!_.isEmpty(chips) && (
-          <HStack spacing="2" w="full">
-            {chips.map(chip => (
-              <Chip key={chip} text={chip} onClick={handleRemoveChip} removable />
-            ))}
-          </HStack>
-        )}
-      </VStack>
-    </>
+        {!isNoSearch && <AutoComplete keywords={keywords} activeItemIndex={activeItemIndex} addChip={addChip} />}
+        {isNoSearch && <NoResult searchValue={searchValue} />}
+      </Box>
+      {/* 이건 메인페이지로 옮겨주세요 결과페이지의 검색창에서는 없는 부분입니다 */}
+      {/* {!_.isEmpty(chips) && (
+        <HStack spacing="2" w="full">
+          {chips.map(chip => (
+            <Chip key={chip} text={chip} onClick={handleRemoveChip} removable />
+          ))}
+        </HStack>
+      )} */}
+    </Box>
   );
 }
 

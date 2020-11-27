@@ -1,10 +1,12 @@
-import { Box, Text, HStack } from '@chakra-ui/core';
-import { CloseIcon } from '@chakra-ui/icons';
+import { Flex } from '@chakra-ui/core';
 import React from 'react';
+import { RemoveBtn } from '../../assets';
 import theme from '../../themes';
 
-export default ({ text, removable, onClick }) => (
-  <HStack
+export default ({ text, removeable, onClick }) => (
+  <Flex
+    onClick={onClick}
+    overflowY="visible"
     mr="2"
     fontSize="14px"
     bg={theme.colors.lightGreen}
@@ -14,13 +16,12 @@ export default ({ text, removable, onClick }) => (
     borderRadius="100px"
     p="5px 13px"
     fontWeight="bold"
-    cursor={!removable && 'pointer'}
+    alignItems="center"
+    cursor={!removeable && 'pointer'}
+    wordBreak="keep-all"
   >
-    <Text as="span">{text}</Text>
-    {removable && (
-      <Box as="span" cursor="pointer" onClick={() => onClick(text)}>
-        <CloseIcon width="10px" height="10px" mt="-2px" />
-      </Box>
-    )}
-  </HStack>
+    {text}
+    {removeable
+      && <span style={{ marginLeft: '7px', marginTop: '3px', cursor: 'pointer' }}><RemoveBtn /></span>}
+  </Flex>
 );

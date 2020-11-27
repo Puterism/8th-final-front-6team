@@ -1,18 +1,20 @@
 import React from 'react';
 import { Input } from '@chakra-ui/core';
+import theme from '../../themes';
 
-const SearchInput = ({ onChange, onKeyPress, searchValue }) => (
+const SearchInput = ({ onChange, onKeyPress, searchValue, placeholder }) => (
   <Input
     onChange={onChange}
     onKeyDown={onKeyPress}
     value={searchValue}
-    placeholder="구입할 채소를 검색해주세요. 최저가 조합의 커머스를 알려드릴게요. ex) 양파 + 감자"
-    color="main.500"
+    placeholder={placeholder}
+    color={theme.colors.mediumGray}
     border="none"
     boxShadow="none"
-    fontSize="sm"
+    fontSize="18px"
     _focus={{ border: 'none' }}
-    _placeholder={{ color: '#2699fb' }}
+    _placeholder={{ color: theme.colors.mediumGray }}
+    my="5px"
   />
 );
 
