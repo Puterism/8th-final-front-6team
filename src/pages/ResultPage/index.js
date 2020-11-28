@@ -142,7 +142,7 @@ const ResultPage = () => {
         </Button>
       </Flex>
       {isModalOpened && <DetailModal closeModal={closeModal} name={selectedVegi} />}
-    </Flex>
+    </Layout>
   );
 };
 
