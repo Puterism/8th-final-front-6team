@@ -9,54 +9,21 @@ import SearchInput from './SearchInput';
 import theme from '../../themes';
 import { SearchBtn } from '../../assets';
 
-function SearchBar({ placeholder }) {
+function SearchBar({
+  placeholder,
+  keywords,
+  reset,
+  setKeywords,
+  setIsNoSearch,
+  isNoSearch,
+  fetchChips,
+  addChip,
+  isActive,
+  chips
+}) {
   const [searchValue, setSearchValue] = useState('');
-  const [isNoSearch, setIsNoSearch] = useState(false);
   const [isSubmitting] = useState(false);
-  const [chips, setChips] = useState([]);
-  const [keywords, setKeywords] = useState([]);
   const [activeItemIndex, setActiveItemIndex] = useState(0);
-  const isActive = !_.isEmpty(chips);
-
-  const reset = useCallback(() => {
-    setIsNoSearch(false);
-    setSearchValue('');
-    setKeywords([]);
-  }, []);
-
-  const fetchChips = useCallback(
-    _.debounce(searchValue => {
-      if (!searchValue) {
-        setKeywords([]);
-        return;
-      }
-      axios.get(`https://vegetable.tk/api/v1/chips/${searchValue}`).then(result => {
-        const { chips } = result.data;
-        if (_.isEmpty(chips)) {
-          setIsNoSearch(true);
-        } else {
-          setIsNoSearch(false);
-          setKeywords(result.data.chips.map(chip => chip.keyword));
-        }
-      });
-    }, 200),
-    []
-  );
-
-  const addChip = useCallback(
-    searchText => {
-      setChips(prev => _.uniq(prev.concat(searchText)));
-      reset();
-    },
-    [reset]
-  );
-
-  const handleRemoveChip = useCallback(
-    chip => {
-      setChips(_.remove(chips, c => c !== chip));
-    },
-    [chips]
-  );
 
   const handleChange = useCallback(
     e => {
@@ -81,6 +48,7 @@ function SearchBar({ placeholder }) {
         const chip = keywords[activeItemIndex];
         if (_.isEmpty(chip)) return;
         addChip(chip);
+        setSearchValue('');
         e.preventDefault();
         return;
       }
@@ -102,7 +70,7 @@ function SearchBar({ placeholder }) {
   SearchBar.handleClickOutside = reset;
 
   return (
-    <Box position="relative">
+    <Box position="relative" h="54px">
       <Box
         border="solid 2px"
         borderColor={theme.colors.green}
@@ -115,29 +83,35 @@ function SearchBar({ placeholder }) {
         w="full"
       >
         <Flex alignItems="center">
-          <SearchInput onChange={handleChange} onKeyPress={handleKeyPress} searchValue={searchValue} placeholder={placeholder} />
-          {searchValue === '' && <IconButton
-            icon={<SearchBtn />}
-            isLoading={isSubmitting}
-            color="white"
-            borderRadius="50%"
-            background={theme.colors.lightGray}
-            ml="auto"
-            mr="-10px"
-            disabled={!isActive}
-          />}
+          <SearchInput
+            onChange={handleChange}
+            onKeyPress={handleKeyPress}
+            searchValue={searchValue}
+            placeholder={placeholder}
+          />
+          {searchValue === '' && (
+            <IconButton
+              icon={<SearchBtn />}
+              isLoading={isSubmitting}
+              color="white"
+              borderRadius="50%"
+              background={theme.colors.lightGray}
+              ml="auto"
+              mr="-10px"
+              disabled={!isActive}
+            />
+          )}
         </Flex>
-        {!isNoSearch && <AutoComplete keywords={keywords} activeItemIndex={activeItemIndex} addChip={addChip} />}
-        {isNoSearch && <NoResult searchValue={searchValue} />}
+        {!isNoSearch && (
+          <AutoComplete
+            searchValue={searchValue}
+            keywords={keywords}
+            activeItemIndex={activeItemIndex}
+            addChip={addChip}
+          />
+        )}
+        {isNoSearch && <NoResult chips={chips} searchValue={searchValue} />}
       </Box>
-      {/* 이건 메인페이지로 옮겨주세요 결과페이지의 검색창에서는 없는 부분입니다 */}
-      {/* {!_.isEmpty(chips) && (
-        <HStack spacing="2" w="full">
-          {chips.map(chip => (
-            <Chip key={chip} text={chip} onClick={handleRemoveChip} removable />
-          ))}
-        </HStack>
-      )} */}
     </Box>
   );
 }

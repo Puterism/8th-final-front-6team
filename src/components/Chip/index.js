@@ -3,11 +3,12 @@ import React from 'react';
 import { RemoveBtn } from '../../assets';
 import theme from '../../themes';
 
-export default ({ text, removeable, onClick }) => (
+export default ({ text, removable, onClick }) => (
   <Flex
     onClick={onClick}
     overflowY="visible"
     mr="2"
+    mb="2"
     fontSize="14px"
     bg={theme.colors.lightGreen}
     color={theme.colors.green}
@@ -17,11 +18,14 @@ export default ({ text, removeable, onClick }) => (
     p="5px 13px"
     fontWeight="bold"
     alignItems="center"
-    cursor={!removeable && 'pointer'}
+    cursor={!removable && 'pointer'}
     wordBreak="keep-all"
   >
     {text}
-    {removeable
-      && <span style={{ marginLeft: '7px', marginTop: '3px', cursor: 'pointer' }}><RemoveBtn /></span>}
+    {removable && (
+      <span style={{ marginLeft: '7px', marginTop: '3px', cursor: 'pointer' }}>
+        <RemoveBtn />
+      </span>
+    )}
   </Flex>
 );

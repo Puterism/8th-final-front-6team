@@ -9,44 +9,89 @@ import Header from '../../components/Header';
 
 const list = [
   {
-    key: 1, name: '양파', price: '3,000', weight: '100g', num: '3개',
+    key: 1,
+    name: '양파',
+    price: '3,000',
+    weight: '100g',
+    num: '3개'
   },
   {
-    key: 2, name: '브로콜리', price: '3,000', weight: '100g', num: '3개',
+    key: 2,
+    name: '브로콜리',
+    price: '3,000',
+    weight: '100g',
+    num: '3개'
   },
   {
-    key: 3, name: '고구마', price: '3,000', weight: '100g', num: '3개',
+    key: 3,
+    name: '고구마',
+    price: '3,000',
+    weight: '100g',
+    num: '3개'
   },
   {
-    key: 4, name: '양상추', price: '3,000', weight: '100g', num: '3개',
+    key: 4,
+    name: '양상추',
+    price: '3,000',
+    weight: '100g',
+    num: '3개'
   },
   {
-    key: 5, name: '청경채', price: '3,000', weight: '100g', num: '3개',
+    key: 5,
+    name: '청경채',
+    price: '3,000',
+    weight: '100g',
+    num: '3개'
   },
   {
-    key: 6, name: '토마토', price: '3,000', weight: '100g', num: '3개',
+    key: 6,
+    name: '토마토',
+    price: '3,000',
+    weight: '100g',
+    num: '3개'
   },
   {
-    key: 7, name: '콜리플라워', price: '3,000', weight: '100g', num: '3개',
+    key: 7,
+    name: '콜리플라워',
+    price: '3,000',
+    weight: '100g',
+    num: '3개'
   },
   {
-    key: 8, name: '단호박', price: '3,000', weight: '100g', num: '3개',
+    key: 8,
+    name: '단호박',
+    price: '3,000',
+    weight: '100g',
+    num: '3개'
   },
   {
-    key: 9, name: '새송이버섯', price: '3,000', weight: '100g', num: '3개',
-  },
+    key: 9,
+    name: '새송이버섯',
+    price: '3,000',
+    weight: '100g',
+    num: '3개'
+  }
 ];
 
 const mallList = [
   {
-    key: 1, mallName: '이마트', totalPrice: '12,500', list,
+    key: 1,
+    mallName: '이마트',
+    totalPrice: '12,500',
+    list
   },
   {
-    key: 2, mallName: '쿠팡', totalPrice: '12,500', list,
+    key: 2,
+    mallName: '쿠팡',
+    totalPrice: '12,500',
+    list
   },
   {
-    key: 3, mallName: '마켓컬리', totalPrice: '12,500', list,
-  },
+    key: 3,
+    mallName: '마켓컬리',
+    totalPrice: '12,500',
+    list
+  }
 ];
 
 const ResultPage = () => {
@@ -57,7 +102,7 @@ const ResultPage = () => {
     setSelectedVegi(null);
     setIsModalOpened(false);
   };
-  const openModal = (name) => {
+  const openModal = name => {
     setSelectedVegi(name);
     setIsModalOpened(true);
   };
@@ -66,17 +111,21 @@ const ResultPage = () => {
     <Flex flexDir="column">
       <Header />
       <Flex flexDir="column" p="47px 110px">
-        <Text fontSize="22px" color="#666666" fontWeight="bold" mb="20px">가장 합리적인 조합을 찾았어요!</Text>
+        <Text fontSize="22px" color="#666666" fontWeight="bold" mb="20px">
+          가장 합리적인 조합을 찾았어요!
+        </Text>
         <Flex alignItems="center" mr="-110px">
-          <div style={{ width: '40%', marginBottom: "50px" }}>
+          <div style={{ width: '40%', marginBottom: '50px' }}>
             <SearchBar placeholder="채소를 추가하여 조합을 다시 검색할 수 있어요." />
           </div>
           <Flex ml="16px" w="60%" alignItems="center" overflowY="scroll" className="no-scrollbar">
-            {list.map((item) => <Chip text={item.name} removeable />)}
+            {list.map(item => (
+              <Chip text={item.name} removable />
+            ))}
           </Flex>
         </Flex>
         <Flex mt="20" justifyContent="space-between">
-          {mallList.map((item) => (
+          {mallList.map(item => (
             <div style={{ cursor: 'pointer' }} onClick={() => setSelectedMall(item.mallName)}>
               <TotalBox
                 mallName={item.mallName}
