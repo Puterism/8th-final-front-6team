@@ -8,5 +8,5 @@ export { ReactComponent as RemoveBtn } from './icn-remove.svg';
 export { ReactComponent as SearchBtn } from './Slice 1.svg';
 export { ReactComponent as BookmarkBtn } from './bookmark.svg';
 export { ReactComponent as LikedBtn } from './liked.svg';
-export { ReactComponent as LeftBackBtn } from './left_back.svg';
-export { ReactComponent as RightBackBtn } from './right_back.svg';
+export { ReactComponent as ArrowLeftBtn } from './arrow_left.svg';
+export { ReactComponent as ArrowRightBtn } from './arrow_right.svg';

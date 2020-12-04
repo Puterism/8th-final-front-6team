@@ -3,7 +3,7 @@ import {
   Box, Heading, Text, Flex
 } from '@chakra-ui/core';
 import dummyImageUrl from '../../images/dummy_big_card.png';
-import { BookmarkBtn, LeftBackBtn, LikedBtn, RightBackBtn } from '../../assets';
+import { BookmarkBtn, LikedBtn, ArrowLeftBtn, ArrowRightBtn } from '../../assets';
 
 const Card = (props) => {
   const {
@@ -87,8 +87,8 @@ const Card = (props) => {
                 paddingX="32px"
               >
   
-                <LeftBackBtn cursor="pointer" />
-                <RightBackBtn cursor="pointer" />
+                <ArrowLeftBtn cursor="pointer" />
+                <ArrowRightBtn cursor="pointer" />
               </Flex>
               <Box
                 display="inline-block"
