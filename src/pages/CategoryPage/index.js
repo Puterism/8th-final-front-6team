@@ -25,7 +25,6 @@ const CategoryPage = () => (
           description="샐러드는 리코타 치즈 샐러드"
         />
       </Grid>
-      <Box position="fixed" width="full" bottom="0" height="133.8px" backgroundImage="linear-gradient(to bottom, rgba(241, 249, 255, 0), #f1f9ff 59%)" />
     </Layout>
   </Box>
 );
