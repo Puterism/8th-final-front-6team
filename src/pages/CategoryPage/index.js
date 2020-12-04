@@ -4,33 +4,25 @@ import Layout from '../../components/Layout';
 import Card from '../../components/Card';
 
 const CategoryPage = () => (
-  <Box backgroundColor="bg">
+  <Box backgroundColor="#f2f2f2">
     <Layout>
-      <Grid templateColumns="repeat(4, 1fr)" gap="20px" width="100%" marginY="32">
-        <Card
-          title="아보카도를 좋아한다면"
-          description="한 줄로 적어본다면?"
-        />
+      <Grid templateColumns="repeat(3, 1fr)" gap="25px" width="100%" marginY="32" px="110px">
         <Card
           big
           title="오늘의 샐러드"
-          description={'샐러드가 끌리는 날이 있죠,\n집에 있는 채소에 새로운 것들 몇개만 구입해\n멋진 샐러드 식사를 즐겨볼까요?'}
+          description={'유독 샐러드가 끌리는 날이 있죠.\n집에 있는 채소에 새로운 것 몇개만 더하면 멋진 샐러드가 된다는 사실, 알고 계시나요?\navocado에서 가장 많이 검색되는 채소 조합으로 오늘은 샐러드 식사 어떠세요?'}
         />
         <Card
           title="샐러드에 베이컨 한 조각 어때요?"
-          description="Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim."
+          description="집에 있는 채소에 새로운 것 몇개만 더하면 멋진 샐러드가 된다는 사실, 알고 계시나요?"
         />
         <Card
-          title="드레싱만 바꿨을 뿐인데"
-          description="Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim."
+          title="아보카도가 처음인가요?"
+          description="집에 있는 채소에 새로운 것 몇개만 더하면 멋진 샐러드가 된다는 사실, 알고 계시나요?"
         />
         <Card
           title="특별한 날엔, 특별한 샐러드를"
           description="샐러드는 리코타 치즈 샐러드"
-        />
-        <Card
-          title="다이어트는 겨울부터 하는거죠"
-          description="Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim."
         />
       </Grid>
       <Box position="fixed" width="full" bottom="0" height="133.8px" backgroundImage="linear-gradient(to bottom, rgba(241, 249, 255, 0), #f1f9ff 59%)" />

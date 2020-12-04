@@ -1,8 +1,9 @@
 import React from 'react';
 import {
-  Box, Heading, Text, Button,
+  Box, Heading, Text, Flex
 } from '@chakra-ui/core';
 import dummyImageUrl from '../../images/dummy_big_card.png';
+import { BookmarkBtn, LeftBackBtn, LikedBtn, RightBackBtn } from '../../assets';
 
 const Card = (props) => {
   const {
@@ -15,16 +16,17 @@ const Card = (props) => {
         big ? (
           <Box
             overflow="hidden"
-            height="full"
+            minHeight="300px"
             position="relative"
             backgroundImage={`url(${dummyImageUrl})`}
             backgroundSize="cover"
             backgroundPosition="center center"
-            gridColumnEnd="span 3"
+            gridColumn="1 / 4"
             color="white"
+            borderRadius="30px"
           >
             <Box
-              backgroundColor="main.500"
+              backgroundColor="rgba(39, 107, 66, 0.56)"
               opacity="0.6"
               position="absolute"
               top="0"
@@ -35,8 +37,8 @@ const Card = (props) => {
             />
             <Box
               zIndex="10"
-              paddingX="16"
-              paddingY="17"
+              paddingX="106px"
+              paddingY="48px"
               width="full"
               height="full"
               position="absolute"
@@ -46,16 +48,24 @@ const Card = (props) => {
               <Heading
                 as="h3"
                 fontWeight="800"
-                fontSize="53px"
-                lineHeight="1.21"
-                marginBottom="4"
+                fontSize={60}
+                lineHeight="normal"
               >
                 { title }
               </Heading>
               <Text
-                width="500px"
-                fontSize="md"
-                lineHeight="1.5"
+                fontFamily="'Montserrat', sans-serif"
+                fontSize={20}
+                fontWeight="600"
+                letterSpacing="1px"
+                marginBottom="4"
+              >
+                NOW TRENDING
+              </Text>
+              <Text
+                fontWeight="bold"
+                fontSize={15}
+                lineHeight="1.6"
               >
                 { description.split('\n').map((line) => (
                   <Text as="span" key={line}>
@@ -64,107 +74,105 @@ const Card = (props) => {
                   </Text>
                 )) }
               </Text>
+              
+              <Flex
+                position="absolute"
+                top="0"
+                left="0"
+                justifyContent="space-between"
+                alignItems="center"
+                width="full"
+                height="full"
+                zIndex="-1"
+                paddingX="32px"
+              >
+  
+                <LeftBackBtn cursor="pointer" />
+                <RightBackBtn cursor="pointer" />
+              </Flex>
               <Box
                 display="inline-block"
                 position="absolute"
-                bottom="16"
+                top="0"
+                right="0"
+                marginRight="27"
+                marginTop="17"
+                fontFamily="'Montserrat', sans-serif"
               >
-                <Box display="inline-block" marginRight="7">
-                  <Text as="span" marginRight="2">
-                    좋
+                <Flex
+                  display="inline-flex"
+                  marginRight="3"
+                  justifyContent="center"
+                  alignItems="center"
+                  direction="column"
+                >
+                  <Text
+                    as="span"
+                    marginBottom="2px"
+                  >
+                    <BookmarkBtn />
                   </Text>
                   <Text
                     as="span"
-                    fontSize="sm"
-                    fontWeight="bold"
+                    fontSize={12}
+                    fontWeight="500"
                     letterSpacing="normal"
                   >
                     { likesCount }
                   </Text>
-                </Box>
-                <Box display="inline-block" marginRight="7">
-                  <Text as="span" marginRight="2">
-                    댓
+                </Flex>
+                <Flex
+                  display="inline-flex"
+                  justifyContent="center"
+                  alignItems="center"
+                  direction="column"
+                >
+                  <Text
+                    as="span"
+                    marginBottom="2px"
+                  >
+                    <LikedBtn />
                   </Text>
                   <Text
                     as="span"
-                    fontSize="sm"
-                    fontWeight="bold"
+                    fontSize={12}
+                    fontWeight="500"
                     letterSpacing="normal"
                   >
                     { commentsCount }
                   </Text>
-                </Box>
+                </Flex>
+                
               </Box>
-              <Button color="white" variant="link" position="absolute" top="0" right="0" marginRight="16" marginTop="17">
-                SHARE
-              </Button>
+              
             </Box>
           </Box>
         ) : (
-          <Box overflow="hidden" gridColumnEnd="span 1" color="main.500">
-            <Box height="200px" background="url(https://dummyimage.com/340x200/2699fb/fff) center" />
+          <Box overflow="hidden" color="#323232" borderRadius="30px">
+            <Box height="331px" background="url(https://dummyimage.com/390x331/276b42/fff) center" />
             <Box
               bgColor="white"
               padding="30px"
+              minHeight="141px"
               position="relative"
+              borderBottomRadius="30px"
             >
               <Heading
                 as="h3"
                 fontWeight="bold"
-                fontSize="xl"
-                lineHeight="1.5"
-                marginBottom="6"
+                fontSize={22}
+                lineHeight="normal"
+                marginBottom="1"
               >
                 { title }
               </Heading>
               <Text
-                fontSize="sm"
+                fontSize={12}
                 fontWeight="normal"
-                lineHeight="1.71"
-                marginBottom="9"
+                lineHeight="1.67"
               >
                 { description }
               </Text>
-              <Box
-                display="flex"
-                justifyContent="space-between"
-                alignItems="center"
-              >
-                <Box display="inline-block">
-                  <Box display="inline-block" marginRight="7">
-                    <Text as="span" marginRight="2">
-                      좋
-                    </Text>
-                    <Text
-                      as="span"
-                      fontSize="sm"
-                      fontWeight="bold"
-                      letterSpacing="normal"
-                      color="main.500"
-                    >
-                      { likesCount }
-                    </Text>
-                  </Box>
-                  <Box display="inline-block" marginRight="7">
-                    <Text as="span" marginRight="2">
-                      댓
-                    </Text>
-                    <Text
-                      as="span"
-                      fontSize="sm"
-                      fontWeight="bold"
-                      letterSpacing="normal"
-                      color="main.500"
-                    >
-                      { commentsCount }
-                    </Text>
-                  </Box>
-                </Box>
-                <Button color="main.500" variant="link">
-                  SHARE
-                </Button>
-              </Box>
             </Box>
           </Box>
         )
