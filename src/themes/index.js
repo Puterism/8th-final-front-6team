@@ -48,6 +48,7 @@ const theme = extendTheme({
     17: '4.25rem',
     18: '4.5rem',
     19: '4.75rem',
+    27: '6.75rem',
   },
 });
 
