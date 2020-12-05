@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { Button, Flex, Text } from '@chakra-ui/core';
+import { Button, Flex, Text, Box } from '@chakra-ui/core';
+import { useRecoilState } from 'recoil';
 import SearchBar from '../../components/SearchBar';
 import Chip from '../../components/Chip';
 import TotalBox from '../../components/TotalBox';
 import theme from '../../themes';
 import DetailModal from '../../components/DetailModal';
 import Header from '../../components/Header';
+import { ChipsState } from '../../states/atoms';
 
 const list = [
   {
@@ -98,6 +100,7 @@ const ResultPage = () => {
   const [isModalOpened, setIsModalOpened] = useState(false);
   const [selectedMall, setSelectedMall] = useState(mallList[0].mallName);
   const [selectedVegi, setSelectedVegi] = useState(null);
+  const [chips, setChips] = useRecoilState(ChipsState);
   const closeModal = () => {
     setSelectedVegi(null);
     setIsModalOpened(false);
@@ -114,40 +117,24 @@ const ResultPage = () => {
         <Text fontSize="22px" color="#666666" fontWeight="bold" mb="20px">
           가장 합리적인 조합을 찾았어요!
         </Text>
-        <Flex alignItems="center" mr="-110px">
-          <div style={{ width: '40%', marginBottom: '50px' }}>
+        <Flex alignItems="center" mr="-110px" mb="50px">
+          <Box w="40%">
             <SearchBar placeholder="채소를 추가하여 조합을 다시 검색할 수 있어요." />
-          </div>
+          </Box>
           <Flex ml="16px" w="60%" alignItems="center" overflowY="scroll" className="no-scrollbar">
-            {list.map(item => (
-              <Chip text={item.name} removable />
+            {chips.map(chip => (
+              <Chip key={chip} text={chip} removable />
             ))}
           </Flex>
         </Flex>
         <Flex mt="20" justifyContent="space-between">
           {mallList.map(item => (
             <div style={{ cursor: 'pointer' }} onClick={() => setSelectedMall(item.mallName)}>
-              <TotalBox
-                mallName={item.mallName}
-                totalPrice={item.totalPrice}
-                list={item.list}
-                isSelected={selectedMall === item.mallName}
-                selectedVegi={selectedVegi}
-                setSelectedVegi={openModal}
-              />
+              <TotalBox mallName={item.mallName} totalPrice={item.totalPrice} list={item.list} isSelected={selectedMall === item.mallName} selectedVegi={selectedVegi} setSelectedVegi={openModal} />
             </div>
           ))}
         </Flex>
-        <Button
-          w="full"
-          bg={theme.colors.green}
-          py="40px"
-          fontSize="28px"
-          fontWeight="bold"
-          borderRadius="48px"
-          color="white"
-          mt="51px"
-        >
+        <Button w="full" bg={theme.colors.green} py="40px" fontSize="28px" fontWeight="bold" borderRadius="48px" color="white" mt="51px">
           이 조합 선택하기
         </Button>
       </Flex>
