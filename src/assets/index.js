@@ -10,3 +10,4 @@ export { ReactComponent as BookmarkBtn } from './bookmark.svg';
 export { ReactComponent as LikedBtn } from './liked.svg';
 export { ReactComponent as ArrowLeftBtn } from './arrow_left.svg';
 export { ReactComponent as ArrowRightBtn } from './arrow_right.svg';
+export { ReactComponent as CheckSmallIcon } from './icn-select-24.svg';
