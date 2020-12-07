@@ -1,7 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import {
-  Box, Flex, Stack, Text, Button,
-} from '@chakra-ui/core';
+import { Box, Flex, Stack, Text, Button } from '@chakra-ui/core';
 import Layout from '../../components/Layout';
 import SelectionItem from '../../components/SelectionItem';
 import { currencyFormat } from '../../utils';
@@ -34,16 +32,19 @@ const SelectionPage = () => {
   //   return calculated.toFixed(0);
   // }, []);
 
-  const toggleSelectionItem = useCallback((id, checked) => {
-    console.log('toggleSelectionItem', id, checked);
-    setSelectionList((prevState) => {
-      const nextState = [...prevState];
-      const index = nextState.findIndex(item => item.id === id);
-      nextState[index].checked = checked;
+  const toggleSelectionItem = useCallback(
+    (id, checked) => {
+      console.log('toggleSelectionItem', id, checked);
+      setSelectionList(prevState => {
+        const nextState = [...prevState];
+        const index = nextState.findIndex(item => item.id === id);
+        nextState[index].checked = checked;
 
-      return nextState;
-    });
-  }, [setSelectionList]);
+        return nextState;
+      });
+    },
+    [setSelectionList]
+  );
 
   useEffect(() => {
     setSelectionList([
@@ -54,7 +55,7 @@ const SelectionPage = () => {
         amount: '10kg',
         price: 6800,
         image: onionImageUrl,
-        checked: true,
+        checked: true
       },
       {
         id: '2',
@@ -63,7 +64,7 @@ const SelectionPage = () => {
         amount: '10kg',
         price: 6800,
         image: onionImageUrl,
-        checked: true,
+        checked: true
       },
       {
         id: '3',
@@ -72,7 +73,7 @@ const SelectionPage = () => {
         amount: '10kg',
         price: 6800,
         image: onionImageUrl,
-        checked: true,
+        checked: true
       },
       {
         id: '4',
@@ -81,7 +82,7 @@ const SelectionPage = () => {
         amount: '10kg',
         price: 6800,
         image: onionImageUrl,
-        checked: true,
+        checked: true
       },
       {
         id: '5',
@@ -90,7 +91,7 @@ const SelectionPage = () => {
         amount: '10kg',
         price: 6800,
         image: onionImageUrl,
-        checked: true,
+        checked: true
       },
       {
         id: '6',
@@ -99,9 +100,9 @@ const SelectionPage = () => {
         amount: '10kg',
         price: 6800,
         image: onionImageUrl,
-        checked: true,
-      },
-    ])
+        checked: true
+      }
+    ]);
   }, [setSelectionList]);
 
   // useEffect(() => {
@@ -110,31 +111,13 @@ const SelectionPage = () => {
 
   return (
     <Layout>
-      <Flex
-        flexDirection="column"
-        width="full"
-        height="calc(100% - 144px)"
-        maxHeight="full"
-        marginY="37px"
-        paddingX="110px"
-        color={theme.colors.black}
-        position="absolute"
-      >
+      <Flex flexDirection="column" width="full" height="calc(100% - 144px)" maxHeight="full" marginY="37px" paddingX="110px" color="black" position="absolute" overflow="hidden">
         <Flex width="full" justifyContent="space-between" alignItems="baseline" marginBottom="45px">
           <Box>
-            <Text
-              as="h3"
-              fontSize="40px"
-              fontWeight="bold"
-              color={theme.colors.green}
-              letterSpacing="normal"
-            >
+            <Text as="h3" fontSize="40px" fontWeight="bold" color="green" letterSpacing="normal">
               선택한 조합으로 구매해보세요
             </Text>
-            <Text
-              fontSize="18px"
-              letterSpacing="normal"
-            >
+            <Text fontSize="18px" letterSpacing="normal">
               2020년 10월 30일 오후 3시 15분에 검색한 조합
             </Text>
           </Box>
@@ -146,72 +129,35 @@ const SelectionPage = () => {
           paddingLeft="21px"
           paddingRight="40px"
           marginBottom="28px"
-          backgroundColor={theme.colors.subGray}
+          backgroundColor="subGray"
           borderRadius="19px"
           justifyContent="space-between"
           alignItems="center"
         >
           <Flex fontSize="18px">
-            <Text
-              fontWeight="bold"
-              marginRight="34px"
-            >
+            <Text fontWeight="bold" marginRight="34px">
               이마트
             </Text>
-            <Text
-              color={theme.colors.mediumGray}
-              marginRight="14px"
-            >
+            <Text color="mediumGray" marginRight="14px">
               배송료 2,500원
             </Text>
-            <Text color={theme.colors.mediumGray}>
-              30,000원 이상 무료배송
-            </Text>
+            <Text color="mediumGray">30,000원 이상 무료배송</Text>
           </Flex>
           <Flex alignItems="baseline">
-            <Text
-              fontSize={32}
-              marginRight="5px"
-              fontWeight="bold"
-            >
-              { currencyFormat(25800) }
+            <Text fontSize={32} marginRight="5px" fontWeight="bold">
+              {currencyFormat(25800)}
             </Text>
-            <Text
-              fontSize={17} 
-              fontWeight="bold"
-            >
+            <Text fontSize={17} fontWeight="bold">
               원
             </Text>
           </Flex>
         </Flex>
-        <Box
-          flex="1"
-          flexDirection="column"
-          width="full"
-          overflow="auto"
-          marginBottom="18px" 
-          paddingTop="2px"
-          paddingRight="18px"
-        >
-          {
-            selectionList.map((item) => {
-              const { id, image, title, description, amount, price, checked } = item;
-            
-              return (
-                <SelectionItem
-                  key={id}
-                  id={id}
-                  image={image}
-                  title={title}
-                  description={description}
-                  amount={amount}
-                  price={price}
-                  checked={checked && 'checked'}
-                  onToggle={toggleSelectionItem}
-                />
-)
-            })
-          }
+        <Box flex="1" flexDirection="column" width="full" overflow="auto" marginBottom="18px" paddingTop="2px" paddingRight="18px">
+          {selectionList.map(item => {
+            const { id, image, title, description, amount, price, checked } = item;
+
+            return <SelectionItem key={id} id={id} image={image} title={title} description={description} amount={amount} price={price} checked={checked && 'checked'} onToggle={toggleSelectionItem} />;
+          })}
           {/* <SelectionItem
             image={onionImageUrl}
             title="국내산 햇 양파 10kg(특품)"
@@ -239,15 +185,7 @@ const SelectionPage = () => {
             checked
           /> */}
         </Box>
-        <Button
-          width="full"
-          paddingY="28px"
-          color="white"
-          backgroundColor={theme.colors.green} 
-          fontWeight="bold"
-          fontSize={28}
-          marginBottom="48px"
-        >
+        <Button width="full" paddingY="28px" color="white" backgroundColor="green" fontWeight="bold" fontSize={28} marginBottom="48px">
           바로 구매하기
         </Button>
       </Flex>
