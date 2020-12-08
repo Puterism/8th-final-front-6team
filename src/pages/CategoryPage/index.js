@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Grid } from '@chakra-ui/core';
 import Layout from '../../components/Layout';
 import Card from '../../components/Card';
+import Footer from '../../components/Footer';
 
 const CategoryPage = () => (
   <Box backgroundColor="#f2f2f2">
@@ -26,6 +27,9 @@ const CategoryPage = () => (
         />
       </Grid>
     </Layout>
+    <Box px="110px">
+      <Footer />
+    </Box>
   </Box>
 );
 
