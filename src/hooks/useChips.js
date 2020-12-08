@@ -17,7 +17,7 @@ const useChips = () => {
   }, []);
 
   const fetchRecommendedChips = useCallback(async () => {
-    const { chips } = (await axios.get(`https://vegetable.tk/api/v1/chips`)).data;
+    const { chips } = (await axios.get(`https://vegetable.tk/api/v1/chips/recommend`)).data;
     setRecommendedChips(chips);
   }, []);
 
