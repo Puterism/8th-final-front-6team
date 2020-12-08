@@ -1,40 +1,17 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { Box, Flex, Stack, Text, Button } from '@chakra-ui/core';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { Box, Flex, Text, Button } from '@chakra-ui/core';
 import Layout from '../../components/Layout';
 import SelectionItem from '../../components/SelectionItem';
 import { currencyFormat } from '../../utils';
-import theme from '../../themes';
 import onionImageUrl from '../../images/onion.png';
-import chestnutImageUrl from '../../images/chestnut.png';
-import cabbageImageUrl from '../../images/cabbage.png';
 import './SelectionPage.css';
 
 const SelectionPage = () => {
   const [selectionList, setSelectionList] = useState([]);
-
-  // const calculatePricePerGram = useCallback((weight, price, gram) => {
-  //   let weightNumber = null;
-  //   let unit = null;
-  //   const kgPosition = weight.search('kg');
-  //   const unitPosition = kgPosition > 0 ? kgPosition : weight.search('g');
-
-  //   if (unitPosition > 0) {
-  //     weightNumber = parseInt(weight.slice(0, unitPosition), 0);
-  //     unit = weight.slice(unitPosition);
-  //   }
-
-  //   if (unit === 'kg') {
-  //     weightNumber *= 1000;
-  //   }
-
-  //   const calculated = price / (weightNumber / gram);
-
-  //   return calculated.toFixed(0);
-  // }, []);
+  const listContainerRef = useRef();
 
   const toggleSelectionItem = useCallback(
     (id, checked) => {
-      console.log('toggleSelectionItem', id, checked);
       setSelectionList(prevState => {
         const nextState = [...prevState];
         const index = nextState.findIndex(item => item.id === id);
@@ -42,6 +19,8 @@ const SelectionPage = () => {
 
         return nextState;
       });
+      // NEED IMPROVE
+      listContainerRef.current.scrollTo(0, 0);
     },
     [setSelectionList]
   );
@@ -111,7 +90,7 @@ const SelectionPage = () => {
 
   return (
     <Layout>
-      <Flex flexDirection="column" width="full" height="calc(100% - 144px)" maxHeight="full" marginY="37px" paddingX="110px" color="black" position="absolute">
+      <Flex flexDirection="column" width="full" height="calc(100% - 144px)" maxHeight="full" marginY="37px" paddingX="110px" color="black" position="absolute" overflow="hidden" ref={listContainerRef}>
         <Flex width="full" justifyContent="space-between" alignItems="baseline" marginBottom="45px">
           <Box>
             <Text as="h3" fontSize="40px" fontWeight="bold" color="green" letterSpacing="normal">

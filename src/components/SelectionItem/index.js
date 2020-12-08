@@ -14,7 +14,7 @@ const SelectionItem = props => {
   return (
     <Flex width="full" minHeight="152px" alignItems="center" marginBottom="45px">
       <Box as="label" height="47px" marginRight="5">
-        {/* <VisuallyHidden as="input" type="checkbox" checked={checked} onChange={handleChange} /> */}
+        <VisuallyHidden as="input" type="checkbox" checked={checked} onChange={handleChange} />
         <ControlBox
           borderWidth="3px"
           borderColor="#ededed"
