@@ -1,55 +1,53 @@
 import React from 'react';
-import {
-  Box, Flex, Stack, Text, Button, ControlBox, VisuallyHidden, Image,
-  NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper,
-} from '@chakra-ui/core';
-import { ChevronUpIcon, ChevronDownIcon, CheckIcon } from '@chakra-ui/icons';
+import { Box, Flex, Stack, Text, Button, ControlBox, VisuallyHidden, Image } from '@chakra-ui/core';
 import { currencyFormat } from '../../utils';
+import theme from '../../themes';
+import { CheckSmallIcon } from '../../assets';
 
-const SelectionItem = (props) => {
-  const {
-    image, title, description, weight, pricePerGram, price,
-  } = props;
+const SelectionItem = props => {
+  const { id, image, title, description, amount, price, checked, onToggle } = props;
+
+  const handleChange = e => {
+    onToggle(id, e.target.checked);
+  };
 
   return (
-    <Flex
-      width="full"
-      minHeight="211px"
-      border="solid 2px"
-      borderColor="boxBorder"
-      borderRadius="10px"
-      backgroundColor="bg"
-      paddingY="9"
-      paddingLeft="9"
-      paddingRight="11"
-    >
-      <Box as="label" height="47px">
-        <VisuallyHidden as="input" type="checkbox" defaultChecked />
+    <Flex width="full" minHeight="152px" alignItems="center" marginBottom="45px">
+      <Box as="label" height="47px" marginRight="5">
+        <VisuallyHidden as="input" type="checkbox" checked={checked} onChange={handleChange} />
         <ControlBox
           borderWidth="3px"
-          borderColor="checkboxBorder"
-          width="47px"
-          height="47px"
-          rounded="4px"
-          _checked={{ color: 'main.500', borderColor: 'checkboxBorder' }}
+          borderColor="#ededed"
+          width="38px"
+          height="38px"
+          rounded="19px"
+          _checked={{ color: theme.colors.white, backgroundColor: theme.colors.green, borderColor: theme.colors.green }}
           cursor="pointer"
         >
-          <Text as="span" fontWeight="bold" fontSize="24">
-            <CheckIcon />
+          <Text as="span" fontWeight="bold" fontSize={30}>
+            <CheckSmallIcon />
           </Text>
         </ControlBox>
       </Box>
-      <Image src={image} alt={title} width="142px" height="142px" marginLeft="8" />
-      <Stack direction="column" marginLeft="4" spacing={5}>
-        <Text fontSize={24} fontWeight="bold" lineHeight="1.21">
-          { title }
-        </Text>
-        <Text maxWidth="508px" fontSize={18} fontWeight="normal" lineHeight="1.33">
-          { description }
-        </Text>
-      </Stack>
-      <Stack direction="column" spacing={2} textAlign="right" flex="1">
-        <Box>
+      <Flex width="full" padding="22px" border="solid 2px" borderColor={checked ? theme.colors.green : '#ededed'} borderRadius="10px">
+        <Image src={image} alt={title} width="95px" height="95px" borderRadius="8px" margin="6px" marginRight="33px" />
+        <Stack direction="column" spacing={0}>
+          <Text fontSize={25} fontWeight="bold" marginBottom="1">
+            {title}
+          </Text>
+          <Text fontSize={20} fontWeight="normal" color="#aaaaaa" marginBottom="2">
+            {description}
+          </Text>
+          <Text color={theme.colors.green} fontSize="20px">
+            <Text as="span">{currencyFormat(price)}원</Text>
+            <Text as="span" opacity="0.2" marginX="2">
+              |
+            </Text>
+            <Text as="span">{amount}</Text>
+          </Text>
+        </Stack>
+        <Stack direction="column" spacing={0} textAlign="right" flex="1">
+          {/* <Box>
           <Text as="span" fontSize={24} fontWeight="800" marginRight="2">
             { weight }
           </Text>
@@ -58,9 +56,9 @@ const SelectionItem = (props) => {
             { pricePerGram }
             )
           </Text>
-        </Box>
-        <Flex justifyContent="flex-end" alignItems="flex-end">
-          <NumberInput defaultValue={1} min={1} height="33px" borderColor="boxBorder">
+        </Box> */}
+          <Flex justifyContent="flex-end" alignItems="flex-end" marginBottom="15px">
+            {/* <NumberInput defaultValue={1} min={1} height="33px" borderColor="boxBorder">
             <NumberInputField width="80px" height="33px" borderRadius="25px" border="solid 2px" fontSize={14} />
             <NumberInputStepper right={1}>
               <NumberIncrementStepper
@@ -76,28 +74,50 @@ const SelectionItem = (props) => {
                 <ChevronDownIcon w={4} h={4} color="main.500" />
               </NumberDecrementStepper>
             </NumberInputStepper>
-          </NumberInput>
-          <Text as="span" fontSize={40} fontWeight="900" lineHeight="1" marginLeft="6">
-            { currencyFormat(price) }
-          </Text>
-        </Flex>
-        <Box>
-          <Button colorScheme="main.500" variant="outline" marginTop="3" borderWidth={2}>
-            구매하기
-          </Button>
-        </Box>
-      </Stack>
+          </NumberInput> */}
+            <Flex alignItems="baseline">
+              <Text fontSize={32} marginRight="5px" fontWeight="bold">
+                {currencyFormat(price)}
+              </Text>
+              <Text fontSize={17} fontWeight="bold">
+                원
+              </Text>
+            </Flex>
+          </Flex>
+          <Flex justifyContent="flex-end" alignItems="center" whiteSpace="nowrap">
+            <Text as="span" fontSize="22px" color={theme.colors.mediumGray} marginRight="19px">
+              3개 선택
+            </Text>
+            <Button
+              borderColor={theme.colors.green}
+              color={theme.colors.green}
+              variant="outline"
+              height="auto"
+              fontSize="22px"
+              borderWidth={2}
+              borderRadius="23px"
+              textAlign="center"
+              paddingX="28px"
+              paddingY="7px"
+              // paddingBottom="7px"
+            >
+              구매하기
+            </Button>
+          </Flex>
+        </Stack>
+      </Flex>
     </Flex>
   );
 };
 
 SelectionItem.defaultProps = {
+  id: '',
   image: null,
   title: '',
   description: '',
-  weight: '0g',
-  pricePerGram: '100g당 0원',
+  amount: '0g',
   price: 0,
+  onToggle: () => {}
 };
 
 export default SelectionItem;
