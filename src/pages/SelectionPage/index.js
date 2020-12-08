@@ -111,7 +111,7 @@ const SelectionPage = () => {
 
   return (
     <Layout>
-      <Flex flexDirection="column" width="full" height="calc(100% - 144px)" maxHeight="full" marginY="37px" paddingX="110px" color="black" position="absolute" overflow="hidden">
+      <Flex flexDirection="column" width="full" height="calc(100% - 144px)" maxHeight="full" marginY="37px" paddingX="110px" color="black" position="absolute">
         <Flex width="full" justifyContent="space-between" alignItems="baseline" marginBottom="45px">
           <Box>
             <Text as="h3" fontSize="40px" fontWeight="bold" color="green" letterSpacing="normal">

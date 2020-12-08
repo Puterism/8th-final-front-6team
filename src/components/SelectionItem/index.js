@@ -1,33 +1,20 @@
 import React from 'react';
-import {
-  Box, Flex, Stack, Text, Button, ControlBox, VisuallyHidden, Image,
-} from '@chakra-ui/core';
+import { Box, Flex, Stack, Text, Button, ControlBox, VisuallyHidden, Image } from '@chakra-ui/core';
 import { currencyFormat } from '../../utils';
 import theme from '../../themes';
 import { CheckSmallIcon } from '../../assets';
 
-const SelectionItem = (props) => {
-  const {
-    id, image, title, description, amount, price, checked, onToggle,
-  } = props;
+const SelectionItem = props => {
+  const { id, image, title, description, amount, price, checked, onToggle } = props;
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     onToggle(id, e.target.checked);
   };
 
   return (
-    <Flex
-      width="full"
-      minHeight="152px"
-      alignItems="center"
-      marginBottom="45px"
-    >
-      <Box
-        as="label"
-        height="47px"
-        marginRight="5"
-      >
-        <VisuallyHidden as="input" type="checkbox" checked={checked} onChange={handleChange} />
+    <Flex width="full" minHeight="152px" alignItems="center" marginBottom="45px">
+      <Box as="label" height="47px" marginRight="5">
+        {/* <VisuallyHidden as="input" type="checkbox" checked={checked} onChange={handleChange} /> */}
         <ControlBox
           borderWidth="3px"
           borderColor="#ededed"
@@ -42,38 +29,21 @@ const SelectionItem = (props) => {
           </Text>
         </ControlBox>
       </Box>
-      <Flex 
-        width="full"
-        padding="22px"
-        border="solid 2px"
-        borderColor={checked ? theme.colors.green : '#ededed'}
-        borderRadius="10px"
-      >
+      <Flex width="full" padding="22px" border="solid 2px" borderColor={checked ? theme.colors.green : '#ededed'} borderRadius="10px">
         <Image src={image} alt={title} width="95px" height="95px" borderRadius="8px" margin="6px" marginRight="33px" />
         <Stack direction="column" spacing={0}>
           <Text fontSize={25} fontWeight="bold" marginBottom="1">
-            { title }
+            {title}
           </Text>
           <Text fontSize={20} fontWeight="normal" color="#aaaaaa" marginBottom="2">
-            { description }
+            {description}
           </Text>
-          <Text
-            color={theme.colors.green}
-            fontSize="20px"
-          >
-            <Text as="span">
-              { currencyFormat(price) }원
-            </Text>
-            <Text
-              as="span"
-              opacity="0.2"
-              marginX="2"
-            >
+          <Text color={theme.colors.green} fontSize="20px">
+            <Text as="span">{currencyFormat(price)}원</Text>
+            <Text as="span" opacity="0.2" marginX="2">
               |
             </Text>
-            <Text as="span">
-              { amount }
-            </Text>
+            <Text as="span">{amount}</Text>
           </Text>
         </Stack>
         <Stack direction="column" spacing={0} textAlign="right" flex="1">
@@ -106,32 +76,16 @@ const SelectionItem = (props) => {
             </NumberInputStepper>
           </NumberInput> */}
             <Flex alignItems="baseline">
-              <Text
-                fontSize={32}
-                marginRight="5px"
-                fontWeight="bold"
-              >
-                { currencyFormat(price) }
+              <Text fontSize={32} marginRight="5px" fontWeight="bold">
+                {currencyFormat(price)}
               </Text>
-              <Text
-                fontSize={17}
-                fontWeight="bold"
-              >
+              <Text fontSize={17} fontWeight="bold">
                 원
               </Text>
             </Flex>
           </Flex>
-          <Flex
-            justifyContent="flex-end"
-            alignItems="center" 
-            whiteSpace="nowrap"
-          >
-            <Text
-              as="span" 
-              fontSize="22px"
-              color={theme.colors.mediumGray}
-              marginRight="19px"
-            >
+          <Flex justifyContent="flex-end" alignItems="center" whiteSpace="nowrap">
+            <Text as="span" fontSize="22px" color={theme.colors.mediumGray} marginRight="19px">
               3개 선택
             </Text>
             <Button
@@ -163,7 +117,7 @@ SelectionItem.defaultProps = {
   description: '',
   amount: '0g',
   price: 0,
-  onToggle: () => {},
+  onToggle: () => {}
 };
 
 export default SelectionItem;
