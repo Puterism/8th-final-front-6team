@@ -119,7 +119,7 @@ const ResultPage = () => {
         </Text>
         <Flex alignItems="center" mr="-110px" mb="50px">
           <Box w="40%">
-            <SearchBar placeholder="채소를 추가하여 조합을 다시 검색할 수 있어요." />
+            <SearchBar placeholder="채소를 추가하여 조합을 다시 검색할 수 있어요." isActive={false} />
           </Box>
           <Flex ml="16px" w="60%" alignItems="center" overflowY="scroll" className="no-scrollbar">
             {chips.map(chip => (

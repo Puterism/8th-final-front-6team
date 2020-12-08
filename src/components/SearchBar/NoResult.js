@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { VStack, HStack, Icon, Text, Flex, Box } from '@chakra-ui/core';
-import axios from 'axios';
+import React from 'react';
+import { VStack, Icon, Text, Flex, Box } from '@chakra-ui/core';
 import { SearchIcon } from '../../assets';
 import Chip from '../Chip';
-import theme from '../../themes';
 
 const NoResult = ({ searchValue, chips }) => {
   return (
@@ -25,7 +23,7 @@ const NoResult = ({ searchValue, chips }) => {
         </Flex>
         <Flex w="full" mt="13px" flexWrap="wrap">
           {chips.map((chip, index) => {
-            return <Chip key={index} text={chip} />;
+            return <Chip key={chip.id} text={chip.keyword} />;
           })}
         </Flex>
       </Box>

@@ -1,21 +1,38 @@
 import { Flex, IconButton, Box } from '@chakra-ui/core';
 import React, { useState, useCallback, useEffect } from 'react';
 import onClickOutside from 'react-onclickoutside';
-import axios from 'axios';
 import _ from 'lodash';
+
 import NoResult from './NoResult';
 import AutoComplete from './AutoComplete';
 import SearchInput from './SearchInput';
-import thArrowRightBtn from '../../themes';
 import { SearchBtn, ArrowRightBtn } from '../../assets';
+import useChips from '../../hooks/useChips';
+import useAutoComplete from '../../hooks/useAutoComplete';
 
-function SearchBar({ placeholder, keywords, reset, setKeywords, setIsNoSearch, isNoSearch, fetchChips, addChip, isActive, chips, onSearch, isError, setIsError }) {
+function SearchBar(props) {
   const [searchValue, setSearchValue] = useState('');
   const [isSubmitting] = useState(false);
   const [activeItemIndex, setActiveItemIndex] = useState(0);
+  const [isError, setIsError] = useState(false);
+  const { chips, recommendedChips, addChip, fetchRecommendedChips } = useChips();
+  const { autoCompleteKeywords, setAutoCompleteKeywords, fetchAutoCompleteKeywords, isEmptyAutoCompleteKeywords, setIsEmptyAutoCompleteKeywords } = useAutoComplete();
+  const [isActive, setIsActive] = useState(false);
+  const placeholder = isError ? '채소 종류를 한 개 이상 입력해 주세요' : props.placeholder;
+
+  const reset = useCallback(() => {
+    setIsEmptyAutoCompleteKeywords(false);
+    setAutoCompleteKeywords([]);
+    setSearchValue('');
+  }, []);
+
+  const handleSearch = useCallback(async () => {
+    if (!isActive) return setIsError(true);
+    props.onSearch && (await props.onSearch());
+  }, [isActive, props.onSearch]);
 
   const handleChange = useCallback(
-    e => {
+    async e => {
       const input = e.target.value;
       if (_.isEmpty(input)) {
         reset && reset();
@@ -23,9 +40,9 @@ function SearchBar({ placeholder, keywords, reset, setKeywords, setIsNoSearch, i
 
       setIsError(false);
       setSearchValue(input);
-      fetchChips(input);
+      fetchAutoCompleteKeywords(input);
     },
-    [reset, fetchChips]
+    [reset, fetchAutoCompleteKeywords]
   );
 
   const handleKeyPress = useCallback(
@@ -35,10 +52,10 @@ function SearchBar({ placeholder, keywords, reset, setKeywords, setIsNoSearch, i
       const shouldMoveDown = e.keyCode === 40;
 
       if (shouldAddChip) {
-        const chip = keywords[activeItemIndex];
+        const chip = autoCompleteKeywords[activeItemIndex];
         if (_.isEmpty(chip)) return;
         addChip(chip);
-        setSearchValue('');
+        reset();
         e.preventDefault();
         return;
       }
@@ -50,24 +67,38 @@ function SearchBar({ placeholder, keywords, reset, setKeywords, setIsNoSearch, i
       }
 
       if (shouldMoveDown) {
-        setActiveItemIndex(prev => Math.min(prev + 1, keywords.length - 1));
+        setActiveItemIndex(prev => Math.min(prev + 1, autoCompleteKeywords.length - 1));
         e.preventDefault();
       }
     },
-    [keywords, activeItemIndex, addChip]
+    [autoCompleteKeywords, activeItemIndex, addChip, reset]
   );
 
   const handleAddChip = useCallback(
     keyword => {
-      addChip && addChip(keyword);
-      setSearchValue('');
+      addChip(keyword);
+      reset();
     },
-    [addChip]
+    [addChip, reset]
   );
 
   useEffect(() => {
     if (isError) setSearchValue('');
   }, [isError]);
+
+  useEffect(() => {
+    if (isEmptyAutoCompleteKeywords) {
+      fetchRecommendedChips();
+    }
+  }, [isEmptyAutoCompleteKeywords]);
+
+  useEffect(() => {
+    setIsActive(!_.isEmpty(chips));
+  }, [chips]);
+
+  useEffect(() => {
+    typeof props.isActive === 'boolean' && setIsActive(props.isActive);
+  }, []);
 
   SearchBar.handleClickOutside = reset || (() => {});
   return (
@@ -76,13 +107,13 @@ function SearchBar({ placeholder, keywords, reset, setKeywords, setIsNoSearch, i
         <Flex alignItems="center">
           <SearchInput isError={isError} onChange={handleChange} onKeyPress={handleKeyPress} searchValue={searchValue} placeholder={placeholder} />
           {!isActive ? (
-            <IconButton icon={<SearchBtn />} isLoading={isSubmitting} color="white" borderRadius="50%" background="lightGray" ml="auto" mr="-10px" onClick={onSearch} />
+            <IconButton icon={<SearchBtn />} isLoading={isSubmitting} color="white" borderRadius="50%" background="lightGray" ml="auto" mr="-10px" onClick={handleSearch} />
           ) : (
-            <IconButton icon={<ArrowRightBtn />} isLoading={isSubmitting} color="white" borderRadius="50%" background="green" ml="auto" mr="-10px" onClick={onSearch} />
+            <IconButton icon={<ArrowRightBtn />} isLoading={isSubmitting} color="white" borderRadius="50%" background="green" ml="auto" mr="-10px" onClick={handleSearch} />
           )}
         </Flex>
-        {!isNoSearch && <AutoComplete searchValue={searchValue} keywords={keywords} activeItemIndex={activeItemIndex} addChip={handleAddChip} />}
-        {isNoSearch && <NoResult chips={chips} searchValue={searchValue} />}
+        {!isEmptyAutoCompleteKeywords && <AutoComplete searchValue={searchValue} keywords={autoCompleteKeywords} activeItemIndex={activeItemIndex} addChip={handleAddChip} />}
+        {isEmptyAutoCompleteKeywords && <NoResult chips={recommendedChips} searchValue={searchValue} />}
       </Box>
     </Box>
   );
