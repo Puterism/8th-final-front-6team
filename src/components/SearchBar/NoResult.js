@@ -3,7 +3,7 @@ import { VStack, Icon, Text, Flex, Box } from '@chakra-ui/core';
 import { SearchIcon } from '../../assets';
 import Chip from '../Chip';
 
-const NoResult = ({ searchValue, chips }) => {
+const NoResult = ({ searchValue, chips, onClickChip }) => {
   return (
     <VStack w="full" mt="10px">
       <Flex borderRadius="9px" mx="20px" w="full" bg="lightGreen" alignItems="center" px="16px" py="2">
@@ -23,7 +23,7 @@ const NoResult = ({ searchValue, chips }) => {
         </Flex>
         <Flex w="full" mt="13px" flexWrap="wrap">
           {chips.map((chip, index) => {
-            return <Chip key={chip.id} text={chip.keyword} />;
+            return <Chip key={chip.id} text={chip.keyword} onClick={() => onClickChip(chip.keyword)} />;
           })}
         </Flex>
       </Box>

@@ -12,7 +12,7 @@ const useAutoComplete = () => {
         setAutoCompleteKeywords([]);
         return;
       }
-      console.log(123);
+
       axios.get(`https://vegetable.tk/api/v1/chips/${searchValue}`).then(result => {
         const { chips } = result.data;
         if (_.isEmpty(chips)) {

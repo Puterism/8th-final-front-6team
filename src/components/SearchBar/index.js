@@ -76,6 +76,7 @@ function SearchBar(props) {
 
   const handleAddChip = useCallback(
     keyword => {
+      console.log(keyword);
       addChip(keyword);
       reset();
     },
@@ -113,7 +114,7 @@ function SearchBar(props) {
           )}
         </Flex>
         {!isEmptyAutoCompleteKeywords && <AutoComplete searchValue={searchValue} keywords={autoCompleteKeywords} activeItemIndex={activeItemIndex} addChip={handleAddChip} />}
-        {isEmptyAutoCompleteKeywords && <NoResult chips={recommendedChips} searchValue={searchValue} />}
+        {isEmptyAutoCompleteKeywords && <NoResult chips={recommendedChips} searchValue={searchValue} onClickChip={handleAddChip} />}
       </Box>
     </Box>
   );
