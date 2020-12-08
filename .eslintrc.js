@@ -33,6 +33,7 @@ module.exports = {
     'jsx-a11y/click-events-have-key-events': 0,
     'react/jsx-props-no-spreading': 0,
     'react/jsx-one-expression-per-line': 0,
-    'arrow-parens': 0
+    'arrow-parens': 0,
+    'react/destructuring-assignment': 0
   }
 };
