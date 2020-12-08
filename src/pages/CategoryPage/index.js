@@ -3,6 +3,7 @@ import React from 'react';
 import { Box, Grid } from '@chakra-ui/core';
 import Layout from '../../components/Layout';
 import Card from '../../components/Card';
+import Footer from '../../components/Footer';
 
 import {
   categoryImage1, categoryImage2, categoryImage3, categoryImage4, categoryImage5, 
@@ -161,6 +162,9 @@ const CategoryPage = () => (
         />
       </Grid>
     </Layout>
+    <Box px="110px">
+      <Footer />
+    </Box>
   </Box>
 );
 
