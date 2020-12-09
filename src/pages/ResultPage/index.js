@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Flex, Text, Box } from '@chakra-ui/core';
 import { useRecoilState } from 'recoil';
+import Axios from 'axios';
 import SearchBar from '../../components/SearchBar';
 import Chip from '../../components/Chip';
 import TotalBox from '../../components/TotalBox';
@@ -112,6 +113,11 @@ const ResultPage = () => {
     setSelectedVegi(name);
     setIsModalOpened(true);
   };
+  console.log('chips', chips);
+
+  // const markets = Axios.get(`https://vegetable.tk/api/v1/chips/${searchValue}`)
+
+  useEffect(() => {}, []);
 
   return (
     <Flex flexDir="column">
@@ -120,7 +126,7 @@ const ResultPage = () => {
         <Text fontSize="22px" color="#666666" fontWeight="bold" mb="20px">
           가장 합리적인 조합을 찾았어요!
         </Text>
-        <Flex alignItems="center" mr="-110px" mb="50px">
+        <Flex alignItems="center" mr="-110px">
           <Box w="40%">
             <SearchBar placeholder="채소를 추가하여 조합을 다시 검색할 수 있어요." isActive={false} />
           </Box>
@@ -130,7 +136,7 @@ const ResultPage = () => {
             ))}
           </Flex>
         </Flex>
-        <Flex mt="20" justifyContent="space-between">
+        <Flex mt="60px" justifyContent="space-between">
           {mallList.map(item => (
             <div style={{ cursor: 'pointer' }} onClick={() => setSelectedMall(item.mallName)}>
               <TotalBox mallName={item.mallName} totalPrice={item.totalPrice} list={item.list} isSelected={selectedMall === item.mallName} selectedVegi={selectedVegi} setSelectedVegi={openModal} />
@@ -142,7 +148,7 @@ const ResultPage = () => {
         </Button>
       </Flex>
       {isModalOpened && <DetailModal closeModal={closeModal} name={selectedVegi} />}
-    </Layout>
+    </Flex>
   );
 };
 
