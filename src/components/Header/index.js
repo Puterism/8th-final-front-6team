@@ -10,11 +10,11 @@ const Header = props => {
 
   return (
     <Flex w="full" align="center" justify="space-between" px="110px" pt="67px">
-      <Heading as={Link} to="/" color="darkGray" fontSize="xl" fontWeight="500">
+      <Heading as={Link} to="/" color="darkGray" fontSize="20px" fontWeight="500" fontFamily="'Montserrat Alternates', sans-serif;">
         avocado
       </Heading>
       <Flex>
-        <HStack color="darkGray" spacing="7" fontSize="xs">
+        <HStack color="darkGray" spacing="7" fontSize="xs" fontWeight="500" fontFamily="'Montserrat Alternates', sans-serif;">
           {menus &&
             menus.map((menu, i) => {
               const isActive = match.path === `/${menu.text}` || (match.path === '/' && menu.text === 'home');
