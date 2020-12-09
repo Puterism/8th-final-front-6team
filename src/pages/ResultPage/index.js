@@ -25,6 +25,8 @@ const ResultPage = () => {
     setIsModalOpened(false);
   };
   const openModal = item => {
+    window.scroll(0, 0);
+
     setSelectedVegi(item);
     setIsModalOpened(true);
   };
