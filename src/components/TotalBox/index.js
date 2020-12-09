@@ -3,7 +3,7 @@ import { Flex, Box, Avatar, Text } from '@chakra-ui/core';
 import theme from '../../themes';
 import { Coupang, Emart, Kurly, SearchIcon } from '../../assets';
 
-const SelectedList = ({ name, price, weight, num, isSelected, setSelectedVegi }) => {
+const SelectedList = ({ id, name, price, weight, num, isSelected, setSelectedVegi }) => {
   const hoverStyle = { bg: theme.colors.subGray };
   return (
     <Box
@@ -16,7 +16,7 @@ const SelectedList = ({ name, price, weight, num, isSelected, setSelectedVegi })
       m="10px 0"
       p="8px 14px"
       color={theme.colors.black}
-      onClick={() => setSelectedVegi(name)}
+      onClick={() => setSelectedVegi(id)}
       bg={isSelected && theme.colors.subGray}
     >
       <Flex flexDir="row">
@@ -57,7 +57,6 @@ export default ({ mallName, totalPrice, list, isSelected, selectedVegi, setSelec
   >
     <Box w="100%" h="134px" bg={isSelected ? theme.colors.lightGreen : theme.colors.subGray} display="flex" flexDir="column" borderRadius="19px" p="14px">
       <Flex alignItems="center">
-        <Kurly />
         <Text ml="4px" fontSize="16px">
           {mallName}
         </Text>
@@ -79,7 +78,7 @@ export default ({ mallName, totalPrice, list, isSelected, selectedVegi, setSelec
 
     <Box mt="10px" w="full" overflowY="scroll">
       {list.map(item => (
-        <SelectedList key={item.key} name={item.name} price={item.price} weight={item.weight} num={item.num} isSelected={selectedVegi === item.name} setSelectedVegi={setSelectedVegi} />
+        <SelectedList id={item.id} name={item.keyward} price={item.product.price} isSelected={selectedVegi === item.name} setSelectedVegi={setSelectedVegi} />
       ))}
     </Box>
   </Box>

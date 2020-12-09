@@ -4,120 +4,49 @@ import { useRecoilState } from 'recoil';
 import Axios from 'axios';
 import SearchBar from '../../components/SearchBar';
 import Chip from '../../components/Chip';
-import TotalBox from '../../components/TotalBox';
 import theme from '../../themes';
 import DetailModal from '../../components/DetailModal';
 import Header from '../../components/Header';
 import { ChipsState } from '../../states/atoms';
 import useChips from '../../hooks/useChips';
-
-const list = [
-  {
-    key: 1,
-    name: '양파',
-    price: '3,000',
-    weight: '100g',
-    num: '3개'
-  },
-  {
-    key: 2,
-    name: '브로콜리',
-    price: '3,000',
-    weight: '100g',
-    num: '3개'
-  },
-  {
-    key: 3,
-    name: '고구마',
-    price: '3,000',
-    weight: '100g',
-    num: '3개'
-  },
-  {
-    key: 4,
-    name: '양상추',
-    price: '3,000',
-    weight: '100g',
-    num: '3개'
-  },
-  {
-    key: 5,
-    name: '청경채',
-    price: '3,000',
-    weight: '100g',
-    num: '3개'
-  },
-  {
-    key: 6,
-    name: '토마토',
-    price: '3,000',
-    weight: '100g',
-    num: '3개'
-  },
-  {
-    key: 7,
-    name: '콜리플라워',
-    price: '3,000',
-    weight: '100g',
-    num: '3개'
-  },
-  {
-    key: 8,
-    name: '단호박',
-    price: '3,000',
-    weight: '100g',
-    num: '3개'
-  },
-  {
-    key: 9,
-    name: '새송이버섯',
-    price: '3,000',
-    weight: '100g',
-    num: '3개'
-  }
-];
-
-const mallList = [
-  {
-    key: 1,
-    mallName: '이마트',
-    totalPrice: '12,500',
-    list
-  },
-  {
-    key: 2,
-    mallName: '쿠팡',
-    totalPrice: '12,500',
-    list
-  },
-  {
-    key: 3,
-    mallName: '마켓컬리',
-    totalPrice: '12,500',
-    list
-  }
-];
+import TotalBox from '../../components/TotalBox';
 
 const ResultPage = () => {
   const [isModalOpened, setIsModalOpened] = useState(false);
-  const [selectedMall, setSelectedMall] = useState(mallList[0].mallName);
+  const [selectedMall, setSelectedMall] = useState(null);
   const [selectedVegi, setSelectedVegi] = useState(null);
   const [chips, setChips] = useRecoilState(ChipsState);
+  const [markets, setMarkets] = useState(null);
+
   const { removeChip } = useChips();
 
   const closeModal = () => {
     setSelectedVegi(null);
     setIsModalOpened(false);
   };
-  const openModal = name => {
-    setSelectedVegi(name);
+  const openModal = id => {
+    setSelectedVegi(id);
     setIsModalOpened(true);
   };
-  console.log('chips', chips);
+  const chipIds = [];
+  chips.map(item => chipIds.push(item.id));
 
-  // const markets = Axios.get(`https://vegetable.tk/api/v1/chips/${searchValue}`)
+  const fetchMarkets = async () => {
+    if (chipIds.length > 0) {
+      const { data } = await Axios.get(`https://vegetable.tk/api/v1/markets/result`, {
+        params: {
+          chipIds: chipIds.reduce((f, s) => `${f},${s}`)
+        }
+      });
+      console.log(data);
+      // setMarkets(data.markets);
+      // setSelectedMall(data.markets[0].marketId);
+    }
+  };
 
-  useEffect(() => {}, []);
+  // useEffect(() => {
+  fetchMarkets();
+  // }, [markets, selectedMall]);
 
   return (
     <Flex flexDir="column">
@@ -137,17 +66,22 @@ const ResultPage = () => {
           </Flex>
         </Flex>
         <Flex mt="60px" justifyContent="space-between">
-          {mallList.map(item => (
-            <div style={{ cursor: 'pointer' }} onClick={() => setSelectedMall(item.mallName)}>
-              <TotalBox mallName={item.mallName} totalPrice={item.totalPrice} list={item.list} isSelected={selectedMall === item.mallName} selectedVegi={selectedVegi} setSelectedVegi={openModal} />
-            </div>
-          ))}
+          {markets &&
+            selectedMall &&
+            markets.map(item => {
+              console.log(item);
+              return (
+                <div style={{ cursor: 'pointer' }} onClick={() => setSelectedMall(item.marketId)}>
+                  <TotalBox mallName={item.name} totalPrice={item.totalPrice} list={item.chips} isSelected={selectedMall === item.marketId} selectedVegi={selectedVegi} setSelectedVegi={openModal} />
+                </div>
+              );
+            })}
         </Flex>
         <Button w="full" bg={theme.colors.green} py="40px" fontSize="28px" fontWeight="bold" borderRadius="48px" color="white" mt="51px">
           이 조합 선택하기
         </Button>
       </Flex>
-      {isModalOpened && <DetailModal closeModal={closeModal} name={selectedVegi} />}
+      {isModalOpened && <DetailModal closeModal={closeModal} name={selectedVegi} marketId={selectedMall} chipId={selectedVegi} />}
     </Flex>
   );
 };
