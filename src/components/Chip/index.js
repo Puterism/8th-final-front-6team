@@ -3,10 +3,10 @@ import React, { useCallback } from 'react';
 import { RemoveBtn } from '../../assets';
 import theme from '../../themes';
 
-export default ({ text, removable, onClick, onClickDelete }) => {
+export default ({ chip, removable, onClick, onClickDelete }) => {
   const handleClickDelete = useCallback(() => {
-    onClickDelete && onClickDelete(text);
-  }, [text]);
+    onClickDelete && onClickDelete(chip);
+  }, [chip]);
 
   return (
     <Flex
@@ -26,7 +26,7 @@ export default ({ text, removable, onClick, onClickDelete }) => {
       cursor={!removable && 'pointer'}
       wordBreak="keep-all"
     >
-      {text}
+      {chip.keyword}
       {removable && (
         <span style={{ marginLeft: '7px', marginTop: '3px', cursor: 'pointer' }}>
           <RemoveBtn onClick={handleClickDelete} />

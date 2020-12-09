@@ -8,6 +8,7 @@ import theme from '../../themes';
 import DetailModal from '../../components/DetailModal';
 import Header from '../../components/Header';
 import { ChipsState } from '../../states/atoms';
+import useChips from '../../hooks/useChips';
 
 const list = [
   {
@@ -101,6 +102,8 @@ const ResultPage = () => {
   const [selectedMall, setSelectedMall] = useState(mallList[0].mallName);
   const [selectedVegi, setSelectedVegi] = useState(null);
   const [chips, setChips] = useRecoilState(ChipsState);
+  const { removeChip } = useChips();
+
   const closeModal = () => {
     setSelectedVegi(null);
     setIsModalOpened(false);
@@ -123,7 +126,7 @@ const ResultPage = () => {
           </Box>
           <Flex ml="16px" w="60%" alignItems="center" overflowY="scroll" className="no-scrollbar">
             {chips.map(chip => (
-              <Chip key={chip} text={chip} removable />
+              <Chip key={chip.id} chip={chip} onClickDelete={removeChip} removable />
             ))}
           </Flex>
         </Flex>

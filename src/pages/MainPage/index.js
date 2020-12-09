@@ -27,7 +27,7 @@ const MainPage = () => {
           {!_.isEmpty(chips) && (
             <HStack spacing="2" w="full" mt="4">
               {chips.map(chip => (
-                <Chip key={chip} text={chip} onClickDelete={removeChip} removable />
+                <Chip key={chip.id} chip={chip} onClickDelete={removeChip} removable />
               ))}
             </HStack>
           )}

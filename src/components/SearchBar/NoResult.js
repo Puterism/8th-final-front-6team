@@ -23,7 +23,7 @@ const NoResult = ({ searchValue, chips, onClickChip }) => {
         </Flex>
         <Flex w="full" mt="13px" flexWrap="wrap">
           {chips.map((chip, index) => {
-            return <Chip key={chip.id} text={chip.keyword} onClick={() => onClickChip(chip.keyword)} />;
+            return <Chip key={chip.id} chip={chip} onClick={() => onClickChip(chip)} />;
           })}
         </Flex>
       </Box>

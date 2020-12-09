@@ -16,13 +16,13 @@ function SearchBar(props) {
   const [activeItemIndex, setActiveItemIndex] = useState(0);
   const [isError, setIsError] = useState(false);
   const { chips, recommendedChips, addChip, fetchRecommendedChips } = useChips();
-  const { autoCompleteKeywords, setAutoCompleteKeywords, fetchAutoCompleteKeywords, isEmptyAutoCompleteKeywords, setIsEmptyAutoCompleteKeywords } = useAutoComplete();
+  const { autoCompleteChips, setAutoCompleteChips, fetchAutoCompleteChips, isEmptyAutoComplete, setIsEmptyAutoComplete } = useAutoComplete();
   const [isActive, setIsActive] = useState(false);
   const placeholder = isError ? '채소 종류를 한 개 이상 입력해 주세요' : props.placeholder;
 
   const reset = useCallback(() => {
-    setIsEmptyAutoCompleteKeywords(false);
-    setAutoCompleteKeywords([]);
+    setIsEmptyAutoComplete(false);
+    setAutoCompleteChips([]);
     setSearchValue('');
   }, []);
 
@@ -40,9 +40,9 @@ function SearchBar(props) {
 
       setIsError(false);
       setSearchValue(input);
-      fetchAutoCompleteKeywords(input);
+      fetchAutoCompleteChips(input);
     },
-    [reset, fetchAutoCompleteKeywords]
+    [reset, fetchAutoCompleteChips]
   );
 
   const handleKeyPress = useCallback(
@@ -52,7 +52,7 @@ function SearchBar(props) {
       const shouldMoveDown = e.keyCode === 40;
 
       if (shouldAddChip) {
-        const chip = autoCompleteKeywords[activeItemIndex];
+        const chip = autoCompleteChips[activeItemIndex];
         if (_.isEmpty(chip)) return;
         addChip(chip);
         reset();
@@ -67,17 +67,16 @@ function SearchBar(props) {
       }
 
       if (shouldMoveDown) {
-        setActiveItemIndex(prev => Math.min(prev + 1, autoCompleteKeywords.length - 1));
+        setActiveItemIndex(prev => Math.min(prev + 1, autoCompleteChips.length - 1));
         e.preventDefault();
       }
     },
-    [autoCompleteKeywords, activeItemIndex, addChip, reset]
+    [autoCompleteChips, activeItemIndex, addChip, reset]
   );
 
   const handleAddChip = useCallback(
-    keyword => {
-      console.log(keyword);
-      addChip(keyword);
+    chip => {
+      addChip(chip);
       reset();
     },
     [addChip, reset]
@@ -88,10 +87,10 @@ function SearchBar(props) {
   }, [isError]);
 
   useEffect(() => {
-    if (isEmptyAutoCompleteKeywords) {
+    if (isEmptyAutoComplete) {
       fetchRecommendedChips();
     }
-  }, [isEmptyAutoCompleteKeywords]);
+  }, [isEmptyAutoComplete]);
 
   useEffect(() => {
     setIsActive(!_.isEmpty(chips));
@@ -113,8 +112,8 @@ function SearchBar(props) {
             <IconButton icon={<ArrowRightBtn />} isLoading={isSubmitting} color="white" borderRadius="50%" background="green" ml="auto" mr="-10px" onClick={handleSearch} />
           )}
         </Flex>
-        {!isEmptyAutoCompleteKeywords && <AutoComplete searchValue={searchValue} keywords={autoCompleteKeywords} activeItemIndex={activeItemIndex} addChip={handleAddChip} />}
-        {isEmptyAutoCompleteKeywords && <NoResult chips={recommendedChips} searchValue={searchValue} onClickChip={handleAddChip} />}
+        {!isEmptyAutoComplete && <AutoComplete searchValue={searchValue} chips={autoCompleteChips} activeItemIndex={activeItemIndex} addChip={handleAddChip} />}
+        {isEmptyAutoComplete && <NoResult chips={recommendedChips} searchValue={searchValue} onClickChip={handleAddChip} />}
       </Box>
     </Box>
   );

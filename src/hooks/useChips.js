@@ -8,12 +8,18 @@ const useChips = () => {
   const [chips, setChips] = useRecoilState(ChipsState);
   const [recommendedChips, setRecommendedChips] = useState([]);
 
-  const addChip = useCallback(searchText => {
-    setChips(prev => _.uniq(prev.concat(searchText)));
+  const addChip = useCallback(chip => {
+    setChips(prev => {
+      if (prev && prev.findIndex(prevChip => prevChip.keyword === chip.keyword) === -1) {
+        return prev.concat(chip);
+      }
+      return prev;
+    });
   }, []);
 
   const removeChip = useCallback(chip => {
-    setChips(prev => prev.filter(c => c !== chip));
+    console.log(chip);
+    setChips(prev => prev.filter(c => c.keyword !== chip.keyword));
   }, []);
 
   const fetchRecommendedChips = useCallback(async () => {

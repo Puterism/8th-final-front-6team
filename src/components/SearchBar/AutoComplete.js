@@ -2,12 +2,12 @@ import React from 'react';
 import { Flex, Icon, Text, Box } from '@chakra-ui/core';
 import { FiSearch } from 'react-icons/fi';
 
-const AutoComplete = ({ searchValue, keywords, activeItemIndex, addChip }) => {
+const AutoComplete = ({ searchValue, chips, activeItemIndex, addChip }) => {
   return (
     <Flex direction="column">
-      {keywords &&
-        keywords.map((keyword, index) => {
-          const activeKeyword = keyword.replace(searchValue, `<span style="color: #36c66f; font-weight: bold">${searchValue}</span>`);
+      {chips &&
+        chips.map((chip, index) => {
+          const activeKeyword = chip.keyword.replace(searchValue, `<span style="color: #36c66f; font-weight: bold">${searchValue}</span>`);
           return (
             <Flex
               align="center"
@@ -15,7 +15,7 @@ const AutoComplete = ({ searchValue, keywords, activeItemIndex, addChip }) => {
               px="4"
               py="2"
               key={index}
-              onClick={() => addChip(keyword)}
+              onClick={() => addChip(chip)}
               background={activeItemIndex === index ? 'main.40' : null}
               h="52px"
               borderRadius="9px"
