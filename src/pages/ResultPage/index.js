@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo, useCallback } from 'react';
 import { Button, Flex, Text, Box } from '@chakra-ui/core';
 import { useRecoilState } from 'recoil';
 import Axios from 'axios';
+import { isEmpty } from 'lodash';
 import SearchBar from '../../components/SearchBar';
 import Chip from '../../components/Chip';
 import theme from '../../themes';
@@ -17,7 +18,6 @@ const ResultPage = () => {
   const [selectedVegi, setSelectedVegi] = useState(null);
   const [chips, setChips] = useRecoilState(ChipsState);
   const [markets, setMarkets] = useState(null);
-
   const { removeChip } = useChips();
 
   const closeModal = () => {
@@ -28,25 +28,26 @@ const ResultPage = () => {
     setSelectedVegi(id);
     setIsModalOpened(true);
   };
-  const chipIds = [];
-  chips.map(item => chipIds.push(item.id));
 
-  const fetchMarkets = async () => {
-    if (chipIds.length > 0) {
-      const { data } = await Axios.get(`https://vegetable.tk/api/v1/markets/result`, {
-        params: {
-          chipIds: chipIds.reduce((f, s) => `${f},${s}`)
-        }
-      });
-      console.log(data);
-      // setMarkets(data.markets);
-      // setSelectedMall(data.markets[0].marketId);
-    }
-  };
+  const fetchMarkets = useCallback(async chips => {
+    if (isEmpty(chips)) return;
+    const chipIds = chips.map(chip => chip.id).join(',');
+    const { data } = await Axios.get(`https://vegetable.tk/api/v1/markets/result`, {
+      params: { chipIds }
+    });
+    setMarkets(data.markets);
+    setSelectedMall(data.markets[0].marketId);
+  }, []);
 
-  // useEffect(() => {
-  fetchMarkets();
-  // }, [markets, selectedMall]);
+  const handleSearch = useCallback(async () => {
+    await fetchMarkets(chips);
+  }, [chips]);
+
+  useEffect(() => {
+    fetchMarkets(chips);
+  }, []);
+
+  console.log(markets);
 
   return (
     <Flex flexDir="column">
@@ -57,7 +58,7 @@ const ResultPage = () => {
         </Text>
         <Flex alignItems="center" mr="-110px">
           <Box w="40%">
-            <SearchBar placeholder="채소를 추가하여 조합을 다시 검색할 수 있어요." isActive={false} />
+            <SearchBar placeholder="채소를 추가하여 조합을 다시 검색할 수 있어요." isActive={false} onSearch={handleSearch} />
           </Box>
           <Flex ml="16px" w="60%" alignItems="center" overflowY="scroll" className="no-scrollbar">
             {chips.map(chip => (
