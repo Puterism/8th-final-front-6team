@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo, useCallback } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Button, Flex, Text, Box } from '@chakra-ui/core';
 import { useRecoilState } from 'recoil';
 import Axios from 'axios';
@@ -24,8 +24,8 @@ const ResultPage = () => {
     setSelectedVegi(null);
     setIsModalOpened(false);
   };
-  const openModal = id => {
-    setSelectedVegi(id);
+  const openModal = item => {
+    setSelectedVegi(item);
     setIsModalOpened(true);
   };
 
@@ -36,7 +36,7 @@ const ResultPage = () => {
       params: { chipIds }
     });
     setMarkets(data.markets);
-    setSelectedMall(data.markets[0].marketId);
+    setSelectedMall(data.markets[0].id);
   }, []);
 
   const handleSearch = useCallback(async () => {
@@ -46,8 +46,6 @@ const ResultPage = () => {
   useEffect(() => {
     fetchMarkets(chips);
   }, []);
-
-  console.log(markets);
 
   return (
     <Flex flexDir="column">
@@ -70,10 +68,9 @@ const ResultPage = () => {
           {markets &&
             selectedMall &&
             markets.map(item => {
-              console.log(item);
               return (
-                <div style={{ cursor: 'pointer' }} onClick={() => setSelectedMall(item.marketId)}>
-                  <TotalBox mallName={item.name} totalPrice={item.totalPrice} list={item.chips} isSelected={selectedMall === item.marketId} selectedVegi={selectedVegi} setSelectedVegi={openModal} />
+                <div key={item.id} style={{ cursor: 'pointer' }} onClick={() => setSelectedMall(item.id)}>
+                  <TotalBox mallName={item.name} totalPrice={item.totalPrice} list={item.chips} isSelected={selectedMall === item.id} selectedVegi={selectedVegi} setSelectedVegi={openModal} />
                 </div>
               );
             })}
@@ -82,7 +79,7 @@ const ResultPage = () => {
           이 조합 선택하기
         </Button>
       </Flex>
-      {isModalOpened && <DetailModal closeModal={closeModal} name={selectedVegi} marketId={selectedMall} chipId={selectedVegi} />}
+      {isModalOpened && <DetailModal closeModal={closeModal} selectedVegi={selectedVegi} marketId={selectedMall} />}
     </Flex>
   );
 };

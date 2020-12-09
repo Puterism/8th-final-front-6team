@@ -1,9 +1,9 @@
 import React from 'react';
-import { Flex, Box, Avatar, Text } from '@chakra-ui/core';
+import { Flex, Box, Text } from '@chakra-ui/core';
 import theme from '../../themes';
 import { Coupang, Emart, Kurly, SearchIcon } from '../../assets';
 
-const SelectedList = ({ id, name, price, weight, num, isSelected, setSelectedVegi }) => {
+const SelectedList = ({ item, isSelected, setSelectedVegi }) => {
   const hoverStyle = { bg: theme.colors.subGray };
   return (
     <Box
@@ -16,24 +16,22 @@ const SelectedList = ({ id, name, price, weight, num, isSelected, setSelectedVeg
       m="10px 0"
       p="8px 14px"
       color={theme.colors.black}
-      onClick={() => setSelectedVegi(id)}
+      onClick={() => setSelectedVegi(item)}
       bg={isSelected && theme.colors.subGray}
     >
       <Flex flexDir="row">
         <SearchIcon />
         <Flex flexDir="column" ml="6px" w="full">
           <Flex>
-            <Text>{name}</Text>
+            <Text>{item.keyword}</Text>
           </Flex>
           <Flex alignItems="center">
             <Text fontSize="12px" color="#cccccc">
-              무안 햇양파 국내산 신토...
+              {item.product.name}
             </Text>
             <Text ml="auto" textAlign="end" fontSize="15px" color="#aaaaaa">
-              {price}원{' / '}
-              {weight}
-              {'  '}
-              {num}
+              {item.product.price}원{' / '}
+              {item.product.amount}
             </Text>
           </Flex>
         </Flex>
@@ -42,7 +40,7 @@ const SelectedList = ({ id, name, price, weight, num, isSelected, setSelectedVeg
   );
 };
 
-export default ({ mallName, totalPrice, list, isSelected, selectedVegi, setSelectedVegi }) => (
+export default ({ mallName, totalPrice, list, isSelected, setSelectedVegi }) => (
   <Box
     border="solid 2px"
     borderColor={isSelected ? theme.colors.green : theme.colors.subGray}
@@ -57,6 +55,9 @@ export default ({ mallName, totalPrice, list, isSelected, selectedVegi, setSelec
   >
     <Box w="100%" h="134px" bg={isSelected ? theme.colors.lightGreen : theme.colors.subGray} display="flex" flexDir="column" borderRadius="19px" p="14px">
       <Flex alignItems="center">
+        {mallName === '이마트' && <Emart />}
+        {mallName === '쿠팡' && <Coupang />}
+        {mallName === '마켓컬리' && <Kurly />}
         <Text ml="4px" fontSize="16px">
           {mallName}
         </Text>
@@ -76,9 +77,9 @@ export default ({ mallName, totalPrice, list, isSelected, selectedVegi, setSelec
       </Flex>
     </Box>
 
-    <Box mt="10px" w="full" overflowY="scroll">
+    <Box mt="10px" w="full" overflowY="scroll" className="no-scroller">
       {list.map(item => (
-        <SelectedList id={item.id} name={item.keyward} price={item.product.price} isSelected={selectedVegi === item.name} setSelectedVegi={setSelectedVegi} />
+        <SelectedList key={item.id} item={item} isSelected={item.product.id === item.id} keyword={item.keyword} setSelectedVegi={setSelectedVegi} />
       ))}
     </Box>
   </Box>
