@@ -4,7 +4,7 @@ import theme from '../../themes';
 import { Minus, Plus, Check } from '../../assets';
 
 export default ({ isSelected, name, price, weight, src }) => {
-  const [num, setNum] = useState(0);
+  const [num, setNum] = useState(1);
   return (
     <>
       <Box cursor="pointer" minW="295px" maxW="295px" h="230px" borderRadius="10px" border="solid 2px" borderColor={isSelected ? theme.colors.green : '#efefef'} mr="22px">
@@ -19,7 +19,7 @@ export default ({ isSelected, name, price, weight, src }) => {
           </Text>
           {isSelected && (
             <Flex ml="auto" alignItems="center" mt="-16px">
-              <Circle border="solid 1px #cccccc" p="3px" onClick={() => num > 0 && setNum(num - 1)}>
+              <Circle border="solid 1px #cccccc" p="3px" onClick={() => num > 1 && setNum(num - 1)}>
                 <Minus />
               </Circle>
               <Text fontSize="20px" fontWeight="bold" color={theme.colors.green} mx="6px">

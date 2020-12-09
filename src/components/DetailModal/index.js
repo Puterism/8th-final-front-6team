@@ -5,7 +5,7 @@ import ImageBox from '../ImageBox';
 import theme from '../../themes';
 import { CloseBtn } from '../../assets';
 
-export default ({ closeModal, selectedVegi, marketId }) => {
+export default ({ closeModal, selectedVegi, marketId, changeItem, changedItem }) => {
   const [list, setList] = useState(null);
   const { id } = selectedVegi;
 
@@ -16,7 +16,6 @@ export default ({ closeModal, selectedVegi, marketId }) => {
         chipId: id
       }
     });
-    data && console.log(data.chips);
     setList(data.chips.slice(0, 5));
   }, []);
 
@@ -37,9 +36,24 @@ export default ({ closeModal, selectedVegi, marketId }) => {
           <CloseBtn onClick={() => closeModal()} style={{ marginLeft: 'auto', marginRight: '69px', cursor: 'pointer' }} />
         </Flex>
         <Flex mt="36px">
-          <ImageBox isSelected name={selectedVegi.product.name.slice(0, 10)} price={selectedVegi.product.price} weight={selectedVegi.product.amount} src={selectedVegi.product.imageUrl} />
+          <div onClick={() => changeItem(selectedVegi)}>
+            <ImageBox
+              isSelected={changedItem.id === selectedVegi.id}
+              name={selectedVegi.product.name.slice(0, 15)}
+              price={selectedVegi.product.price}
+              weight={selectedVegi.product.amount}
+              src={selectedVegi.product.imageUrl}
+            />
+          </div>
           <Flex overflowX="scroll" w="full" ml="100px" pr="30px" className="no-scrollbar">
-            {list && list.map(item => <ImageBox key={item.id} name={item.name.slice(0, 15)} price={item.price} weight={item.amount} src={item.imageUrl} />)}
+            {list &&
+              list.map(item => {
+                return (
+                  <div key={item.id} onClick={() => changeItem(item)}>
+                    <ImageBox isSelected={changedItem.id === item.id} name={item.name.slice(0, 15)} price={item.price} weight={item.amount} src={item.imageUrl} />
+                  </div>
+                );
+              })}
           </Flex>
         </Flex>
       </Box>
