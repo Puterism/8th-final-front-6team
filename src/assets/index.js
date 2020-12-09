@@ -14,3 +14,6 @@ export { ReactComponent as ArrowLeftBtn } from './arrow_left.svg';
 export { ReactComponent as ArrowRightBtn } from './arrow_right.svg';
 export { ReactComponent as CheckSmallIcon } from './icn-select-24.svg';
 export { ReactComponent as Caution } from './caution.svg';
+export { ReactComponent as Emart } from './slice-23.svg';
+export { ReactComponent as Coupang } from './slice-24.svg';
+export { ReactComponent as Kurly } from './slice-25.svg';

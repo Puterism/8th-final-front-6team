@@ -1,7 +1,7 @@
 import React from 'react';
 import { Flex, Box, Avatar, Text } from '@chakra-ui/core';
 import theme from '../../themes';
-import { SearchIcon } from '../../assets';
+import { Coupang, Emart, Kurly, SearchIcon } from '../../assets';
 
 const SelectedList = ({ name, price, weight, num, isSelected, setSelectedVegi }) => {
   const hoverStyle = { bg: theme.colors.subGray };
@@ -55,28 +55,14 @@ export default ({ mallName, totalPrice, list, isSelected, selectedVegi, setSelec
     borderRadius="30px"
     p="16px"
   >
-    <Box
-      w="100%"
-      h="134px"
-      bg={isSelected ? theme.colors.lightGreen : theme.colors.subGray}
-      display="flex"
-      flexDir="column"
-      borderRadius="19px"
-      p="14px"
-    >
+    <Box w="100%" h="134px" bg={isSelected ? theme.colors.lightGreen : theme.colors.subGray} display="flex" flexDir="column" borderRadius="19px" p="14px">
       <Flex alignItems="center">
-        <Avatar size="xs" bg="white" />
+        <Kurly />
         <Text ml="4px" fontSize="16px">
           {mallName}
         </Text>
       </Flex>
-      <Text
-        textAlign="end"
-        mt="8px"
-        fontSize="32px"
-        fontWeight="bold"
-        color={isSelected ? theme.colors.green : '#cccccc'}
-      >
+      <Text textAlign="end" mt="8px" fontSize="32px" fontWeight="bold" color={isSelected ? theme.colors.green : '#cccccc'}>
         {totalPrice}
         <span style={{ fontSize: '17px', ml: '5px' }}>원</span>
       </Text>
@@ -91,17 +77,9 @@ export default ({ mallName, totalPrice, list, isSelected, selectedVegi, setSelec
       </Flex>
     </Box>
 
-    <Box mt="10px" w="full" overflowX="scroll">
+    <Box mt="10px" w="full" overflowY="scroll">
       {list.map(item => (
-        <SelectedList
-          key={item.key}
-          name={item.name}
-          price={item.price}
-          weight={item.weight}
-          num={item.num}
-          isSelected={selectedVegi === item.name}
-          setSelectedVegi={setSelectedVegi}
-        />
+        <SelectedList key={item.key} name={item.name} price={item.price} weight={item.weight} num={item.num} isSelected={selectedVegi === item.name} setSelectedVegi={setSelectedVegi} />
       ))}
     </Box>
   </Box>
