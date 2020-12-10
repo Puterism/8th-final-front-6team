@@ -64,13 +64,13 @@ const ResultPage = () => {
         for (let j = 0; j < markets[i].chips.length; j += 1) {
           if (item.chipId === markets[i].chips[j].id) {
             markets[i].chips[j].product = item;
+            markets[i].totalPrice = 0;
             if (num) {
               markets[i].chips[j].product.num += num;
-              markets[i].totalPrice = 0;
-              markets[i].chips.forEach(chip => {
-                markets[i].totalPrice += chip.product.num * chip.product.price;
-              });
             }
+            markets[i].chips.forEach(chip => {
+              markets[i].totalPrice += chip.product.num * chip.product.price;
+            });
 
             setChangedItem(markets[i].chips[j].product);
           }
