@@ -1,14 +1,47 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { Box, Flex, Text, Button } from '@chakra-ui/core';
+import React, { useState, useEffect, useMemo, useCallback, useRef } from 'react';
+import { useLocation } from 'react-router-dom';
+import { Box, Flex, Text, Button, ControlBox, VisuallyHidden } from '@chakra-ui/core';
+import dayjs from 'dayjs';
+import 'dayjs/locale/ko';
 import Layout from '../../components/Layout';
 import SelectionItem from '../../components/SelectionItem';
+import { Coupang, Emart, Kurly, CheckSmallIcon } from '../../assets';
 import { currencyFormat } from '../../utils';
-import onionImageUrl from '../../images/onion.png';
 import './SelectionPage.css';
 
 const SelectionPage = () => {
+  const [selectedMarket, setSelectedMarket] = useState({});
   const [selectionList, setSelectionList] = useState([]);
   const listContainerRef = useRef();
+  const { state } = useLocation();
+
+  const isSelectedAll = useMemo(() => {
+    return !selectionList.some(item => !item.checked);
+  }, [selectionList]);
+
+  const isNotSelectedAll = useMemo(() => {
+    return !selectionList.some(item => item.checked);
+  }, [selectionList]);
+
+  const handleChangeCheckAll = () => {
+    setSelectionList(prevState => {
+      const nextState = [...prevState];
+      nextState.forEach(item => {
+        item.checked = !isSelectedAll;
+      });
+
+      return nextState;
+    });
+  };
+
+  const handleClickBuyAll = useCallback(() => {
+    selectionList.forEach((item) => {
+      if (item.checked) {
+        // TODO: Not Working Properly
+        window.open(item.marketLink, item.id);
+      }
+    })
+  }, [selectionList]);
 
   const toggleSelectionItem = useCallback(
     (id, checked) => {
@@ -26,67 +59,19 @@ const SelectionPage = () => {
   );
 
   useEffect(() => {
-    setSelectionList([
-      {
-        id: '1',
-        title: '국내산 햇 양파 10kg(특품)',
-        description: '속이 알찬 양파',
-        amount: '10kg',
-        price: 6800,
-        image: onionImageUrl,
-        checked: true
-      },
-      {
-        id: '2',
-        title: '국내산 햇 양파 10kg(특품)',
-        description: '속이 알찬 양파속이 알찬 양파속이 알찬 양파속이 알찬 양파속이 알찬 양파속이 알찬 양파속이 알찬 양파속이 알찬 양파',
-        amount: '10kg',
-        price: 6800,
-        image: onionImageUrl,
-        checked: true
-      },
-      {
-        id: '3',
-        title: '국내산 햇 양파 10kg(특품)',
-        description: '속이 알찬 양파',
-        amount: '10kg',
-        price: 6800,
-        image: onionImageUrl,
-        checked: true
-      },
-      {
-        id: '4',
-        title: '국내산 햇 양파 10kg(특품)',
-        description: '속이 알찬 양파',
-        amount: '10kg',
-        price: 6800,
-        image: onionImageUrl,
-        checked: true
-      },
-      {
-        id: '5',
-        title: '국내산 햇 양파 10kg(특품)',
-        description: '속이 알찬 양파',
-        amount: '10kg',
-        price: 6800,
-        image: onionImageUrl,
-        checked: true
-      },
-      {
-        id: '6',
-        title: '국내산 햇 양파 10kg(특품)',
-        description: '속이 알찬 양파',
-        amount: '10kg',
-        price: 6800,
-        image: onionImageUrl,
-        checked: true
-      }
-    ]);
-  }, [setSelectionList]);
-
-  // useEffect(() => {
-  //   document.body.style.overflow = 'hidden';
-  // })
+    if (state.selectedMarket && state.selectedMarket.chips.length > 0) {
+      setSelectedMarket(state.selectedMarket);
+      setSelectionList(() => {
+        const nextState = [];
+        state.selectedMarket.chips.forEach(chip => {
+          const { product } = chip;
+          const newProduct = {...product, checked: true};
+          nextState.push(newProduct);
+        });
+        return nextState;
+      });
+    }
+  }, [setSelectedMarket, setSelectionList, state.selectedMarket]);
 
   return (
     <Layout>
@@ -97,7 +82,7 @@ const SelectionPage = () => {
               선택한 조합으로 구매해보세요
             </Text>
             <Text fontSize="18px" letterSpacing="normal">
-              2020년 10월 30일 오후 3시 15분에 검색한 조합
+              {dayjs().locale('ko').format('YYYY년 MM월 DD일 A hh시 MM분')}에 검색한 조합
             </Text>
           </Box>
         </Flex>
@@ -114,17 +99,22 @@ const SelectionPage = () => {
           alignItems="center"
         >
           <Flex fontSize="18px">
+            <Box marginRight="8px">
+              {selectedMarket.name === '이마트' && <Emart />}
+              {selectedMarket.name === '쿠팡' && <Coupang />}
+              {selectedMarket.name === '마켓컬리' && <Kurly />}
+            </Box>
             <Text fontWeight="bold" marginRight="34px">
-              이마트
+              {selectedMarket.name}
             </Text>
             <Text color="mediumGray" marginRight="14px">
-              배송료 2,500원
+              배송료 {currencyFormat(selectedMarket.deliveryFee)}원
             </Text>
-            <Text color="mediumGray">30,000원 이상 무료배송</Text>
+            <Text color="mediumGray">{currencyFormat(selectedMarket.freeDeliveryPrice)}원 이상 무료배송</Text>
           </Flex>
           <Flex alignItems="baseline">
             <Text fontSize={32} marginRight="5px" fontWeight="bold">
-              {currencyFormat(25800)}
+              {currencyFormat(selectedMarket.totalPrice)}
             </Text>
             <Text fontSize={17} fontWeight="bold">
               원
@@ -132,39 +122,61 @@ const SelectionPage = () => {
           </Flex>
         </Flex>
         <Box flex="1" flexDirection="column" width="full" overflow="auto" marginBottom="18px" paddingTop="2px" paddingRight="18px">
+          <Box as="label" height="47px" marginRight="5" marginBottom="5" display="inline-block" cursor="pointer" fontSize={18} color="black">
+            <VisuallyHidden as="input" type="checkbox" checked={isSelectedAll} onChange={handleChangeCheckAll} />
+            <ControlBox
+              verticalAlign="middle"
+              borderWidth="3px"
+              borderColor="#ededed"
+              width="38px"
+              height="38px"
+              rounded="19px"
+              marginRight="18px"
+              _checked={{ color: "white", backgroundColor: "green", borderColor: "green" }}
+              cursor="pointer"
+            >
+              <Text as="span" fontWeight="bold" fontSize={30}>
+                <CheckSmallIcon />
+              </Text>
+            </ControlBox>
+            모든 상품 선택하기
+          </Box>
           {selectionList.map(item => {
-            const { id, image, title, description, amount, price, checked } = item;
+            const { id, imageUrl, name, amount, num, price, checked, marketLink } = item;
 
-            return <SelectionItem key={id} id={id} image={image} title={title} description={description} amount={amount} price={price} checked={checked && 'checked'} onToggle={toggleSelectionItem} />;
+            return (
+              <SelectionItem
+                key={id}
+                id={id}
+                image={imageUrl}
+                title={name}
+                description={name}
+                amount={amount}
+                num={num}
+                price={price}
+                marketLink={marketLink}
+                checked={checked && 'checked'}
+                onToggle={toggleSelectionItem}
+              />
+            );
           })}
-          {/* <SelectionItem
-            image={onionImageUrl}
-            title="국내산 햇 양파 10kg(특품)"
-            description="속이 알찬 양파"
-            weight="10kg"
-            // pricePerGram={`100g당 ${currencyFormat(calculatePricePerGram('10kg', 6800, 100))}`}
-            price={6800}
-            checked
-          />
-          <SelectionItem
-            image={chestnutImageUrl}
-            title="국내산 참송이 버섯 150g"
-            description="상세 설명을 마구마구 입력해서 마구마구 길이를 늘여서 엄청엄청 길게 써진다면 어떻게 보일지 테스트를 해본다면?"
-            weight="150g"
-            // pricePerGram={`100g당 ${currencyFormat(calculatePricePerGram('150g', 14000, 100))}`}
-            price={14000}
-          />
-          <SelectionItem
-            image={cabbageImageUrl}
-            title="친환경 인증 국내산 양배추 1kg"
-            description="인생에 목숨을 커다란 더운지라 피고 못할 전인 싹이 것은 사막이다. 미묘한 없으면, 인간의 있을 행복스럽고 하여도 오아이스도 것이다. 위하여서 그와 인생의 피가 우는 내려온 가슴이 있을 생명을 철환하였는가? 속에 산야에 인생의 군영과 무엇이 영원히 힘있다. 할지라도 청춘이 주며, 보이는 없는 주는 품으며, 아름답고 이것이다. 가치를 가는 그러므로 칼이다. 품으며, 얼음과 천지는 피어나기 피가 유소년에게서 것이다. 생생하며, 피가 가는 것이다. 이상 시들어 구하지 실로 청춘이 칼이다. 어디 거선의 천지는 찾아 것은 있는가? 따뜻한 낙원을 천하를 착목한는 있으랴?"
-            weight="1kg"
-            // pricePerGram={`100g당 ${currencyFormat(calculatePricePerGram('1kg', 8600, 100))}`}
-            price={8600}
-            checked
-          /> */}
         </Box>
-        <Button width="full" paddingY="28px" color="white" backgroundColor="green" fontWeight="bold" fontSize={28} marginBottom="48px">
+        <Button
+          width="full"
+          paddingY="28px"
+          color="white"
+          backgroundColor="green"
+          fontWeight="bold"
+          fontSize={28}
+          marginBottom="48px"
+          disabled={isNotSelectedAll}
+          _disabled={{
+            backgroundColor: "#dbdbdb",
+            color: "white",
+            cursor: "default",
+          }}
+          onClick={handleClickBuyAll}
+        >
           바로 구매하기
         </Button>
       </Flex>
