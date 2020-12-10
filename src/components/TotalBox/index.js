@@ -3,7 +3,7 @@ import { Flex, Box, Text } from '@chakra-ui/core';
 import theme from '../../themes';
 import { Coupang, Emart, Kurly, SearchIcon } from '../../assets';
 
-const SelectedList = ({ item, isSelected, setSelectedVegi }) => {
+const SelectedList = ({ item, setSelectedVegi, keyword }) => {
   const hoverStyle = { bg: theme.colors.subGray };
   return (
     <Box
@@ -17,21 +17,20 @@ const SelectedList = ({ item, isSelected, setSelectedVegi }) => {
       p="8px 14px"
       color={theme.colors.black}
       onClick={() => setSelectedVegi(item)}
-      bg={isSelected && theme.colors.subGray}
     >
       <Flex flexDir="row">
         <SearchIcon />
         <Flex flexDir="column" ml="6px" w="full">
           <Flex>
-            <Text>{item.keyword}</Text>
+            <Text>{keyword}</Text>
           </Flex>
           <Flex alignItems="center">
             <Text fontSize="12px" color="#cccccc">
-              {item.product.name}
+              {item.product.name.slice(0, 20)}
             </Text>
             <Text ml="auto" textAlign="end" fontSize="15px" color="#aaaaaa">
               {item.product.price}원{' / '}
-              {item.product.amount}
+              {item.product.amount} {item.product.num}개
             </Text>
           </Flex>
         </Flex>
@@ -77,10 +76,10 @@ export default ({ mallName, totalPrice, list, isSelected, setSelectedVegi }) => 
       </Flex>
     </Box>
 
-    <Box mt="10px" w="full" overflowY="scroll" className="no-scroller">
-      {list.map(item => (
-        <SelectedList key={item.id} item={item} isSelected={item.product.id === item.id} keyword={item.keyword} setSelectedVegi={setSelectedVegi} />
-      ))}
+    <Box mt="10px" w="full" overflowY="scroll" className="no-scrollbar">
+      {list.map(item => {
+        return <SelectedList key={item.id} item={item} keyword={item.keyword} setSelectedVegi={setSelectedVegi} />;
+      })}
     </Box>
   </Box>
 );

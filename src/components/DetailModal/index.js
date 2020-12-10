@@ -7,6 +7,7 @@ import { CloseBtn } from '../../assets';
 
 export default ({ closeModal, selectedVegi, marketId, changeItem, changedItem }) => {
   const [list, setList] = useState(null);
+  const [beforeItem, setBeforeItem] = useState(null);
   const { id } = selectedVegi;
 
   const fetchList = useCallback(async () => {
@@ -16,7 +17,11 @@ export default ({ closeModal, selectedVegi, marketId, changeItem, changedItem })
         chipId: id
       }
     });
-    setList(data.chips.slice(0, 5));
+    data.chips.forEach(item => {
+      item.num = 1;
+    });
+    setBeforeItem(data.chips[0]);
+    setList(data.chips.slice(1, 5));
   }, []);
 
   useEffect(() => {
@@ -36,21 +41,24 @@ export default ({ closeModal, selectedVegi, marketId, changeItem, changedItem })
           <CloseBtn onClick={() => closeModal()} style={{ marginLeft: 'auto', marginRight: '69px', cursor: 'pointer' }} />
         </Flex>
         <Flex mt="36px">
-          <div onClick={() => changeItem(selectedVegi)}>
-            <ImageBox
-              isSelected={changedItem.id === selectedVegi.id}
-              name={selectedVegi.product.name.slice(0, 15)}
-              price={selectedVegi.product.price}
-              weight={selectedVegi.product.amount}
-              src={selectedVegi.product.imageUrl}
-            />
-          </div>
+          {beforeItem && (
+            <div onClick={() => changeItem(beforeItem)}>
+              <ImageBox
+                num={beforeItem.num}
+                isSelected={changedItem.id === beforeItem.id}
+                name={beforeItem.name.slice(0, 15)}
+                price={beforeItem.price}
+                weight={beforeItem.amount}
+                src={beforeItem.imageUrl}
+              />
+            </div>
+          )}
           <Flex overflowX="scroll" w="full" ml="100px" pr="30px" className="no-scrollbar">
             {list &&
               list.map(item => {
                 return (
                   <div key={item.id} onClick={() => changeItem(item)}>
-                    <ImageBox isSelected={changedItem.id === item.id} name={item.name.slice(0, 15)} price={item.price} weight={item.amount} src={item.imageUrl} />
+                    <ImageBox num={item.num} isSelected={changedItem.id === item.id} name={item.name.slice(0, 15)} price={item.price} weight={item.amount} src={item.imageUrl} />
                   </div>
                 );
               })}

@@ -31,7 +31,7 @@ const ResultPage = ({ history }) => {
     window.scroll(0, 0);
 
     setSelectedVegi(item);
-    setChangedItem(item);
+    setChangedItem(item.product);
     setIsModalOpened(true);
   };
 
@@ -41,6 +41,11 @@ const ResultPage = ({ history }) => {
     const { data } = await Axios.get(`https://vegetable.tk/api/v1/markets/result`, {
       params: { chipIds }
     });
+    for (let i = 0; i < data.markets.length; i += 1) {
+      data.markets[i].chips.forEach(item => {
+        item.product.num = 1;
+      });
+    }
     setMarkets(data.markets);
     setSelectedMall(data.markets[0]);
   }, []);
