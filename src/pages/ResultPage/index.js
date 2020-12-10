@@ -13,7 +13,7 @@ import { ChipsState } from '../../states/atoms';
 import useChips from '../../hooks/useChips';
 import TotalBox from '../../components/TotalBox';
 
-const ResultPage = ({ history }) => {
+const ResultPage = () => {
   const [isModalOpened, setIsModalOpened] = useState(false);
   const [selectedMall, setSelectedMall] = useState(null);
   const [selectedVegi, setSelectedVegi] = useState(null);
@@ -58,13 +58,21 @@ const ResultPage = ({ history }) => {
     fetchMarkets(chips);
   }, []);
 
-  const changeItem = item => {
-    setChangedItem(item);
+  const changeItem = (item, num) => {
     for (let i = 0; i < markets.length; i += 1) {
       if (item.marketId === markets[i].id) {
         for (let j = 0; j < markets[i].chips.length; j += 1) {
           if (item.chipId === markets[i].chips[j].id) {
             markets[i].chips[j].product = item;
+            if (num) {
+              markets[i].chips[j].product.num += num;
+              markets[i].totalPrice = 0;
+              markets[i].chips.forEach(chip => {
+                markets[i].totalPrice += chip.product.num * chip.product.price;
+              });
+            }
+
+            setChangedItem(markets[i].chips[j].product);
           }
         }
       }
@@ -94,7 +102,7 @@ const ResultPage = ({ history }) => {
             markets.map(item => {
               return (
                 <div key={item.id} style={{ cursor: 'pointer' }} onClick={() => setSelectedMall(item)}>
-                  <TotalBox mallName={item.name} totalPrice={item.totalPrice} list={item.chips} isSelected={selectedMall.id === item.id} selectedVegi={selectedVegi} setSelectedVegi={openModal} />
+                  <TotalBox market={item} isSelected={selectedMall.id === item.id} selectedVegi={selectedVegi} setSelectedVegi={openModal} />
                 </div>
               );
             })}

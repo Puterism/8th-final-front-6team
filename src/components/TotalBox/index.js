@@ -26,7 +26,7 @@ const SelectedList = ({ item, setSelectedVegi, keyword }) => {
           </Flex>
           <Flex alignItems="center">
             <Text fontSize="12px" color="#cccccc">
-              {item.product.name.slice(0, 20)}
+              {item.product.name.slice(0, 18)}
             </Text>
             <Text ml="auto" textAlign="end" fontSize="15px" color="#aaaaaa">
               {item.product.price}원{' / '}
@@ -39,7 +39,7 @@ const SelectedList = ({ item, setSelectedVegi, keyword }) => {
   );
 };
 
-export default ({ mallName, totalPrice, list, isSelected, setSelectedVegi }) => (
+export default ({ market, isSelected, setSelectedVegi }) => (
   <Box
     border="solid 2px"
     borderColor={isSelected ? theme.colors.green : theme.colors.subGray}
@@ -54,30 +54,30 @@ export default ({ mallName, totalPrice, list, isSelected, setSelectedVegi }) => 
   >
     <Box w="100%" h="134px" bg={isSelected ? theme.colors.lightGreen : theme.colors.subGray} display="flex" flexDir="column" borderRadius="19px" p="14px">
       <Flex alignItems="center">
-        {mallName === '이마트' && <Emart />}
-        {mallName === '쿠팡' && <Coupang />}
-        {mallName === '마켓컬리' && <Kurly />}
+        {market.name === '이마트' && <Emart />}
+        {market.name === '쿠팡' && <Coupang />}
+        {market.name === '마켓컬리' && <Kurly />}
         <Text ml="4px" fontSize="16px">
-          {mallName}
+          {market.name}
         </Text>
       </Flex>
       <Text textAlign="end" mt="8px" fontSize="32px" fontWeight="bold" color={isSelected ? theme.colors.green : '#cccccc'}>
-        {totalPrice}
+        {market.totalPrice}
         <span style={{ fontSize: '17px', ml: '5px' }}>원</span>
       </Text>
 
       <Flex mt="auto" alignItems="center">
         <Text fontSize="14px" color={isSelected ? theme.colors.green : '#cccccc'}>
-          배송료 2,500원
+          배송료 {market.deliveryFee}원
         </Text>
         <Text fontSize="14px" ml="10px" color={isSelected ? theme.colors.green : '#cccccc'}>
-          3만원 이상 무료배송
+          {market.freeDeliveryPrice}원 이상 무료배송
         </Text>
       </Flex>
     </Box>
 
     <Box mt="10px" w="full" overflowY="scroll" className="no-scrollbar">
-      {list.map(item => {
+      {market.chips.map(item => {
         return <SelectedList key={item.id} item={item} keyword={item.keyword} setSelectedVegi={setSelectedVegi} />;
       })}
     </Box>

@@ -18,7 +18,11 @@ export default ({ closeModal, selectedVegi, marketId, changeItem, changedItem })
       }
     });
     data.chips.forEach(item => {
-      item.num = 1;
+      if (changedItem.id === item.id) {
+        item.num = changedItem.num;
+      } else {
+        item.num = 1;
+      }
     });
     setBeforeItem(data.chips[0]);
     setList(data.chips.slice(1, 5));
@@ -43,14 +47,7 @@ export default ({ closeModal, selectedVegi, marketId, changeItem, changedItem })
         <Flex mt="36px">
           {beforeItem && (
             <div onClick={() => changeItem(beforeItem)}>
-              <ImageBox
-                num={beforeItem.num}
-                isSelected={changedItem.id === beforeItem.id}
-                name={beforeItem.name.slice(0, 15)}
-                price={beforeItem.price}
-                weight={beforeItem.amount}
-                src={beforeItem.imageUrl}
-              />
+              <ImageBox changeItem={changeItem} item={beforeItem} isSelected={changedItem.id === beforeItem.id} />
             </div>
           )}
           <Flex overflowX="scroll" w="full" ml="100px" pr="30px" className="no-scrollbar">
@@ -58,7 +55,7 @@ export default ({ closeModal, selectedVegi, marketId, changeItem, changedItem })
               list.map(item => {
                 return (
                   <div key={item.id} onClick={() => changeItem(item)}>
-                    <ImageBox num={item.num} isSelected={changedItem.id === item.id} name={item.name.slice(0, 15)} price={item.price} weight={item.amount} src={item.imageUrl} />
+                    <ImageBox changeItem={changeItem} item={item} isSelected={changedItem.id === item.id} />
                   </div>
                 );
               })}
