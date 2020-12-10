@@ -12,13 +12,14 @@ import Header from '../../components/Header';
 import { ChipsState } from '../../states/atoms';
 import useChips from '../../hooks/useChips';
 import TotalBox from '../../components/TotalBox';
+import './ResultPage.css';
 
 const ResultPage = () => {
   const [isModalOpened, setIsModalOpened] = useState(false);
   const [selectedMall, setSelectedMall] = useState(null);
   const [selectedVegi, setSelectedVegi] = useState(null);
   const [changedItem, setChangedItem] = useState(null);
-  const [chips, setChips] = useRecoilState(ChipsState);
+  const [chips] = useRecoilState(ChipsState);
   const [markets, setMarkets] = useState(null);
   const { removeChip } = useChips();
 
@@ -80,23 +81,25 @@ const ResultPage = () => {
   };
 
   return (
-    <Flex flexDir="column">
+    <Flex overflow="scroll" flexDir="column" height="100vh">
       <Header />
-      <Flex flexDir="column" p="47px 110px">
-        <Text fontSize="22px" color="#666666" fontWeight="bold" mb="20px">
-          가장 합리적인 조합을 찾았어요!
-        </Text>
-        <Flex alignItems="center" mr="-110px">
-          <Box w="40%">
-            <SearchBar placeholder="채소를 추가하여 조합을 다시 검색할 수 있어요." isActive={false} onSearch={handleSearch} />
-          </Box>
-          <Flex ml="16px" w="60%" alignItems="center" overflowY="scroll" className="no-scrollbar">
-            {chips.map(chip => (
-              <Chip key={chip.id} chip={chip} onClickDelete={removeChip} removable />
-            ))}
+      <Flex flexDir="column" p="47px 110px" height="100%" justifyContent="space-between">
+        <div>
+          <Text fontSize="22px" color="#666666" fontWeight="bold" mb="20px">
+            가장 합리적인 조합을 찾았어요!
+          </Text>
+          <Flex alignItems="center" mr="-110px">
+            <Box w="40%">
+              <SearchBar placeholder="채소를 추가하여 조합을 다시 검색할 수 있어요." isActive={false} onSearch={handleSearch} />
+            </Box>
+            <Flex ml="16px" w="60%" alignItems="center" overflowY="scroll" className="no-scrollbar">
+              {chips.map(chip => (
+                <Chip key={chip.id} chip={chip} onClickDelete={removeChip} removable />
+              ))}
+            </Flex>
           </Flex>
-        </Flex>
-        <Flex mt="60px" justifyContent="space-between">
+        </div>
+        <Flex justifyContent="space-between">
           {markets &&
             selectedMall &&
             markets.map(item => {
@@ -115,7 +118,7 @@ const ResultPage = () => {
             }
           }}
         >
-          <Button w="full" bg={theme.colors.green} py="40px" fontSize="28px" fontWeight="bold" borderRadius="48px" color="white" mt="51px">
+          <Button w="full" bg={theme.colors.green} py="40px" fontSize="28px" fontWeight="bold" borderRadius="48px" color="white">
             이 조합 선택하기
           </Button>
         </Link>

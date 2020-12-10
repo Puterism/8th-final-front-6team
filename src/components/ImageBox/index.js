@@ -18,7 +18,7 @@ export default ({ changeItem, isSelected, item }) => {
 
   return (
     <>
-      <Box cursor="pointer" minW="295px" maxW="295px" h="230px" borderRadius="10px" border="solid 2px" borderColor={isSelected ? theme.colors.green : '#efefef'} mr="22px">
+      <Box mt="36px" cursor="pointer" minW="295px" maxW="295px" h="230px" borderRadius="10px" border="solid 2px" borderColor={isSelected ? theme.colors.green : '#efefef'} mr="22px">
         <Image objectFit="cover" width="295px" height="142px" borderTopRadius="8px" src={item.imageUrl} />
         <Flex p="10px" flexDir="column">
           <Text fontSize="18px" color={theme.colors.black}>
@@ -42,12 +42,12 @@ export default ({ changeItem, isSelected, item }) => {
             </Flex>
           )}
         </Flex>
-        {isSelected && (
-          <Circle bg={theme.colors.green} mt="-240px" ml="250px" p="10px" position="absolute" zIndex="3">
-            <Check />
-          </Circle>
-        )}
       </Box>
+      {isSelected && (
+        <Circle w="58px" h="58px" bg={theme.colors.green} mt="-240px" marginLeft="auto" right="10px" position="relative" zIndex="3">
+          <Check />
+        </Circle>
+      )}
     </>
   );
 };
