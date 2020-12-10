@@ -34,7 +34,7 @@ export default ({ closeModal, selectedVegi, marketId, changeItem, changedItem })
 
   return (
     <Flex w="full" h="full" bgColor="rgba(32, 32, 32, 0.3)" alignItems="flex-end" position="absolute" zIndex="3">
-      <Box pl="70px" b="0" w="full" position="absolute" zIndex="3" h="418px">
+      <Box pl="70px" b="0" w="full" position="relative" zIndex="3" h="418px">
         <Flex alignItems="center" mt="41px">
           <Text fontSize="24px" color={theme.colors.black}>
             {selectedVegi.keyword}
@@ -44,13 +44,13 @@ export default ({ closeModal, selectedVegi, marketId, changeItem, changedItem })
           </Text>
           <CloseBtn onClick={() => closeModal()} style={{ marginLeft: 'auto', marginRight: '69px', cursor: 'pointer' }} />
         </Flex>
-        <Flex mt="36px">
+        <Flex>
           {beforeItem && (
             <div onClick={() => changeItem(beforeItem)}>
               <ImageBox changeItem={changeItem} item={beforeItem} isSelected={changedItem.id === beforeItem.id} />
             </div>
           )}
-          <Flex overflowX="scroll" w="full" ml="100px" pr="30px" className="no-scrollbar">
+          <Flex overflow="scroll" w="full" h="344px" ml="100px" pr="30px" className="no-scrollbar">
             {list &&
               list.map(item => {
                 return (
