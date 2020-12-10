@@ -18,7 +18,6 @@ const useChips = () => {
   }, []);
 
   const removeChip = useCallback(chip => {
-    console.log(chip);
     setChips(prev => prev.filter(c => c.keyword !== chip.keyword));
   }, []);
 
