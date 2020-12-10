@@ -19,7 +19,7 @@ const MainPage = () => {
     <Layout>
       <Flex flexDir="column" mt="100px" w="full" alignItems="center">
         <Img src="/images/main.png" w="450px" h="220px" mx="auto" />
-        <Heading color="darkGray" fontSize="40px" mt="2">
+        <Heading color="darkGray" fontSize="40px" mt="2" fontFamily="'Montserrat', sans-serif;" fontWeight="bold">
           for a smarter veggie lifestyle
         </Heading>
         <Flex flexDirection="column" mt="58px" w="1050px" mx="auto">
