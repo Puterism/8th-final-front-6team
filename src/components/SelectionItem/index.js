@@ -5,7 +5,7 @@ import theme from '../../themes';
 import { CheckSmallIcon } from '../../assets';
 
 const SelectionItem = props => {
-  const { id, image, title, description, amount, price, checked, onToggle } = props;
+  const { id, image, title, description, amount, num, price, marketLink, checked, onToggle } = props;
 
   const handleChange = e => {
     onToggle(id, e.target.checked);
@@ -86,9 +86,12 @@ const SelectionItem = props => {
           </Flex>
           <Flex justifyContent="flex-end" alignItems="center" whiteSpace="nowrap">
             <Text as="span" fontSize="22px" color={theme.colors.mediumGray} marginRight="19px">
-              3개 선택
+              {num}개 선택
             </Text>
             <Button
+              as="a"
+              href={marketLink}
+              target="_blank"
               borderColor={theme.colors.green}
               color={theme.colors.green}
               variant="outline"
@@ -99,7 +102,6 @@ const SelectionItem = props => {
               textAlign="center"
               paddingX="28px"
               paddingY="7px"
-              // paddingBottom="7px"
             >
               구매하기
             </Button>
