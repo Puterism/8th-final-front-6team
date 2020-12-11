@@ -106,9 +106,10 @@ function SearchBar(props) {
       <Box border="solid 2px" borderColor={isError ? 'orange' : 'green'} bg="white" position="absolute" borderRadius="30px" overflow="hidden" px="20px" zIndex="3" w="full">
         <Flex alignItems="center">
           <SearchInput ref={inputRef} isError={isError} onChange={handleChange} onKeyDown={handleKeyDown} onKeyPress={handleKeyPress} searchValue={searchValue} placeholder={placeholder} />
-          {!isActive ? (
+          {props.hasSearchIcon && !isActive && (
             <IconButton icon={<SearchBtn />} isLoading={isSubmitting} color="white" borderRadius="50%" background="lightGray" ml="auto" mr="-10px" onClick={handleSearch} />
-          ) : (
+          )}
+          {props.hasSearchIcon && isActive && (
             <IconButton icon={<ArrowRightBtn />} isLoading={isSubmitting} color="white" borderRadius="50%" background="green" ml="auto" mr="-10px" onClick={handleSearch} />
           )}
         </Flex>

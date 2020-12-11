@@ -56,11 +56,14 @@ const ResultPage = () => {
   }, [chips]);
 
   useEffect(() => {
-    fetchMarkets(chips);
     return () => {
       setChips([]);
     };
   }, []);
+
+  useEffect(() => {
+    if (!isEmpty(chips)) fetchMarkets(chips);
+  }, [chips]);
 
   const changeItem = (item, num) => {
     for (let i = 0; i < markets.length; i += 1) {
@@ -84,7 +87,7 @@ const ResultPage = () => {
   };
 
   return (
-    <Flex overflow="scroll" flexDir="column" height="100vh" w="full" maxW="1210px" mx="auto">
+    <Flex overflow="scroll" flexDir="column" height="100vh" w="full" maxW="1230px" mx="auto">
       <Header px="0" />
       <Flex flexDir="column" height="100%" py="12">
         <div>
