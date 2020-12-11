@@ -1,8 +1,7 @@
 import { Flex, IconButton, Box } from '@chakra-ui/core';
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
 import onClickOutside from 'react-onclickoutside';
 import _ from 'lodash';
-
 import NoResult from './NoResult';
 import AutoComplete from './AutoComplete';
 import SearchInput from './SearchInput';
@@ -18,12 +17,15 @@ function SearchBar(props) {
   const { chips, recommendedChips, addChip, fetchRecommendedChips } = useChips();
   const { autoCompleteChips, setAutoCompleteChips, fetchAutoCompleteChips, isEmptyAutoComplete, setIsEmptyAutoComplete } = useAutoComplete();
   const [isActive, setIsActive] = useState(false);
+  const inputRef = useRef();
   const placeholder = isError ? '채소 종류를 한 개 이상 입력해 주세요' : props.placeholder;
 
   const reset = useCallback(() => {
     setIsEmptyAutoComplete(false);
     setAutoCompleteChips([]);
     setSearchValue('');
+    inputRef.current.focus();
+    console.log(inputRef.current);
   }, []);
 
   const handleSearch = useCallback(async () => {
@@ -47,9 +49,15 @@ function SearchBar(props) {
 
   const handleKeyPress = useCallback(
     e => {
+      const shouldSearch = e.key === 'Enter' || searchValue === '';
       const shouldAddChip = e.key === ' ' || e.key === 'Enter';
       const shouldMoveUp = e.keyCode === 38;
       const shouldMoveDown = e.keyCode === 40;
+
+      if (shouldSearch) {
+        handleSearch();
+        return;
+      }
 
       if (shouldAddChip) {
         const chip = autoCompleteChips[activeItemIndex];
@@ -71,7 +79,7 @@ function SearchBar(props) {
         e.preventDefault();
       }
     },
-    [autoCompleteChips, activeItemIndex, addChip, reset]
+    [autoCompleteChips, activeItemIndex, addChip, reset, searchValue, handleSearch]
   );
 
   const handleAddChip = useCallback(
@@ -105,7 +113,7 @@ function SearchBar(props) {
     <Box position="relative" h="54px">
       <Box border="solid 2px" borderColor={isError ? 'orange' : 'green'} bg="white" position="absolute" borderRadius="30px" overflow="hidden" px="20px" zIndex="3" w="full">
         <Flex alignItems="center">
-          <SearchInput isError={isError} onChange={handleChange} onKeyPress={handleKeyPress} searchValue={searchValue} placeholder={placeholder} />
+          <SearchInput ref={inputRef} isError={isError} onChange={handleChange} onKeyPress={handleKeyPress} searchValue={searchValue} placeholder={placeholder} />
           {!isActive ? (
             <IconButton icon={<SearchBtn />} isLoading={isSubmitting} color="white" borderRadius="50%" background="lightGray" ml="auto" mr="-10px" onClick={handleSearch} />
           ) : (

@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { Input, Icon } from '@chakra-ui/core';
 import theme from '../../themes';
 import { Caution } from '../../assets/index';
 
-const SearchInput = ({ isError, onChange, onKeyPress, searchValue, placeholder }) => {
+const SearchInput = forwardRef(({ isError, onChange, onKeyPress, searchValue, placeholder }, ref) => {
   return (
     <>
       {isError && <Icon as={Caution} w="6" h="6" mr="-12px" />}
       <Input
+        ref={ref}
         onChange={onChange}
         onKeyDown={onKeyPress}
         value={searchValue}
@@ -22,6 +23,6 @@ const SearchInput = ({ isError, onChange, onKeyPress, searchValue, placeholder }
       />
     </>
   );
-};
+});
 
 export default SearchInput;
