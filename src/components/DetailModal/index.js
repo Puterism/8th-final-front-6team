@@ -33,7 +33,7 @@ export default ({ closeModal, selectedVegi, marketId, changeItem, changedItem })
   }, []);
 
   return (
-    <Flex w="full" h="full" bgColor="rgba(32, 32, 32, 0.3)" alignItems="flex-end" position="absolute" zIndex="3">
+    <Flex w="full" left="0" h="full" bgColor="rgba(32, 32, 32, 0.3)" alignItems="flex-end" position="absolute" zIndex="3">
       <Box pl="70px" b="0" w="full" position="relative" zIndex="3" h="418px">
         <Flex alignItems="center" mt="41px">
           <Text fontSize="24px" color={theme.colors.black}>
