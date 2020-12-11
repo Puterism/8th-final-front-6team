@@ -25,7 +25,7 @@ export default ({ closeModal, selectedVegi, marketId, changeItem, changedItem })
       }
     });
     setBeforeItem(data.chips[0]);
-    setList(data.chips.slice(1, 5));
+    setList(data.chips.slice(1, 9));
   }, []);
 
   useEffect(() => {
