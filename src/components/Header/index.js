@@ -5,11 +5,11 @@ import { Hamburger } from '../../assets/index';
 import useHeader from '../../hooks/useHeader';
 
 const Header = props => {
-  const { menus } = props;
+  const { menus, ...rest } = props;
   const { match } = useHeader();
 
   return (
-    <Flex w="full" align="center" justify="space-between" px="110px" pt="67px">
+    <Flex w="full" align="center" justify="space-between" px="110px" pt="33px" {...rest}>
       <Heading as={Link} to="/" color="darkGray" fontSize="20px" fontWeight="500" fontFamily="'Montserrat Alternates', sans-serif;">
         avocado
       </Heading>

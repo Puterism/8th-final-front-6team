@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { Button, Flex, Text, Box } from '@chakra-ui/core';
+import { Button, Flex, Text, Box, HStack } from '@chakra-ui/core';
 import { useRecoilState } from 'recoil';
 import Axios from 'axios';
 import { isEmpty } from 'lodash';
@@ -81,9 +81,9 @@ const ResultPage = () => {
   };
 
   return (
-    <Flex overflow="scroll" flexDir="column" height="100vh">
-      <Header />
-      <Flex flexDir="column" p="47px 110px" height="100%" justifyContent="space-between">
+    <Flex overflow="scroll" flexDir="column" height="100vh" w="full" maxW="1210px" mx="auto">
+      <Header px="0" />
+      <Flex flexDir="column" height="100%" py="12">
         <div>
           <Text fontSize="22px" color="#666666" fontWeight="bold" mb="20px">
             가장 합리적인 조합을 찾았어요!
@@ -99,7 +99,7 @@ const ResultPage = () => {
             </Flex>
           </Flex>
         </div>
-        <Flex justifyContent="space-between">
+        <HStack spacing="8" w="full" pt="67px" pb="79px">
           {markets &&
             selectedMall &&
             markets.map(item => {
@@ -109,7 +109,7 @@ const ResultPage = () => {
                 </div>
               );
             })}
-        </Flex>
+        </HStack>
         <Link
           to={{
             pathname: '/selection',
