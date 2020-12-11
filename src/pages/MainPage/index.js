@@ -30,7 +30,7 @@ const MainPage = () => {
   return (
     <Layout>
       <Flex flexDir="column" mt="100px" w="full" alignItems="center">
-        <Lottie options={defaultOptions} height="260px" width="860px" />
+        <Lottie options={defaultOptions} height="260px" width="860px" isClickToPauseDisabled />
         <Flex flexDirection="column" mt="58px" w="1050px" mx="auto">
           <SearchBar onSearch={onSearch} placeholder="구입할 채소를 검색해주세요. 최저가 조합의 커머스를 알려드릴게요. ex) 양파 + 감자" />
           {!_.isEmpty(chips) && (
