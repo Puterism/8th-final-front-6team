@@ -14,6 +14,7 @@ const AutoComplete = ({ searchValue, chips, activeItemIndex, addChip }) => {
               w="full"
               px="4"
               py="2"
+              mb="2"
               key={index}
               onClick={() => addChip(chip)}
               background={activeItemIndex === index ? 'main.40' : null}
