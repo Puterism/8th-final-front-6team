@@ -6,6 +6,7 @@ import SearchBar from '../../components/SearchBar';
 import Layout from '../../components/Layout';
 import Chip from '../../components/Chip';
 import useChips from '../../hooks/useChips';
+import HomeIllustURL from '../../images/home_illust.png';
 
 const MainPage = () => {
   const { removeChip, chips } = useChips();
@@ -18,10 +19,7 @@ const MainPage = () => {
   return (
     <Layout>
       <Flex flexDir="column" mt="100px" w="full" alignItems="center">
-        <Img src="/images/main.png" w="450px" h="220px" mx="auto" />
-        <Heading color="darkGray" fontSize="40px" mt="2" fontFamily="'Montserrat', sans-serif;" fontWeight="bold">
-          for a smarter veggie lifestyle
-        </Heading>
+        <Img src={HomeIllustURL} mx="auto" />
         <Flex flexDirection="column" mt="58px" w="1050px" mx="auto">
           <SearchBar onSearch={onSearch} placeholder="구입할 채소를 검색해주세요. 최저가 조합의 커머스를 알려드릴게요. ex) 양파 + 감자" />
           {!_.isEmpty(chips) && (

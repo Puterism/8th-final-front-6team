@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Text, Heading, Flex, Image } from '@chakra-ui/core';
+import { Box, Text, Heading, Flex, Img } from '@chakra-ui/core';
 import FooterIllustSrc from '../../images/footer_illust.png';
 
 const Footer = () => {
@@ -18,7 +18,7 @@ const Footer = () => {
         </Text>
       </Box>
       <Flex justifyContent="space-between" marginTop="25px">
-        <Image src={FooterIllustSrc} alt="avocado" />
+        <Img src={FooterIllustSrc} alt="avocado" height="106px" marginTop="75px" />
         <Flex marginTop="30px">
           <Box marginRight="70px">
             <Heading
