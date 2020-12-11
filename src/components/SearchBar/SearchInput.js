@@ -3,14 +3,15 @@ import { Input, Icon } from '@chakra-ui/core';
 import theme from '../../themes';
 import { Caution } from '../../assets/index';
 
-const SearchInput = forwardRef(({ isError, onChange, onKeyPress, searchValue, placeholder }, ref) => {
+const SearchInput = forwardRef(({ isError, onChange, onKeyDown, onKeyPress, searchValue, placeholder }, ref) => {
   return (
     <>
       {isError && <Icon as={Caution} w="6" h="6" mr="-12px" />}
       <Input
         ref={ref}
         onChange={onChange}
-        onKeyDown={onKeyPress}
+        onKeyDown={onKeyDown}
+        onKeyPress={onKeyPress}
         value={searchValue}
         placeholder={placeholder}
         color="mediumGray"

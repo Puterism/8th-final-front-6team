@@ -24,8 +24,7 @@ function SearchBar(props) {
     setIsEmptyAutoComplete(false);
     setAutoCompleteChips([]);
     setSearchValue('');
-    inputRef.current.focus();
-    console.log(inputRef.current);
+    if (inputRef.current.value === '') inputRef.current.focus();
   }, []);
 
   const handleSearch = useCallback(async () => {
@@ -33,53 +32,46 @@ function SearchBar(props) {
     props.onSearch && (await props.onSearch());
   }, [isActive, props.onSearch]);
 
-  const handleChange = useCallback(
-    async e => {
-      const input = e.target.value;
-      if (_.isEmpty(input)) {
-        reset && reset();
-      }
+  const handleChange = useCallback(async e => {
+    setIsError(false);
+    setSearchValue(e.target.value);
+    fetchAutoCompleteChips(e.target.value);
+  }, []);
 
-      setIsError(false);
-      setSearchValue(input);
-      fetchAutoCompleteChips(input);
+  const handleKeyDown = useCallback(
+    e => {
+      const shouldMoveUp = e.keyCode === 38;
+      const shouldMoveDown = e.keyCode === 40;
+      if (shouldMoveUp) {
+        setActiveItemIndex(prev => Math.max(0, prev - 1));
+        return;
+      }
+      if (shouldMoveDown) {
+        setActiveItemIndex(prev => Math.min(prev + 1, autoCompleteChips.length - 1));
+      }
     },
-    [reset, fetchAutoCompleteChips]
+    [autoCompleteChips]
   );
 
   const handleKeyPress = useCallback(
-    e => {
-      const shouldSearch = e.key === 'Enter' || searchValue === '';
+    async e => {
+      const shouldSearch = e.key === 'Enter' && e.target.value === '' && !_.isEmpty(chips);
       const shouldAddChip = e.key === ' ' || e.key === 'Enter';
-      const shouldMoveUp = e.keyCode === 38;
-      const shouldMoveDown = e.keyCode === 40;
 
       if (shouldSearch) {
-        handleSearch();
+        await handleSearch();
         return;
       }
 
       if (shouldAddChip) {
+        e.preventDefault();
         const chip = autoCompleteChips[activeItemIndex];
         if (_.isEmpty(chip)) return;
         addChip(chip);
         reset();
-        e.preventDefault();
-        return;
-      }
-
-      if (shouldMoveUp) {
-        setActiveItemIndex(prev => Math.max(0, prev - 1));
-        e.preventDefault();
-        return;
-      }
-
-      if (shouldMoveDown) {
-        setActiveItemIndex(prev => Math.min(prev + 1, autoCompleteChips.length - 1));
-        e.preventDefault();
       }
     },
-    [autoCompleteChips, activeItemIndex, addChip, reset, searchValue, handleSearch]
+    [autoCompleteChips, activeItemIndex, addChip, reset, handleSearch, chips]
   );
 
   const handleAddChip = useCallback(
@@ -113,7 +105,7 @@ function SearchBar(props) {
     <Box position="relative" h="54px">
       <Box border="solid 2px" borderColor={isError ? 'orange' : 'green'} bg="white" position="absolute" borderRadius="30px" overflow="hidden" px="20px" zIndex="3" w="full">
         <Flex alignItems="center">
-          <SearchInput ref={inputRef} isError={isError} onChange={handleChange} onKeyPress={handleKeyPress} searchValue={searchValue} placeholder={placeholder} />
+          <SearchInput ref={inputRef} isError={isError} onChange={handleChange} onKeyDown={handleKeyDown} onKeyPress={handleKeyPress} searchValue={searchValue} placeholder={placeholder} />
           {!isActive ? (
             <IconButton icon={<SearchBtn />} isLoading={isSubmitting} color="white" borderRadius="50%" background="lightGray" ml="auto" mr="-10px" onClick={handleSearch} />
           ) : (

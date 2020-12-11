@@ -19,7 +19,7 @@ const ResultPage = () => {
   const [selectedMall, setSelectedMall] = useState(null);
   const [selectedVegi, setSelectedVegi] = useState(null);
   const [changedItem, setChangedItem] = useState(null);
-  const [chips] = useRecoilState(ChipsState);
+  const [chips, setChips] = useRecoilState(ChipsState);
   const [markets, setMarkets] = useState(null);
   const { removeChip } = useChips();
 
@@ -57,6 +57,9 @@ const ResultPage = () => {
 
   useEffect(() => {
     fetchMarkets(chips);
+    return () => {
+      setChips([]);
+    };
   }, []);
 
   const changeItem = (item, num) => {
