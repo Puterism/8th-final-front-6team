@@ -3,7 +3,7 @@ import { Button, Flex, Text, Box, HStack } from '@chakra-ui/core';
 import { useRecoilState } from 'recoil';
 import Axios from 'axios';
 import { isEmpty } from 'lodash';
-import { Link } from 'react-router-dom';
+import { Link, Router, useHistory } from 'react-router-dom';
 import SearchBar from '../../components/SearchBar';
 import Chip from '../../components/Chip';
 import theme from '../../themes';
@@ -22,6 +22,7 @@ const ResultPage = () => {
   const [chips, setChips] = useRecoilState(ChipsState);
   const [markets, setMarkets] = useState(null);
   const { removeChip } = useChips();
+  const history = useHistory();
 
   const closeModal = () => {
     setSelectedVegi(null);
@@ -56,6 +57,7 @@ const ResultPage = () => {
   }, [chips]);
 
   useEffect(() => {
+    if (isEmpty(chips)) history.push('/');
     return () => {
       setChips([]);
     };
