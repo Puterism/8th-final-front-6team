@@ -4,6 +4,7 @@ import { useRecoilState } from 'recoil';
 import Axios from 'axios';
 import { isEmpty } from 'lodash';
 import { Link, useHistory } from 'react-router-dom';
+import styled from '@emotion/styled';
 import SearchBar from '../../components/SearchBar';
 import Chip from '../../components/Chip';
 import theme from '../../themes';
@@ -12,7 +13,12 @@ import Header from '../../components/Header';
 import { ChipsState } from '../../states/atoms';
 import useChips from '../../hooks/useChips';
 import TotalBox from '../../components/TotalBox';
-import './ResultPage.css';
+
+const ResultContainer = styled(Flex)`
+  ::-webkit-scrollbar{
+    display: none;
+  } 
+`;
 
 const ResultPage = () => {
   const [isModalOpened, setIsModalOpened] = useState(false);
@@ -89,7 +95,7 @@ const ResultPage = () => {
   };
 
   return (
-    <Flex overflow="scroll" flexDir="column" height="100vh" w="full" maxW="1230px" mx="auto">
+    <ResultContainer overflow="scroll" flexDir="column" height="100vh" w="full" maxW="1230px" mx="auto">
       <Header px="0" />
       <Flex flexDir="column" height="100%" py="12">
         <div>
@@ -132,7 +138,7 @@ const ResultPage = () => {
         </Link>
       </Flex>
       {isModalOpened && <DetailModal closeModal={closeModal} selectedVegi={selectedVegi} marketId={selectedMall.id} changeItem={changeItem} changedItem={changedItem} />}
-    </Flex>
+    </ResultContainer>
   );
 };
 
