@@ -3,7 +3,7 @@ import { Button, Flex, Text, Box, HStack } from '@chakra-ui/core';
 import { useRecoilState } from 'recoil';
 import Axios from 'axios';
 import { isEmpty } from 'lodash';
-import { Link, Router, useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import SearchBar from '../../components/SearchBar';
 import Chip from '../../components/Chip';
 import theme from '../../themes';

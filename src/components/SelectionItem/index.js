@@ -77,7 +77,7 @@ const SelectionItem = props => {
           </NumberInput> */}
             <Flex alignItems="baseline">
               <Text fontSize={32} marginRight="5px" fontWeight="bold">
-                {currencyFormat(price)}
+                {currencyFormat(price * num)}
               </Text>
               <Text fontSize={17} fontWeight="bold">
                 원

@@ -78,10 +78,10 @@ const SelectionPage = () => {
       <Flex flexDirection="column" width="full" height="calc(100% - 144px)" maxHeight="full" marginY="37px" paddingX="110px" color="black" position="absolute" overflow="hidden" ref={listContainerRef}>
         <Flex width="full" justifyContent="space-between" alignItems="baseline" marginBottom="45px">
           <Box>
-            <Text as="h3" fontSize="40px" fontWeight="bold" color="green" letterSpacing="normal">
+            <Text as="h3" fontSize={27} fontWeight="bold" color="green" letterSpacing="normal" marginBottom="5px">
               선택한 조합으로 구매해보세요
             </Text>
-            <Text fontSize="18px" letterSpacing="normal">
+            <Text fontSize={18} letterSpacing="normal">
               {dayjs().locale('ko').format('YYYY년 MM월 DD일 A hh시 MM분')}에 검색한 조합
             </Text>
           </Box>
@@ -163,9 +163,10 @@ const SelectionPage = () => {
         </Box>
         <Button
           width="full"
-          paddingY="28px"
+          paddingY="40px"
           color="white"
           backgroundColor="green"
+          borderRadius="48px"
           fontWeight="bold"
           fontSize={28}
           marginBottom="48px"

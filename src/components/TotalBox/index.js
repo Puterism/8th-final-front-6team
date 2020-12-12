@@ -1,6 +1,7 @@
 import React from 'react';
 import { Flex, Box, Text } from '@chakra-ui/core';
 import theme from '../../themes';
+import { currencyFormat } from '../../utils';
 import { Coupang, Emart, Kurly, SearchIcon } from '../../assets';
 
 const SelectedList = ({ item, setSelectedVegi, keyword }) => {
@@ -29,7 +30,7 @@ const SelectedList = ({ item, setSelectedVegi, keyword }) => {
               {item.product.name.slice(0, 18)}
             </Text>
             <Text ml="auto" textAlign="end" fontSize="15px" color="#aaaaaa">
-              {item.product.price}원{' / '}
+              {currencyFormat(item.product.price)}원{' / '}
               {item.product.amount} {item.product.num}개
             </Text>
           </Flex>
@@ -62,16 +63,16 @@ export default ({ market, isSelected, setSelectedVegi }) => (
         </Text>
       </Flex>
       <Text textAlign="end" mt="8px" fontSize="32px" fontWeight="bold" color={isSelected ? theme.colors.green : '#cccccc'}>
-        {market.totalPrice}
+        {currencyFormat(market.totalPrice)}
         <span style={{ fontSize: '17px', ml: '5px' }}>원</span>
       </Text>
 
       <Flex mt="auto" alignItems="center">
         <Text fontSize="14px" color={isSelected ? theme.colors.green : '#cccccc'}>
-          배송료 {market.deliveryFee}원
+          배송료 {currencyFormat(market.deliveryFee)}원
         </Text>
         <Text fontSize="14px" ml="10px" color={isSelected ? theme.colors.green : '#cccccc'}>
-          {market.freeDeliveryPrice}원 이상 무료배송
+          {currencyFormat(market.freeDeliveryPrice)}원 이상 무료배송
         </Text>
       </Flex>
     </Box>
