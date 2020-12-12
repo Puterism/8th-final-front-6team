@@ -4,7 +4,7 @@
 
 ### 기술스택
 
-- React, React-Router, Styled-Components, Chakra UI
+- React, React-Router, Emotion, Chakra UI
 
 ### PR
 
