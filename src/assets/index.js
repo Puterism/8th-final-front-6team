@@ -12,6 +12,7 @@ export { ReactComponent as BookmarkBlackBtn } from './bookmark_black.svg';
 export { ReactComponent as LikedBlackBtn } from './liked_black.svg';
 export { ReactComponent as ArrowLeftBtn } from './arrow_left.svg';
 export { ReactComponent as ArrowRightBtn } from './arrow_right.svg';
+export { ReactComponent as ArrowRightAltBtn } from './arrow_right_alt.svg';
 export { ReactComponent as CheckSmallIcon } from './icn-select-24.svg';
 export { ReactComponent as Caution } from './caution.svg';
 export { ReactComponent as Emart } from './slice-23.svg';

@@ -2,7 +2,7 @@ import React from 'react';
 import {
   Box, Heading, Text, Flex
 } from '@chakra-ui/core';
-import { BookmarkBtn, LikedBtn, ArrowLeftBtn, ArrowRightBtn } from '../../assets';
+import { BookmarkBtn, LikedBtn, ArrowLeftBtn, ArrowRightAltBtn } from '../../assets';
 
 const CardBig = (props) => {
   const {
@@ -139,7 +139,7 @@ const CardBig = (props) => {
         >
   
           <ArrowLeftBtn cursor="pointer" />
-          <ArrowRightBtn cursor="pointer" />
+          <ArrowRightAltBtn cursor="pointer" />
         </Flex>
       </Box>
     </Box>
