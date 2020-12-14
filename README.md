@@ -1,5 +1,11 @@
 # 디프만 8기 파이널 프로젝트 6조 프론트엔드
 
+### 발표자료
+https://github.com/depromeet/8th-final-front-6team/files/5686169/DPM_avocado_final.PT.pdf
+
+### 사이트주소
+https://abocado.netlify.app
+
 ## 룰
 
 ### 기술스택
