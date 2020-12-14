@@ -6,6 +6,11 @@ https://github.com/depromeet/8th-final-front-6team/files/5686169/DPM_avocado_fin
 ### 사이트주소
 https://abocado.netlify.app
 
+![image](https://user-images.githubusercontent.com/29771088/102035369-8ad57100-3e03-11eb-878a-e5894db16490.png)
+![image](https://user-images.githubusercontent.com/29771088/102035390-932dac00-3e03-11eb-9797-966e7497fc71.png)
+![image](https://user-images.githubusercontent.com/29771088/102035483-cff9a300-3e03-11eb-845b-9b0106042c6a.png)
+
+
 ## 룰
 
 ### 기술스택
